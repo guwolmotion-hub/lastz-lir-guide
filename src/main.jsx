@@ -160,9 +160,9 @@ const extraGuides = {
         { label: '가운데', value: '본부 선물과 무료기름 수령' },
       ],
       sections: [
-        { title: '화면 왼쪽', lines: ['프로필 사진 아래 숫자를 클릭해 무료수령 2개를 받으세요.', '트럭은 만능 주황 조각 2개 이상일 때 약탈하고, 나의 화물차를 보내세요. 수요일과 토요일은 주황 S급을 우선합니다.', '현상 퀘스트는 개인 퀘스트 파견, 연맹원 퀘스트 도움, 타 서버 물자받기 약탈을 확인하세요. 화요일과 토요일은 주황 S급을 우선합니다.'] },
-        { title: '화면 오른쪽', lines: ['이벤트센터에서 전면전비, 협곡쟁탈전(CC) 신청, 혼돈의 땅, 난폭두목, 시련좀비를 확인하세요.', 'VS 연맹대결에서는 연맹 지원, 연맹원 전투 자동 단결, 연맹테크 기부, 연맹선물 수령을 매일 확인하세요.'] },
-        { title: '화면 가운데', lines: ['본부 아래 선물 상자를 수령하세요.', '무료기름은 오전 7시와 오후 7시에 받으세요.', 'S급 영웅 카트리나는 오전 11시 리셋 후 100개 추가 수령을 확인하세요.'] },
+        { title: '화면 왼쪽', lines: ['프로필 사진 아래 숫자를 클릭해 무료 수령 보상 2개를 받으세요.', '트럭 보상에 만능 주황 조각이 2개 이상이면 약탈을 진행하세요.', '나의 화물차도 매일 보내고, 수요일과 토요일은 주황 S급 화물차를 우선하세요.', '현상 퀘스트는 개인 파견, 연맹원 퀘스트 도움, 타 서버 물자받기 약탈을 확인하세요.', '화요일과 토요일 현상 퀘스트는 주황 S급을 우선하세요.'] },
+        { title: '화면 오른쪽', lines: ['이벤트센터에서 전면전비 퀘스트를 확인하세요.', '협곡쟁탈전(CC)은 신청 여부와 배정 상태를 확인하세요.', '혼돈의 땅, 난폭두목, 시련좀비 기간 퀘스트를 놓치지 마세요.', 'VS 연맹대결에서는 연맹 지원, 연맹원 전투 자동 단결, 연맹테크 기부, 연맹선물 수령을 매일 처리하세요.'] },
+        { title: '화면 가운데', lines: ['본부 아래 선물 상자를 수령하세요.', '무료기름은 오전 7시와 오후 7시에 받으세요.', '오전 11시 리셋 후 S급 영웅 카트리나 조각 100개 추가 수령을 확인하세요.'] },
       ],
     },
     popular: {
@@ -176,9 +176,10 @@ const extraGuides = {
       ],
       sections: [
         { title: '로테이션 이벤트', lines: ['행운의 흔들기, 사격장 보물찾기, 행운할인 상점, 행운룰렛은 일주일씩 순환합니다.', '해당 이벤트를 위해 다이아를 꾸준히 모아두세요.'] },
-        { title: '시간제한 이벤트', lines: ['Z코인 판매 상품과 80% 이상 할인 상품은 전기 제외 모두 구매합니다.', '연료와 경찰휘장은 할인하지 않아도 구매합니다.', '이후 구매 우선순위는 상황에 따라 변경될 수 있으나, 기름과 휘장은 계속 구매합니다.'] },
-        { title: '특권과 아이템', lines: ['VIP 등급에 따라 목재, 음식, 50연료통, 고급 텔레포트, 렌치, 경찰휘장, 에너지코어, 8시간 만능가속, 만능 주황 조각을 구매합니다.', 'Z코인과 전기는 부족할 때만 구매하고, 다이아 3만 개 이하는 아이템에 눈길 주지 말고 패스하세요.'] },
-        { title: '상점 우선순위', lines: ['용사훈장으로 주황 장비 선택 상자를 먼저 구매하세요.', '용사훈장이 많아지면 할인 에너지코어까지만 구매하고 그 외는 구매하지 않습니다.', '영예휘장으로 피난민 모집소, 만능 주황 조각, 에너지코어, 렌치를 구매하세요.', '시즌 영웅과 영웅 장비를 준비한다면 만능 장비 조각도 구매합니다.'] },
+        { title: '시간제한 이벤트', lines: ['Z코인 판매 상품과 80% 이상 할인 상품은 전기 제외 모두 구매합니다.', '연료와 경찰휘장은 할인하지 않아도 구매합니다.', '기름과 휘장은 장기적으로 계속 필요한 재화이므로 우선순위를 유지하세요.'] },
+        { title: '특권 상점', lines: ['VIP 등급에 따라 목재, 음식, 50연료통, 고급 텔레포트, 렌치, 경찰휘장을 구매하세요.', '에너지코어, 8시간 만능가속, 만능 주황 조각도 핵심 구매 후보입니다.', 'Z코인과 전기는 부족할 때만 구매하세요.', '다이아가 3만 개 이하라면 아이템 구매는 패스하세요.'] },
+        { title: '공훈상점', lines: ['경기장, 협곡쟁탈전, 수도쟁탈전 등에서 얻는 용사훈장으로 주황 장비 선택 상자를 먼저 구매하세요.', '용사훈장이 충분히 많아지면 할인 에너지코어까지만 구매하고 그 외는 구매하지 않습니다.'] },
+        { title: '영예휘장', lines: ['캐러밴, 탐색, 영웅전장에서 얻는 영예휘장으로 피난민 모집권, 만능 주황 조각, 에너지코어, 렌치를 구매하세요.', '시즌 영웅과 영웅 장비를 준비한다면 만능 장비 조각도 구매하세요.', '피난민 모집권은 화요일 주황 외교관 모집에 매우 중요합니다.'] },
       ],
     },
   },
@@ -193,8 +194,8 @@ const extraGuides = {
         { label: 'Center', value: 'HQ gifts and free fuel' },
       ],
       sections: [
-        { title: 'Left Side', lines: ['Tap the number under your profile picture and claim the two free rewards.', 'For trucks, plunder when the reward has at least two universal orange fragments, and send your own truck. On Wednesday and Saturday, prioritize orange S-grade trucks.', 'For bounty quests, check personal dispatches, help alliance member quests, and plunder other servers for supply collection. On Tuesday and Saturday, prioritize orange S-grade quests.'] },
-        { title: 'Right Side', lines: ['In Event Center, check Full Preparedness, Canyon Clash application, Land of Chaos, Raider Boss, and Trial Zombies.', 'In Alliance Duel, check alliance help, auto rally for member battles, alliance tech donations, and alliance gifts every day.'] },
+        { title: 'Left Side', lines: ['Tap the number under your profile picture and claim the two free rewards.', 'For trucks, plunder when the reward has at least two universal orange fragments.', 'Send your own truck every day, and prioritize orange S-grade trucks on Wednesday and Saturday.', 'For bounty quests, check personal dispatches, alliance member help, and cross-server supply plunder.', 'On Tuesday and Saturday, prioritize orange S-grade bounty quests.'] },
+        { title: 'Right Side', lines: ['In Event Center, check Full Preparedness quests.', 'For Canyon Clash (CC), check application and assignment status.', 'Do not miss Land of Chaos, Raider Boss, and Trial Zombie event quests.', 'In Alliance Duel, handle alliance help, auto rally, tech donation, and alliance gifts every day.'] },
         { title: 'Center', lines: ['Claim the gift chest below HQ.', 'Claim free fuel at 07:00 and 19:00.', 'After the 11:00 reset, check the extra 100 Katrina S-grade hero shards.'] },
       ],
     },
@@ -209,9 +210,10 @@ const extraGuides = {
       ],
       sections: [
         { title: 'Rotating Events', lines: ['Lucky Shake, Shooting Range Treasure Hunt, Lucky Discount Shop, and Lucky Roulette rotate weekly.', 'Keep saving diamonds for these events.'] },
-        { title: 'Timed Events', lines: ['Buy Z-coin items and all items discounted 80% or more, except electricity.', 'Buy fuel and police badges even without discounts.', 'Priorities may change later, but fuel and badges remain regular buys.'] },
-        { title: 'Privilege and Items', lines: ['Depending on VIP level, buy wood, food, 50 fuel barrels, advanced teleports, wrenches, police badges, energy cores, 8-hour universal speedups, and universal orange fragments.', 'Buy Z-coins and electricity only when short, and skip items if you have 30,000 diamonds or less.'] },
-        { title: 'Shop Priority', lines: ['Use warrior medals to buy orange equipment selection boxes first.', 'When you have enough warrior medals, buy discounted energy cores only and skip the rest.', 'Use honor badges for refugee recruitment, universal orange fragments, energy cores, and wrenches.', 'If preparing season heroes and hero equipment, also buy universal equipment fragments.'] },
+        { title: 'Timed Events', lines: ['Buy Z-coin items and all items discounted 80% or more, except electricity.', 'Buy fuel and police badges even without discounts.', 'Fuel and badges stay high priority because they are useful long term.'] },
+        { title: 'Privilege Shop', lines: ['Depending on VIP level, buy wood, food, 50 fuel barrels, advanced teleports, wrenches, and police badges.', 'Energy cores, 8-hour universal speedups, and universal orange fragments are also key purchase candidates.', 'Buy Z-coins and electricity only when short.', 'Skip item purchases if you have 30,000 diamonds or less.'] },
+        { title: 'Merit Shop', lines: ['Use warrior medals from Arena, Canyon Clash, and Capital Clash to buy orange equipment selection boxes first.', 'When you have enough warrior medals, buy discounted energy cores only and skip the rest.'] },
+        { title: 'Honor Badges', lines: ['Use honor badges from Caravan, Exploration, and Hero Battlefield to buy refugee tickets, universal orange fragments, energy cores, and wrenches.', 'If preparing season heroes and hero equipment, also buy universal equipment fragments.', 'Refugee tickets are very important for Tuesday orange diplomat recruitment.'] },
       ],
     },
   },
@@ -226,8 +228,8 @@ const extraGuides = {
         { label: 'Centro', value: 'Regalos de base y combustible' },
       ],
       sections: [
-        { title: 'Lado Izquierdo', lines: ['Toca el número bajo la foto de perfil y reclama las dos recompensas gratis.', 'En camiones, saquea cuando haya al menos dos fragmentos naranjas universales y envía tu camión. Miércoles y sábado prioriza camiones S naranjas.', 'En recompensas, revisa despachos personales, ayuda a misiones de alianza y saqueo de suministros en otros servidores. Martes y sábado prioriza misiones S naranjas.'] },
-        { title: 'Lado Derecho', lines: ['En el Centro de eventos revisa preparación total, inscripción a Cañón, Tierra del Caos, jefe violento y zombis de prueba.', 'En Duelo de alianza revisa ayuda de alianza, reunión automática, donaciones de tecnología y regalos de alianza cada día.'] },
+        { title: 'Lado Izquierdo', lines: ['Toca el número bajo la foto de perfil y reclama las dos recompensas gratis.', 'En camiones, saquea cuando haya al menos dos fragmentos naranjas universales.', 'Envía tu camión cada día y prioriza camiones S naranjas los miércoles y sábados.', 'En recompensas, revisa despachos personales, ayuda de alianza y saqueo de suministros en otros servidores.', 'Los martes y sábados prioriza misiones S naranjas.'] },
+        { title: 'Lado Derecho', lines: ['En el Centro de eventos revisa las misiones de preparación total.', 'En Cañón (CC), revisa solicitud y estado de asignación.', 'No pierdas Tierra del Caos, jefe violento y zombis de prueba.', 'En Duelo de alianza revisa ayuda, reunión automática, donaciones de tecnología y regalos cada día.'] },
         { title: 'Centro', lines: ['Reclama el cofre de regalo bajo la base.', 'Reclama combustible gratis a las 07:00 y 19:00.', 'Tras el reinicio de las 11:00, revisa los 100 fragmentos extra de Katrina S.'] },
       ],
     },
@@ -242,9 +244,10 @@ const extraGuides = {
       ],
       sections: [
         { title: 'Eventos en Rotación', lines: ['Lucky Shake, Tesoro del campo de tiro, Tienda de descuento de suerte y Ruleta de suerte rotan cada semana.', 'Guarda diamantes de forma constante para estos eventos.'] },
-        { title: 'Eventos Temporales', lines: ['Compra artículos de Z-coin y todos los artículos con 80% o más de descuento, excepto electricidad.', 'Compra combustible e insignias de policía aunque no tengan descuento.', 'Las prioridades pueden cambiar, pero combustible e insignias se siguen comprando.'] },
-        { title: 'Privilegios e Ítems', lines: ['Según tu VIP, compra madera, comida, barriles de 50 combustible, teletransportes avanzados, llaves, insignias, núcleos de energía, aceleradores universales de 8 horas y fragmentos naranjas universales.', 'Compra Z-coins y electricidad solo si faltan, y omite artículos si tienes 30,000 diamantes o menos.'] },
-        { title: 'Prioridad de Tienda', lines: ['Con medallas de guerrero, compra primero cajas de equipo naranja.', 'Cuando sobren medallas, compra solo núcleos de energía con descuento y omite lo demás.', 'Con insignias de honor, compra reclutamiento de refugiados, fragmentos naranjas universales, núcleos de energía y llaves.', 'Si preparas héroes de temporada y equipo de héroe, compra también fragmentos universales de equipo.'] },
+        { title: 'Eventos Temporales', lines: ['Compra artículos de Z-coin y todos los artículos con 80% o más de descuento, excepto electricidad.', 'Compra combustible e insignias de policía aunque no tengan descuento.', 'Combustible e insignias siguen siendo prioridad porque sirven a largo plazo.'] },
+        { title: 'Tienda de Privilegios', lines: ['Según tu VIP, compra madera, comida, barriles de 50 combustible, teletransportes avanzados, llaves e insignias de policía.', 'Núcleos de energía, aceleradores universales de 8 horas y fragmentos naranjas universales también son compras clave.', 'Compra Z-coins y electricidad solo si faltan.', 'Omite compras de ítems si tienes 30,000 diamantes o menos.'] },
+        { title: 'Tienda de Mérito', lines: ['Usa medallas de guerrero de Arena, Cañón y Capital para comprar primero cajas de equipo naranja.', 'Cuando tengas suficientes medallas, compra solo núcleos de energía con descuento y omite lo demás.'] },
+        { title: 'Insignias de Honor', lines: ['Usa insignias de honor de Caravana, Exploración y Campo de héroes para comprar tickets de refugiados, fragmentos naranjas universales, núcleos de energía y llaves.', 'Si preparas héroes de temporada y equipo de héroe, compra también fragmentos universales de equipo.', 'Los tickets de refugiados son muy importantes para reclutar diplomáticos naranjas los martes.'] },
       ],
     },
   },
@@ -437,8 +440,8 @@ const featuredSections = [
   { id: 'caravan', icon: Calculator, image: 'cards/2.png' },
   { id: 'rules', icon: Swords, image: 'cards/3.png' },
   { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
-  { id: 'daily', icon: ClipboardCheck, image: 'cards/5.svg' },
-  { id: 'popular', icon: Sparkles, image: 'cards/6.svg' },
+  { id: 'daily', icon: ClipboardCheck, image: 'cards/5.png' },
+  { id: 'popular', icon: Sparkles, image: 'cards/6.png' },
 ];
 
 function TextBlock({ text }) {
