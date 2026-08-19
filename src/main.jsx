@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, ArrowLeft, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 
@@ -663,13 +663,37 @@ export default function App() {
   const [section, setSection] = useState(null);
   const [ruleTab, setRuleTab] = useState('[약탈 규칙].txt');
   const [eventTab, setEventTab] = useState('[좀비 공성 및 좀비 폭군 이벤트].txt');
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
   const carouselRef = useRef(null);
+  const dragStateRef = useRef({ active: false, startX: 0, scrollLeft: 0, dragged: false, distance: 0, raf: null });
   const copy = ui[lang];
   const sectionCopy = sectionLabels[lang];
   const activeSection = section ? sectionLabels[lang][section] : null;
   const ruleTabs = fileTabs.filter((item) => item.id === '[약탈 규칙].txt' || item.id === '[토요일 킬데이 규칙].txt');
   const eventTabs = fileTabs.filter((item) => item.id === '[좀비 공성 및 좀비 폭군 이벤트].txt' || item.id === '[협곡 쟁탈전].txt');
+  const updateActiveCard = () => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const cards = [...carousel.querySelectorAll('.feature-card')];
+    const center = carousel.getBoundingClientRect().left + carousel.clientWidth / 2;
+    let nextIndex = 0;
+    let nextDistance = Number.POSITIVE_INFINITY;
+    cards.forEach((card, index) => {
+      const rect = card.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - center);
+      if (distance < nextDistance) {
+        nextDistance = distance;
+        nextIndex = index;
+      }
+    });
+    setActiveCardIndex(nextIndex);
+  };
   const handleSectionChange = (id) => {
+    if (dragStateRef.current.dragged && dragStateRef.current.distance > 18) {
+      dragStateRef.current.dragged = false;
+      dragStateRef.current.distance = 0;
+      return;
+    }
     setSection(id);
     setPage('detail');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -682,6 +706,69 @@ export default function App() {
   const slideCards = (direction) => {
     carouselRef.current?.scrollBy({ left: direction * 330, behavior: 'smooth' });
   };
+  const scheduleActiveCardUpdate = () => {
+    if (dragStateRef.current.raf) return;
+    dragStateRef.current.raf = requestAnimationFrame(() => {
+      dragStateRef.current.raf = null;
+      updateActiveCard();
+    });
+  };
+  const snapActiveCardToCenter = () => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const cards = [...carousel.querySelectorAll('.feature-card')];
+    const carouselRect = carousel.getBoundingClientRect();
+    const center = carouselRect.left + carousel.clientWidth / 2;
+    let activeIndex = 0;
+    let activeDistance = Number.POSITIVE_INFINITY;
+    cards.forEach((item, index) => {
+      const rect = item.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - center);
+      if (distance < activeDistance) {
+        activeDistance = distance;
+        activeIndex = index;
+      }
+    });
+    const card = cards[activeIndex];
+    if (!card) return;
+    const cardRect = card.getBoundingClientRect();
+    const offset = cardRect.left + cardRect.width / 2 - (carouselRect.left + carousel.clientWidth / 2);
+    setActiveCardIndex(activeIndex);
+    carousel.scrollBy({ left: offset, behavior: 'smooth' });
+  };
+  const handleCarouselPointerDown = (event) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    dragStateRef.current = { active: true, startX: event.clientX, scrollLeft: carousel.scrollLeft, dragged: false, distance: 0, raf: null };
+  };
+  const handleCarouselPointerMove = (event) => {
+    const carousel = carouselRef.current;
+    const drag = dragStateRef.current;
+    if (!carousel || !drag.active) return;
+    const delta = event.clientX - drag.startX;
+    drag.distance = Math.max(drag.distance || 0, Math.abs(delta));
+    if (drag.distance > 18) drag.dragged = true;
+    carousel.scrollLeft = drag.scrollLeft - delta;
+    scheduleActiveCardUpdate();
+  };
+  const handleCarouselPointerUp = (event) => {
+    const carousel = carouselRef.current;
+    const drag = dragStateRef.current;
+    if (!carousel || !drag.active) return;
+    drag.active = false;
+    updateActiveCard();
+    window.setTimeout(snapActiveCardToCenter, 30);
+    if (drag.dragged) window.setTimeout(() => {
+      dragStateRef.current.dragged = false;
+      dragStateRef.current.distance = 0;
+    }, 160);
+  };
+  useEffect(() => {
+    if (page !== 'home') return undefined;
+    updateActiveCard();
+    window.addEventListener('resize', updateActiveCard);
+    return () => window.removeEventListener('resize', updateActiveCard);
+  }, [page, lang]);
   const renderContent = () => {
     if (section === 'duel') return <WorkbookView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
@@ -763,11 +850,21 @@ export default function App() {
             <button className="carousel-button prev" onClick={() => slideCards(-1)} aria-label="Previous guide">
               <ChevronLeft size={22} />
             </button>
-            <div className="feature-tabs" aria-label={copy.tabs} ref={carouselRef}>
+            <div
+              className="feature-tabs"
+              aria-label={copy.tabs}
+              ref={carouselRef}
+              onScroll={scheduleActiveCardUpdate}
+              onPointerDown={handleCarouselPointerDown}
+              onPointerMove={handleCarouselPointerMove}
+              onPointerUp={handleCarouselPointerUp}
+              onPointerCancel={handleCarouselPointerUp}
+              onPointerLeave={handleCarouselPointerUp}
+            >
               {featuredSections.map(({ id, icon: Icon, image }, index) => {
                 const item = sectionLabels[lang][id];
                 return (
-                  <button className="feature-card" onClick={() => handleSectionChange(id)} key={id}>
+                  <button className={`feature-card ${activeCardIndex === index ? 'active' : ''}`} onClick={() => handleSectionChange(id)} key={id}>
                     <img src={image} alt="" />
                     <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
                     <span className="feature-kicker">{item.kicker}</span>
