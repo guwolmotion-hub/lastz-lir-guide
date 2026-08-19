@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { AlertTriangle, ArrowLeft, Calculator, CalendarDays, Home, Languages, ListChecks, Shield, Swords, Table2, Users } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { AlertTriangle, ArrowLeft, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 
 const ui = {
@@ -145,6 +145,108 @@ const noticeSummaries = {
       { label: 'Criterio', value: 'Puntos personales del Duelo' },
       { label: 'Método', value: 'Aleatorio entre solicitantes' },
     ],
+  },
+};
+
+const extraGuides = {
+  ko: {
+    daily: {
+      file: '[매일 진행해야하는 퀘스트].txt',
+      title: '매일 진행해야하는 퀘스트',
+      kicker: 'Daily',
+      summary: [
+        { label: '왼쪽', value: '프로필 무료수령, 트럭, 현상 퀘스트' },
+        { label: '오른쪽', value: '이벤트센터와 VS 항목 확인' },
+        { label: '가운데', value: '본부 선물과 무료기름 수령' },
+      ],
+      sections: [
+        { title: '화면 왼쪽', lines: ['프로필 사진 아래 숫자를 클릭해 무료수령 2개를 받으세요.', '트럭은 만능 주황 조각 2개 이상일 때 약탈하고, 나의 화물차를 보내세요. 수요일과 토요일은 주황 S급을 우선합니다.', '현상 퀘스트는 개인 퀘스트 파견, 연맹원 퀘스트 도움, 타 서버 물자받기 약탈을 확인하세요. 화요일과 토요일은 주황 S급을 우선합니다.'] },
+        { title: '화면 오른쪽', lines: ['이벤트센터에서 전면전비, 협곡쟁탈전(CC) 신청, 혼돈의 땅, 난폭두목, 시련좀비를 확인하세요.', 'VS 연맹대결에서는 연맹 지원, 연맹원 전투 자동 단결, 연맹테크 기부, 연맹선물 수령을 매일 확인하세요.'] },
+        { title: '화면 가운데', lines: ['본부 아래 선물 상자를 수령하세요.', '무료기름은 오전 7시와 오후 7시에 받으세요.', 'S급 영웅 카트리나는 오전 11시 리셋 후 100개 추가 수령을 확인하세요.'] },
+      ],
+    },
+    popular: {
+      file: '[필수 인기 이벤트].txt',
+      title: '필수 인기 이벤트',
+      kicker: 'Popular',
+      summary: [
+        { label: '로테이션', value: '4개 이벤트가 주간 순환' },
+        { label: '핵심 재화', value: '다이아를 꾸준히 모으기' },
+        { label: '구매 기준', value: '80% 이상 할인 우선' },
+      ],
+      sections: [
+        { title: '로테이션 이벤트', lines: ['행운의 흔들기, 사격장 보물찾기, 행운할인 상점, 행운룰렛은 일주일씩 순환합니다.', '해당 이벤트를 위해 다이아를 꾸준히 모아두세요.'] },
+        { title: '시간제한 이벤트', lines: ['Z코인 판매 상품과 80% 이상 할인 상품은 전기 제외 모두 구매합니다.', '연료와 경찰휘장은 할인하지 않아도 구매합니다.', '이후 구매 우선순위는 상황에 따라 변경될 수 있으나, 기름과 휘장은 계속 구매합니다.'] },
+        { title: '특권과 아이템', lines: ['VIP 등급에 따라 목재, 음식, 50연료통, 고급 텔레포트, 렌치, 경찰휘장, 에너지코어, 8시간 만능가속, 만능 주황 조각을 구매합니다.', 'Z코인과 전기는 부족할 때만 구매하고, 다이아 3만 개 이하는 아이템에 눈길 주지 말고 패스하세요.'] },
+        { title: '상점 우선순위', lines: ['용사훈장으로 주황 장비 선택 상자를 먼저 구매하세요.', '용사훈장이 많아지면 할인 에너지코어까지만 구매하고 그 외는 구매하지 않습니다.', '영예휘장으로 피난민 모집소, 만능 주황 조각, 에너지코어, 렌치를 구매하세요.', '시즌 영웅과 영웅 장비를 준비한다면 만능 장비 조각도 구매합니다.'] },
+      ],
+    },
+  },
+  en: {
+    daily: {
+      file: '[매일 진행해야하는 퀘스트].txt',
+      title: 'Daily Quest Checklist',
+      kicker: 'Daily',
+      summary: [
+        { label: 'Left side', value: 'Profile claims, trucks, bounty quests' },
+        { label: 'Right side', value: 'Event Center and Alliance Duel' },
+        { label: 'Center', value: 'HQ gifts and free fuel' },
+      ],
+      sections: [
+        { title: 'Left Side', lines: ['Tap the number under your profile picture and claim the two free rewards.', 'For trucks, plunder when the reward has at least two universal orange fragments, and send your own truck. On Wednesday and Saturday, prioritize orange S-grade trucks.', 'For bounty quests, check personal dispatches, help alliance member quests, and plunder other servers for supply collection. On Tuesday and Saturday, prioritize orange S-grade quests.'] },
+        { title: 'Right Side', lines: ['In Event Center, check Full Preparedness, Canyon Clash application, Land of Chaos, Raider Boss, and Trial Zombies.', 'In Alliance Duel, check alliance help, auto rally for member battles, alliance tech donations, and alliance gifts every day.'] },
+        { title: 'Center', lines: ['Claim the gift chest below HQ.', 'Claim free fuel at 07:00 and 19:00.', 'After the 11:00 reset, check the extra 100 Katrina S-grade hero shards.'] },
+      ],
+    },
+    popular: {
+      file: '[필수 인기 이벤트].txt',
+      title: 'Essential Popular Events',
+      kicker: 'Popular',
+      summary: [
+        { label: 'Rotation', value: '4 events rotate weekly' },
+        { label: 'Core currency', value: 'Save diamonds steadily' },
+        { label: 'Buy rule', value: 'Prioritize 80%+ discounts' },
+      ],
+      sections: [
+        { title: 'Rotating Events', lines: ['Lucky Shake, Shooting Range Treasure Hunt, Lucky Discount Shop, and Lucky Roulette rotate weekly.', 'Keep saving diamonds for these events.'] },
+        { title: 'Timed Events', lines: ['Buy Z-coin items and all items discounted 80% or more, except electricity.', 'Buy fuel and police badges even without discounts.', 'Priorities may change later, but fuel and badges remain regular buys.'] },
+        { title: 'Privilege and Items', lines: ['Depending on VIP level, buy wood, food, 50 fuel barrels, advanced teleports, wrenches, police badges, energy cores, 8-hour universal speedups, and universal orange fragments.', 'Buy Z-coins and electricity only when short, and skip items if you have 30,000 diamonds or less.'] },
+        { title: 'Shop Priority', lines: ['Use warrior medals to buy orange equipment selection boxes first.', 'When you have enough warrior medals, buy discounted energy cores only and skip the rest.', 'Use honor badges for refugee recruitment, universal orange fragments, energy cores, and wrenches.', 'If preparing season heroes and hero equipment, also buy universal equipment fragments.'] },
+      ],
+    },
+  },
+  es: {
+    daily: {
+      file: '[매일 진행해야하는 퀘스트].txt',
+      title: 'Lista diaria de misiones',
+      kicker: 'Daily',
+      summary: [
+        { label: 'Izquierda', value: 'Perfil, camiones, recompensas' },
+        { label: 'Derecha', value: 'Centro de eventos y Duelo' },
+        { label: 'Centro', value: 'Regalos de base y combustible' },
+      ],
+      sections: [
+        { title: 'Lado Izquierdo', lines: ['Toca el número bajo la foto de perfil y reclama las dos recompensas gratis.', 'En camiones, saquea cuando haya al menos dos fragmentos naranjas universales y envía tu camión. Miércoles y sábado prioriza camiones S naranjas.', 'En recompensas, revisa despachos personales, ayuda a misiones de alianza y saqueo de suministros en otros servidores. Martes y sábado prioriza misiones S naranjas.'] },
+        { title: 'Lado Derecho', lines: ['En el Centro de eventos revisa preparación total, inscripción a Cañón, Tierra del Caos, jefe violento y zombis de prueba.', 'En Duelo de alianza revisa ayuda de alianza, reunión automática, donaciones de tecnología y regalos de alianza cada día.'] },
+        { title: 'Centro', lines: ['Reclama el cofre de regalo bajo la base.', 'Reclama combustible gratis a las 07:00 y 19:00.', 'Tras el reinicio de las 11:00, revisa los 100 fragmentos extra de Katrina S.'] },
+      ],
+    },
+    popular: {
+      file: '[필수 인기 이벤트].txt',
+      title: 'Eventos populares esenciales',
+      kicker: 'Popular',
+      summary: [
+        { label: 'Rotación', value: '4 eventos semanales' },
+        { label: 'Recurso clave', value: 'Ahorrar diamantes' },
+        { label: 'Compra', value: 'Priorizar 80%+ descuento' },
+      ],
+      sections: [
+        { title: 'Eventos en Rotación', lines: ['Lucky Shake, Tesoro del campo de tiro, Tienda de descuento de suerte y Ruleta de suerte rotan cada semana.', 'Guarda diamantes de forma constante para estos eventos.'] },
+        { title: 'Eventos Temporales', lines: ['Compra artículos de Z-coin y todos los artículos con 80% o más de descuento, excepto electricidad.', 'Compra combustible e insignias de policía aunque no tengan descuento.', 'Las prioridades pueden cambiar, pero combustible e insignias se siguen comprando.'] },
+        { title: 'Privilegios e Ítems', lines: ['Según tu VIP, compra madera, comida, barriles de 50 combustible, teletransportes avanzados, llaves, insignias, núcleos de energía, aceleradores universales de 8 horas y fragmentos naranjas universales.', 'Compra Z-coins y electricidad solo si faltan, y omite artículos si tienes 30,000 diamantes o menos.'] },
+        { title: 'Prioridad de Tienda', lines: ['Con medallas de guerrero, compra primero cajas de equipo naranja.', 'Cuando sobren medallas, compra solo núcleos de energía con descuento y omite lo demás.', 'Con insignias de honor, compra reclutamiento de refugiados, fragmentos naranjas universales, núcleos de energía y llaves.', 'Si preparas héroes de temporada y equipo de héroe, compra también fragmentos universales de equipo.'] },
+      ],
+    },
   },
 };
 
@@ -300,6 +402,8 @@ const sectionLabels = {
     caravan: { kicker: 'Power', title: '캐러밴', desc: '단계 선택 공식과 투력표' },
     rules: { kicker: 'Battle', title: '전투 규칙', desc: '약탈과 킬데이 필수 규칙' },
     events: { kicker: 'Event', title: '이벤트', desc: '좀비 공성, 폭군, 협곡 일정' },
+    daily: { kicker: 'Daily', title: '매일 퀘스트', desc: '매일 확인할 필수 체크리스트' },
+    popular: { kicker: 'Popular', title: '인기 이벤트', desc: '다이아와 상점 구매 기준' },
     open: '열기',
     selectRule: '규칙 선택',
     selectEvent: '이벤트 선택',
@@ -309,6 +413,8 @@ const sectionLabels = {
     caravan: { kicker: 'Power', title: 'Caravan', desc: 'Stage formula and power table' },
     rules: { kicker: 'Battle', title: 'Battle Rules', desc: 'Plunder and Kill Day essentials' },
     events: { kicker: 'Event', title: 'Events', desc: 'Zombie, Tyrant, and Canyon timing' },
+    daily: { kicker: 'Daily', title: 'Daily Quests', desc: 'Essential checklist to review every day' },
+    popular: { kicker: 'Popular', title: 'Popular Events', desc: 'Diamond and shop purchase standards' },
     open: 'Open',
     selectRule: 'Select Rule',
     selectEvent: 'Select Event',
@@ -318,6 +424,8 @@ const sectionLabels = {
     caravan: { kicker: 'Power', title: 'Caravana', desc: 'Fórmula y tabla de poder' },
     rules: { kicker: 'Battle', title: 'Reglas', desc: 'Saqueo y Día de bajas' },
     events: { kicker: 'Event', title: 'Eventos', desc: 'Zombis, Tirano y Cañón' },
+    daily: { kicker: 'Daily', title: 'Misiones diarias', desc: 'Lista esencial para revisar a diario' },
+    popular: { kicker: 'Popular', title: 'Eventos populares', desc: 'Diamantes y reglas de compra' },
     open: 'Abrir',
     selectRule: 'Elegir regla',
     selectEvent: 'Elegir evento',
@@ -329,6 +437,8 @@ const featuredSections = [
   { id: 'caravan', icon: Calculator, image: 'cards/2.png' },
   { id: 'rules', icon: Swords, image: 'cards/3.png' },
   { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
+  { id: 'daily', icon: ClipboardCheck, image: 'cards/5.svg' },
+  { id: 'popular', icon: Sparkles, image: 'cards/6.svg' },
 ];
 
 function TextBlock({ text }) {
@@ -487,6 +597,31 @@ function CaravanView({ lang }) {
   );
 }
 
+function ExtraGuideView({ lang, id }) {
+  const guide = extraGuides[lang][id];
+  return (
+    <section className="content-block">
+      <div className="section-head">
+        <div>
+          <p className="section-kicker">{guide.file}</p>
+          <h2>{guide.title}</h2>
+        </div>
+      </div>
+      <SummaryStrip items={guide.summary} />
+      <div className="guide-section-grid">
+        {guide.sections.map((section) => (
+          <article className="guide-section-card" key={section.title}>
+            <h3>{section.title}</h3>
+            <ul>
+              {section.lines.map((line) => <li key={line}>{line}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function FileNotice({ lang, file }) {
   const item = notices[lang].find((notice) => notice.file === file);
   if (!item) return null;
@@ -528,6 +663,7 @@ export default function App() {
   const [section, setSection] = useState(null);
   const [ruleTab, setRuleTab] = useState('[약탈 규칙].txt');
   const [eventTab, setEventTab] = useState('[좀비 공성 및 좀비 폭군 이벤트].txt');
+  const carouselRef = useRef(null);
   const copy = ui[lang];
   const sectionCopy = sectionLabels[lang];
   const activeSection = section ? sectionLabels[lang][section] : null;
@@ -543,9 +679,13 @@ export default function App() {
     setSection(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const slideCards = (direction) => {
+    carouselRef.current?.scrollBy({ left: direction * 330, behavior: 'smooth' });
+  };
   const renderContent = () => {
     if (section === 'duel') return <WorkbookView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
+    if (section === 'daily' || section === 'popular') return <ExtraGuideView lang={lang} id={section} />;
     if (section === 'rules') {
       return (
         <>
@@ -619,20 +759,28 @@ export default function App() {
               <span>{copy.subtitle}</span>
             </div>
           </div>
-          <div className="feature-tabs" aria-label={copy.tabs}>
-            {featuredSections.map(({ id, icon: Icon, image }, index) => {
-              const item = sectionLabels[lang][id];
-              return (
-                <button className="feature-card" onClick={() => handleSectionChange(id)} key={id}>
-                  <img src={image} alt="" />
-                  <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="feature-kicker">{item.kicker}</span>
-                  <strong>{item.title}</strong>
-                  <em>{item.desc}</em>
-                  <span className="feature-action"><Icon size={17} /> {sectionCopy.open}</span>
-                </button>
-              );
-            })}
+          <div className="feature-carousel">
+            <button className="carousel-button prev" onClick={() => slideCards(-1)} aria-label="Previous guide">
+              <ChevronLeft size={22} />
+            </button>
+            <div className="feature-tabs" aria-label={copy.tabs} ref={carouselRef}>
+              {featuredSections.map(({ id, icon: Icon, image }, index) => {
+                const item = sectionLabels[lang][id];
+                return (
+                  <button className="feature-card" onClick={() => handleSectionChange(id)} key={id}>
+                    <img src={image} alt="" />
+                    <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="feature-kicker">{item.kicker}</span>
+                    <strong>{item.title}</strong>
+                    <em>{item.desc}</em>
+                    <span className="feature-action"><Icon size={17} /> {sectionCopy.open}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <button className="carousel-button next" onClick={() => slideCards(1)} aria-label="Next guide">
+              <ChevronRight size={22} />
+            </button>
           </div>
           <div className="lobby-footer">
             <span>{copy.lobbyNav[0]}</span>

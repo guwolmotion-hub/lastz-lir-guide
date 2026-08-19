@@ -74,10 +74,6 @@ def main():
             data["sheets"][ws.title] = {"kind": "duel", "entries": parse_duel(rows)}
         elif ws.title == "캐러밴 표":
             data["sheets"][ws.title] = {"kind": "caravan", **parse_caravan(rows)}
-        elif ws.title == "시트14":
-            data["sheets"][ws.title] = {"kind": "members", "rows": parse_member_rows(rows)}
-        else:
-            data["sheets"][ws.title] = {"kind": "raw", "rows": rows}
 
     out = Path(__file__).resolve().parents[1] / "src" / "workbook-data.json"
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
