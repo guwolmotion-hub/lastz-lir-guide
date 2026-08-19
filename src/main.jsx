@@ -8,6 +8,8 @@ const ui = {
   ko: {
     eyebrow: 'Last Z 737 Server',
     title: 'Lir 신규 연맹원 가이드',
+    lobbyTitle: 'Lir',
+    lobbySubtitle: '신규 연맹원 가이드',
     subtitle: '연맹 대결, 킬데이, 약탈, 공성 이벤트, 협곡, 캐러밴 기준을 한곳에서 확인하세요.',
     source: '원본 자료',
     quick: '핵심 체크',
@@ -16,12 +18,15 @@ const ui = {
     all: '전체',
     note: '운영진 공지 기준으로 업데이트된 웹 가이드입니다.',
     home: '홈으로',
+    lobbyNav: ['연맹 대전', '캐러밴', '가이드 선택', '전투 규칙', '이벤트'],
     memberNote: '명단성 시트는 원본 엑셀 내용을 웹 표로 옮긴 것입니다.',
     columns: ['상태', '현재', '조정', '닉네임', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', '합계', '비고'],
   },
   en: {
     eyebrow: 'Last Z 737 Server',
     title: 'Lir New Alliance Member Guide',
+    lobbyTitle: 'Lir',
+    lobbySubtitle: 'New Alliance Member Guide',
     subtitle: 'Check Alliance Duel, Kill Day, plunder, zombie events, Canyon Clash, and Caravan power ranges in one place.',
     source: 'Source files',
     quick: 'Key checks',
@@ -30,12 +35,15 @@ const ui = {
     all: 'All',
     note: 'Web guide rebuilt from the management notice files.',
     home: 'Home',
+    lobbyNav: ['Alliance Duel', 'Caravan', 'Select Guide', 'Battle Rules', 'Events'],
     memberNote: 'Roster-like sheet content is shown as a web table from the original workbook.',
     columns: ['Status', 'Current', 'Adjusted', 'Name', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Total', 'Note'],
   },
   es: {
     eyebrow: 'Servidor 737 de Last Z',
     title: 'Guía para nuevos miembros de Lir',
+    lobbyTitle: 'Lir',
+    lobbySubtitle: 'Guía para nuevos miembros',
     subtitle: 'Consulta en un solo lugar el Duelo de alianza, Día de bajas, saqueo, eventos zombi, Cañón y rangos de Caravana.',
     source: 'Archivos fuente',
     quick: 'Puntos clave',
@@ -44,6 +52,7 @@ const ui = {
     all: 'Todo',
     note: 'Guía web reconstruida a partir de los avisos de la administración.',
     home: 'Inicio',
+    lobbyNav: ['Duelo', 'Caravana', 'Elegir guía', 'Reglas', 'Eventos'],
     memberNote: 'La hoja tipo lista se muestra como tabla web desde el libro original.',
     columns: ['Estado', 'Actual', 'Ajuste', 'Nombre', 'Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5', 'Día 6', 'Total', 'Nota'],
   },
@@ -602,7 +611,8 @@ export default function App() {
           <div className="lobby-head">
             <div>
               <p>{copy.eyebrow}</p>
-              <h1>{copy.title}</h1>
+              <h1>{copy.lobbyTitle}</h1>
+              <strong>{copy.lobbySubtitle}</strong>
             </div>
             <span>{copy.subtitle}</span>
           </div>
@@ -622,11 +632,11 @@ export default function App() {
             })}
           </div>
           <div className="lobby-footer">
-            <span>HOME</span>
-            <span>GUIDE</span>
-            <strong><Home size={16} /> PLAY</strong>
-            <span>LIR</span>
-            <span>737</span>
+            <span>{copy.lobbyNav[0]}</span>
+            <span>{copy.lobbyNav[1]}</span>
+            <strong><Home size={16} /> {copy.lobbyNav[2]}</strong>
+            <span>{copy.lobbyNav[3]}</span>
+            <span>{copy.lobbyNav[4]}</span>
           </div>
         </div>
       </section>
