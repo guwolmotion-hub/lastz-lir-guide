@@ -87,6 +87,7 @@ const spanishDuel = {
 const displayNames = {
   '[연맹 대전 준비사항].xlsx': '연맹 대전 준비사항',
   '2026 737서버.xlsx의 사본.xlsx': '연맹 대전 준비사항',
+  '캐러밴 표': '캐러밴 표',
   '[약탈 규칙].txt': '약탈 규칙',
   '[토요일 킬데이 규칙].txt': '토요일 킬데이 규칙',
   '[좀비 공성 및 좀비 폭군 이벤트].txt': '좀비 공성 및 좀비 폭군 이벤트',
@@ -127,6 +128,7 @@ function spanishSummary(entry) {
 
 const fileTabs = [
   { id: workbook.source, type: 'workbook', label: displayName(workbook.source), icon: Table2 },
+  { id: '캐러밴 표', type: 'caravan', label: '캐러밴 표', icon: Table2 },
   { id: '[약탈 규칙].txt', type: 'notice', label: '약탈 규칙', icon: Swords },
   { id: '[토요일 킬데이 규칙].txt', type: 'notice', label: '토요일 킬데이 규칙', icon: Shield },
   { id: '[좀비 공성 및 좀비 폭군 이벤트].txt', type: 'notice', label: '좀비 공성 및 좀비 폭군 이벤트', icon: CalendarDays },
@@ -220,45 +222,7 @@ function Caravan({ lang }) {
   );
 }
 
-function Members({ lang }) {
-  const rows = workbook.sheets['시트14'].rows;
-  return (
-    <div>
-      <p className="muted">{ui[lang].memberNote}</p>
-      <div className="table-wrap wide">
-        <table>
-          <thead><tr>{ui[lang].columns.map((col) => <th key={col}>{col}</th>)}</tr></thead>
-          <tbody>
-            {rows.map((row, idx) => (
-              <tr key={`${row.name}-${idx}`}>
-                <td>{row.status}</td><td>{row.current}</td><td>{row.next}</td><td>{row.name}</td>
-                <td>{row.day1}</td><td>{row.day2}</td><td>{row.day3}</td><td>{row.day4}</td><td>{row.day5}</td><td>{row.day6}</td>
-                <td className="strong">{row.total}</td><td>{row.note}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-function RawSheet({ lang }) {
-  const rows = workbook.sheets['연맹 가이드'].rows;
-  return (
-    <div className="table-wrap">
-      <table>
-        <tbody>
-          {rows.map((row, idx) => <tr key={idx}>{row.map((cell, i) => <td key={i}>{cell}</td>)}</tr>)}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 function WorkbookView({ lang }) {
-  const [sheet, setSheet] = useState('연맹 대결 가이드');
-  const sheetNames = Object.keys(workbook.sheets);
   return (
     <section className="content-block">
       <div className="section-head">
@@ -267,13 +231,21 @@ function WorkbookView({ lang }) {
           <h2>{lang === 'ko' ? '가이드 항목' : lang === 'en' ? 'Guide Sections' : 'Secciones de guía'}</h2>
         </div>
       </div>
-      <div className="subtabs">
-        {sheetNames.map((name) => <button className={sheet === name ? 'active' : ''} onClick={() => setSheet(name)} key={name}>{name}</button>)}
+      <DuelGuide lang={lang} />
+    </section>
+  );
+}
+
+function CaravanView({ lang }) {
+  return (
+    <section className="content-block">
+      <div className="section-head">
+        <div>
+          <p className="section-kicker">{displayName(workbook.source)}</p>
+          <h2>캐러밴 표</h2>
+        </div>
       </div>
-      {sheet === '연맹 대결 가이드' && <DuelGuide lang={lang} />}
-      {sheet === '캐러밴 표' && <Caravan lang={lang} />}
-      {sheet === '시트14' && <Members lang={lang} />}
-      {sheet === '연맹 가이드' && <RawSheet lang={lang} />}
+      <Caravan lang={lang} />
     </section>
   );
 }
@@ -340,7 +312,8 @@ export default function App() {
         </aside>
         <div className="content">
           {tab === workbook.source && <WorkbookView lang={lang} />}
-          {tab !== workbook.source && <FileNotice lang={lang} file={tab} />}
+          {tab === '캐러밴 표' && <CaravanView lang={lang} />}
+          {tab !== workbook.source && tab !== '캐러밴 표' && <FileNotice lang={lang} file={tab} />}
         </div>
       </div>
     </main>
