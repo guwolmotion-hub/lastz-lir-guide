@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
-import { AlertTriangle, Calculator, CalendarDays, Languages, ListChecks, Search, Shield, Swords, Table2, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { AlertTriangle, ArrowLeft, Calculator, CalendarDays, Home, Languages, ListChecks, Shield, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 
 const ui = {
@@ -10,13 +10,12 @@ const ui = {
     title: 'Lir 신규 연맹원 가이드',
     subtitle: '연맹 대결, 킬데이, 약탈, 공성 이벤트, 협곡, 캐러밴 기준을 한곳에서 확인하세요.',
     source: '원본 자료',
-    search: '가이드 검색',
     quick: '핵심 체크',
     tabs: '자료 탭',
     excelTabs: '엑셀 시트',
     all: '전체',
     note: '운영진 공지 기준으로 업데이트된 웹 가이드입니다.',
-    empty: '검색 결과가 없습니다.',
+    home: '홈으로',
     memberNote: '명단성 시트는 원본 엑셀 내용을 웹 표로 옮긴 것입니다.',
     columns: ['상태', '현재', '조정', '닉네임', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', '합계', '비고'],
   },
@@ -25,13 +24,12 @@ const ui = {
     title: 'Lir New Alliance Member Guide',
     subtitle: 'Check Alliance Duel, Kill Day, plunder, zombie events, Canyon Clash, and Caravan power ranges in one place.',
     source: 'Source files',
-    search: 'Search guide',
     quick: 'Key checks',
     tabs: 'Guide tabs',
     excelTabs: 'Workbook sheets',
     all: 'All',
     note: 'Web guide rebuilt from the management notice files.',
-    empty: 'No matching results.',
+    home: 'Home',
     memberNote: 'Roster-like sheet content is shown as a web table from the original workbook.',
     columns: ['Status', 'Current', 'Adjusted', 'Name', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Total', 'Note'],
   },
@@ -40,13 +38,12 @@ const ui = {
     title: 'Guía para nuevos miembros de Lir',
     subtitle: 'Consulta en un solo lugar el Duelo de alianza, Día de bajas, saqueo, eventos zombi, Cañón y rangos de Caravana.',
     source: 'Archivos fuente',
-    search: 'Buscar en la guía',
     quick: 'Puntos clave',
     tabs: 'Pestañas',
     excelTabs: 'Hojas del Excel',
     all: 'Todo',
     note: 'Guía web reconstruida a partir de los avisos de la administración.',
-    empty: 'No hay resultados.',
+    home: 'Inicio',
     memberNote: 'La hoja tipo lista se muestra como tabla web desde el libro original.',
     columns: ['Estado', 'Actual', 'Ajuste', 'Nombre', 'Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5', 'Día 6', 'Total', 'Nota'],
   },
@@ -325,15 +322,6 @@ const featuredSections = [
   { id: 'events', icon: CalendarDays, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=82' },
 ];
 
-function useFiltered(query, lang) {
-  return useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return null;
-    const haystack = JSON.stringify({ notices: notices[lang], workbook }).toLowerCase();
-    return haystack.includes(q);
-  }, [query, lang]);
-}
-
 function TextBlock({ text }) {
   return String(text || '').split('\n').filter(Boolean).map((line, idx) => {
     const isBullet = line.trim().startsWith('-') || line.trim().startsWith('*');
@@ -527,21 +515,24 @@ function SegmentedTabs({ label, items, value, onChange }) {
 
 export default function App() {
   const [lang, setLang] = useState('ko');
-  const [section, setSection] = useState('duel');
+  const [page, setPage] = useState('home');
+  const [section, setSection] = useState(null);
   const [ruleTab, setRuleTab] = useState('[약탈 규칙].txt');
   const [eventTab, setEventTab] = useState('[좀비 공성 및 좀비 폭군 이벤트].txt');
-  const [query, setQuery] = useState('');
-  const hasResult = useFiltered(query, lang);
   const copy = ui[lang];
   const sectionCopy = sectionLabels[lang];
-  const activeSection = sectionLabels[lang][section];
+  const activeSection = section ? sectionLabels[lang][section] : null;
   const ruleTabs = fileTabs.filter((item) => item.id === '[약탈 규칙].txt' || item.id === '[토요일 킬데이 규칙].txt');
   const eventTabs = fileTabs.filter((item) => item.id === '[좀비 공성 및 좀비 폭군 이벤트].txt' || item.id === '[협곡 쟁탈전].txt');
   const handleSectionChange = (id) => {
     setSection(id);
-    window.setTimeout(() => {
-      document.querySelector('.window-shell')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 80);
+    setPage('detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  const goHome = () => {
+    setPage('home');
+    setSection(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const renderContent = () => {
     if (section === 'duel') return <WorkbookView lang={lang} />;
@@ -562,31 +553,64 @@ export default function App() {
     );
   };
 
-  return (
-    <main>
-      <header className="hero">
-        <nav>
+  if (page === 'detail' && section) {
+    return (
+      <main className="detail-page">
+        <nav className="topbar detail-topbar">
+          <button className="home-button" onClick={goHome}>
+            <ArrowLeft size={18} />
+            <span>{copy.home}</span>
+          </button>
           <div className="brand"><span>Lir</span><small>Guide Hub</small></div>
-          <label className="search compact-search">
-            <Search size={18} />
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={copy.search} />
-          </label>
           <div className="lang-switch" aria-label="Language">
             <Languages size={16} />
             {['ko', 'en', 'es'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
           </div>
         </nav>
-        <div className="hero-inner">
-          <div className="hero-copy">
-            <p>{copy.eyebrow}</p>
-            <h1>{copy.title}</h1>
+        <section className="detail-hero">
+          <p>{activeSection.kicker}</p>
+          <h1>{activeSection.title}</h1>
+          <span>{activeSection.desc}</span>
+        </section>
+        <div className="window-shell">
+          <div className="window-bar">
+            <div>
+              <span>{activeSection.kicker}</span>
+              <strong>{activeSection.title}</strong>
+            </div>
+            <p>{copy.note}</p>
+          </div>
+          <div className="content">
+            {renderContent()}
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="home-page">
+      <nav className="topbar">
+        <div className="brand"><span>Lir</span><small>Guide Hub</small></div>
+        <div className="lang-switch" aria-label="Language">
+          <Languages size={16} />
+          {['ko', 'en', 'es'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
+        </div>
+      </nav>
+      <section className="lobby">
+        <div className="lobby-frame">
+          <div className="lobby-head">
+            <div>
+              <p>{copy.eyebrow}</p>
+              <h1>{copy.title}</h1>
+            </div>
             <span>{copy.subtitle}</span>
           </div>
           <div className="feature-tabs" aria-label={copy.tabs}>
             {featuredSections.map(({ id, icon: Icon, image }, index) => {
               const item = sectionLabels[lang][id];
               return (
-                <button className={`feature-card ${section === id ? 'active' : ''}`} onClick={() => handleSectionChange(id)} key={id}>
+                <button className="feature-card" onClick={() => handleSectionChange(id)} key={id}>
                   <img src={image} alt="" />
                   <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
                   <span className="feature-kicker">{item.kicker}</span>
@@ -597,22 +621,15 @@ export default function App() {
               );
             })}
           </div>
-        </div>
-      </header>
-
-      <div className="window-shell">
-        {query && <p className={`search-result ${hasResult ? 'ok' : 'bad'}`}>{hasResult ? copy.all : copy.empty}</p>}
-        <div className="window-bar">
-          <div>
-            <span>{activeSection.kicker}</span>
-            <strong>{activeSection.title}</strong>
+          <div className="lobby-footer">
+            <span>HOME</span>
+            <span>GUIDE</span>
+            <strong><Home size={16} /> PLAY</strong>
+            <span>LIR</span>
+            <span>737</span>
           </div>
-          <p>{copy.note}</p>
         </div>
-        <div className="content">
-          {renderContent()}
-        </div>
-      </div>
+      </section>
     </main>
   );
 }

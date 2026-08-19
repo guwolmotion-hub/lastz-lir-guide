@@ -21,6 +21,7 @@ async function runViewport(name, viewport) {
   await page.getByRole('button', { name: /Caravan/ }).click();
   await page.screenshot({ path: path.join(outDir, `${name}-en-caravan.png`), fullPage: true });
 
+  await page.getByRole('button', { name: /Home/ }).click();
   await page.getByRole('button', { name: 'ES', exact: true }).click();
   await page.getByRole('button', { name: /Reglas/ }).click();
   await page.screenshot({ path: path.join(outDir, `${name}-es-rules.png`), fullPage: true });
@@ -33,6 +34,8 @@ async function runViewport(name, viewport) {
       .map((el) => ({ tag: el.tagName, text: el.textContent.slice(0, 80), sw: el.scrollWidth, cw: el.clientWidth }));
     return {
       title: document.querySelector('h1')?.textContent,
+      homeVisible: !!document.querySelector('.lobby'),
+      detailVisible: !!document.querySelector('.window-shell'),
       bodyWidth: body.scrollWidth,
       viewportWidth: innerWidth,
       horizontalOverflow: body.scrollWidth > innerWidth + 2,
