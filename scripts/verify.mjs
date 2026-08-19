@@ -16,6 +16,12 @@ async function runViewport(name, viewport) {
   const page = await browser.newPage({ viewport });
   await page.goto('http://127.0.0.1:5177/', { waitUntil: 'networkidle' });
   await page.screenshot({ path: path.join(outDir, `${name}-ko.png`), fullPage: true });
+  const homeMetrics = await page.evaluate(() => {
+    const footer = document.querySelector('.lobby-footer')?.getBoundingClientRect();
+    const cards = [...document.querySelectorAll('.feature-card')].map((el) => el.getBoundingClientRect());
+    const footerOverlap = !!footer && cards.some((card) => !(card.right < footer.left || card.left > footer.right || card.bottom < footer.top || card.top > footer.bottom));
+    return { footerOverlap };
+  });
 
   await page.getByRole('button', { name: 'EN', exact: true }).click();
   await page.getByRole('button', { name: /Caravan/ }).click();
@@ -36,12 +42,14 @@ async function runViewport(name, viewport) {
       title: document.querySelector('h1')?.textContent,
       homeVisible: !!document.querySelector('.lobby'),
       detailVisible: !!document.querySelector('.window-shell'),
+      footerOverlap: false,
       bodyWidth: body.scrollWidth,
       viewportWidth: innerWidth,
       horizontalOverflow: body.scrollWidth > innerWidth + 2,
       overflows,
     };
   });
+  metrics.footerOverlap = homeMetrics.footerOverlap;
   checks.push({ name, metrics });
   await page.close();
 }

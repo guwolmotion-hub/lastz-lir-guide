@@ -110,7 +110,7 @@ body::before {
 .lobby-frame::before {
   content: "";
   position: absolute;
-  inset: 70px 36px 78px;
+  inset: 70px 36px 120px;
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 8px;
   pointer-events: none;
@@ -278,12 +278,10 @@ body::before {
 }
 
 .lobby-footer {
-  position: absolute;
-  left: 36px;
-  right: 36px;
-  bottom: 18px;
+  position: relative;
   z-index: 3;
   min-height: 52px;
+  margin: 72px 0 0;
   border-top: 1px solid rgba(228, 62, 72, .38);
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -747,7 +745,7 @@ tbody tr:nth-child(even) td { background: #f7f9fb; }
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 10px 12px 44px;
+    padding: 10px 12px 18px;
     margin-left: -12px;
     margin-right: -12px;
   }
@@ -780,7 +778,7 @@ tbody tr:nth-child(even) td { background: #f7f9fb; }
     min-height: 680px;
     padding: 18px 14px;
   }
-  .lobby-frame::before { inset: 88px 12px 76px; }
+  .lobby-frame::before { inset: 88px 12px 106px; }
   .lobby-head h1,
   .detail-hero h1 { font-size: 38px; line-height: 1.05; }
   .lobby-head > span { font-size: 15px; }
@@ -788,8 +786,7 @@ tbody tr:nth-child(even) td { background: #f7f9fb; }
   .feature-card { min-width: 265px; min-height: 350px; }
   .feature-card strong { font-size: 29px; }
   .lobby-footer {
-    left: 14px;
-    right: 14px;
+    margin-top: 30px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .lobby-footer span:nth-child(4),
