@@ -18,12 +18,12 @@ async function runViewport(name, viewport) {
   await page.screenshot({ path: path.join(outDir, `${name}-ko.png`), fullPage: true });
 
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await page.getByRole('button', { name: '2026 737서버.xlsx의 사본.xlsx' }).click();
+  await page.getByRole('button', { name: '2026 737서버 가이드' }).click();
   await page.getByRole('button', { name: '캐러밴 표' }).click();
   await page.screenshot({ path: path.join(outDir, `${name}-en-caravan.png`), fullPage: true });
 
   await page.getByRole('button', { name: 'ES', exact: true }).click();
-  await page.getByRole('button', { name: '[약탈 규칙].txt' }).click();
+  await page.getByRole('button', { name: '약탈 규칙' }).click();
   await page.screenshot({ path: path.join(outDir, `${name}-es-rules.png`), fullPage: true });
 
   const metrics = await page.evaluate(() => {

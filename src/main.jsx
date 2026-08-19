@@ -84,6 +84,18 @@ const spanishDuel = {
   'Day 6': 'Día 6',
 };
 
+const displayNames = {
+  '2026 737서버.xlsx의 사본.xlsx': '2026 737서버 가이드',
+  '[약탈 규칙].txt': '약탈 규칙',
+  '[토요일 킬데이 규칙].txt': '토요일 킬데이 규칙',
+  '[좀비 공성 및 좀비 폭군 이벤트].txt': '좀비 공성 및 좀비 폭군 이벤트',
+  '[협곡 쟁탈전].txt': '협곡 쟁탈전',
+};
+
+function displayName(name) {
+  return displayNames[name] || String(name).replace(/\.(xlsx|txt)$/i, '').replace(/^\[|\]$/g, '');
+}
+
 function spanishSummary(entry) {
   const map = {
     '※ 공지\nAnnouncement': ['Objetivo semanal: 3,000,000 puntos.', 'Prepara con anticipación los objetos de cada día.', 'Usa insignias, contratos, órdenes y aceleradores en el día recomendado para maximizar puntos.'],
@@ -99,11 +111,11 @@ function spanishSummary(entry) {
 }
 
 const fileTabs = [
-  { id: '2026 737서버.xlsx의 사본.xlsx', type: 'workbook', label: '2026 737서버.xlsx의 사본.xlsx', icon: Table2 },
-  { id: '[약탈 규칙].txt', type: 'notice', label: '[약탈 규칙].txt', icon: Swords },
-  { id: '[토요일 킬데이 규칙].txt', type: 'notice', label: '[토요일 킬데이 규칙].txt', icon: Shield },
-  { id: '[좀비 공성 및 좀비 폭군 이벤트].txt', type: 'notice', label: '[좀비 공성 및 좀비 폭군 이벤트].txt', icon: CalendarDays },
-  { id: '[협곡 쟁탈전].txt', type: 'notice', label: '[협곡 쟁탈전].txt', icon: Users },
+  { id: '2026 737서버.xlsx의 사본.xlsx', type: 'workbook', label: '2026 737서버 가이드', icon: Table2 },
+  { id: '[약탈 규칙].txt', type: 'notice', label: '약탈 규칙', icon: Swords },
+  { id: '[토요일 킬데이 규칙].txt', type: 'notice', label: '토요일 킬데이 규칙', icon: Shield },
+  { id: '[좀비 공성 및 좀비 폭군 이벤트].txt', type: 'notice', label: '좀비 공성 및 좀비 폭군 이벤트', icon: CalendarDays },
+  { id: '[협곡 쟁탈전].txt', type: 'notice', label: '협곡 쟁탈전', icon: Users },
 ];
 
 function useFiltered(query, lang) {
@@ -128,7 +140,7 @@ function NoticeCard({ item }) {
     <article className={`notice ${item.tone}`}>
       <div className="notice-icon"><Icon size={20} /></div>
       <div>
-        <p className="file-name">{item.file}</p>
+        <p className="file-name">{displayName(item.file)}</p>
         <h3>{item.title}</h3>
         <ul>
           {item.body.map((line) => <li key={line}>{line}</li>)}
@@ -223,7 +235,7 @@ function WorkbookView({ lang }) {
     <section className="content-block">
       <div className="section-head">
         <div>
-          <p className="section-kicker">{ui[lang].source}: {workbook.source}</p>
+          <p className="section-kicker">{displayName(workbook.source)}</p>
           <h2>{ui[lang].excelTabs}</h2>
         </div>
       </div>
@@ -246,7 +258,7 @@ function FileNotice({ lang, file }) {
       <div className="section-head">
         <div>
           <p className="section-kicker">{ui[lang].source}</p>
-          <h2>{item.file}</h2>
+          <h2>{displayName(item.file)}</h2>
         </div>
       </div>
       <div className="notice-grid single">
