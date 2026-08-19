@@ -85,7 +85,8 @@ const spanishDuel = {
 };
 
 const displayNames = {
-  '2026 737서버.xlsx의 사본.xlsx': '2026 737서버 가이드',
+  '[연맹 대전 준비사항].xlsx': '연맹 대전 준비사항',
+  '2026 737서버.xlsx의 사본.xlsx': '연맹 대전 준비사항',
   '[약탈 규칙].txt': '약탈 규칙',
   '[토요일 킬데이 규칙].txt': '토요일 킬데이 규칙',
   '[좀비 공성 및 좀비 폭군 이벤트].txt': '좀비 공성 및 좀비 폭군 이벤트',
@@ -94,6 +95,20 @@ const displayNames = {
 
 function displayName(name) {
   return displayNames[name] || String(name).replace(/\.(xlsx|txt)$/i, '').replace(/^\[|\]$/g, '');
+}
+
+function dayLabel(date, lang) {
+  if (date === '※ 공지\nAnnouncement') {
+    return lang === 'ko' ? '공지' : lang === 'en' ? 'Notice' : 'Aviso';
+  }
+  if (lang === 'es') return spanishDuel[date] || date;
+  return date;
+}
+
+function dayTitle(entry, lang) {
+  const text = lang === 'ko' ? entry.ko : lang === 'en' ? entry.en || entry.ko : spanishSummary(entry).join('\n');
+  const first = String(text).split('\n').find(Boolean) || dayLabel(entry.date, lang);
+  return first.replace(/[🔳■]/g, '').trim();
 }
 
 function spanishSummary(entry) {
@@ -111,7 +126,7 @@ function spanishSummary(entry) {
 }
 
 const fileTabs = [
-  { id: '2026 737서버.xlsx의 사본.xlsx', type: 'workbook', label: '2026 737서버 가이드', icon: Table2 },
+  { id: workbook.source, type: 'workbook', label: displayName(workbook.source), icon: Table2 },
   { id: '[약탈 규칙].txt', type: 'notice', label: '약탈 규칙', icon: Swords },
   { id: '[토요일 킬데이 규칙].txt', type: 'notice', label: '토요일 킬데이 규칙', icon: Shield },
   { id: '[좀비 공성 및 좀비 폭군 이벤트].txt', type: 'notice', label: '좀비 공성 및 좀비 폭군 이벤트', icon: CalendarDays },
@@ -152,16 +167,29 @@ function NoticeCard({ item }) {
 
 function DuelGuide({ lang }) {
   const entries = workbook.sheets['연맹 대결 가이드'].entries;
+  const [activeDay, setActiveDay] = useState(entries[0]?.date);
+  const activeEntry = entries.find((entry) => entry.date === activeDay) || entries[0];
   return (
-    <div className="duel-grid">
-      {entries.map((entry) => (
-        <article className="day-panel" key={entry.date}>
-          <div className="day-label">{lang === 'es' ? spanishDuel[entry.date] || entry.date : entry.date.replace('※ 공지\nAnnouncement', lang === 'ko' ? '공지' : 'Announcement')}</div>
-          {lang === 'ko' && <TextBlock text={entry.ko} />}
-          {lang === 'en' && <TextBlock text={entry.en || entry.ko} />}
-          {lang === 'es' && <ul className="spanish-list">{spanishSummary(entry).map((line) => <li key={line}>{line}</li>)}</ul>}
-        </article>
-      ))}
+    <div className="duel-shell">
+      <div className="day-tabs" aria-label="Alliance duel days">
+        {entries.map((entry) => (
+          <button className={activeEntry.date === entry.date ? 'active' : ''} onClick={() => setActiveDay(entry.date)} key={entry.date}>
+            <strong>{dayLabel(entry.date, lang)}</strong>
+            <span>{dayTitle(entry, lang)}</span>
+          </button>
+        ))}
+      </div>
+      <article className="day-detail">
+        <div className="day-detail-head">
+          <span>{dayLabel(activeEntry.date, lang)}</span>
+          <h3>{dayTitle(activeEntry, lang)}</h3>
+        </div>
+        <div className="day-copy">
+          {lang === 'ko' && <TextBlock text={activeEntry.ko} />}
+          {lang === 'en' && <TextBlock text={activeEntry.en || activeEntry.ko} />}
+          {lang === 'es' && <ul className="spanish-list">{spanishSummary(activeEntry).map((line) => <li key={line}>{line}</li>)}</ul>}
+        </div>
+      </article>
     </div>
   );
 }
@@ -236,7 +264,7 @@ function WorkbookView({ lang }) {
       <div className="section-head">
         <div>
           <p className="section-kicker">{displayName(workbook.source)}</p>
-          <h2>{ui[lang].excelTabs}</h2>
+          <h2>{lang === 'ko' ? '가이드 항목' : lang === 'en' ? 'Guide Sections' : 'Secciones de guía'}</h2>
         </div>
       </div>
       <div className="subtabs">
@@ -270,7 +298,7 @@ function FileNotice({ lang, file }) {
 
 export default function App() {
   const [lang, setLang] = useState('ko');
-  const [tab, setTab] = useState(fileTabs[0].id);
+  const [tab, setTab] = useState(workbook.source);
   const [query, setQuery] = useState('');
   const hasResult = useFiltered(query, lang);
   const copy = ui[lang];
@@ -311,8 +339,8 @@ export default function App() {
           <p className="aside-note">{copy.note}</p>
         </aside>
         <div className="content">
-          {tab === '2026 737서버.xlsx의 사본.xlsx' && <WorkbookView lang={lang} />}
-          {tab !== '2026 737서버.xlsx의 사본.xlsx' && <FileNotice lang={lang} file={tab} />}
+          {tab === workbook.source && <WorkbookView lang={lang} />}
+          {tab !== workbook.source && <FileNotice lang={lang} file={tab} />}
         </div>
       </div>
     </main>
