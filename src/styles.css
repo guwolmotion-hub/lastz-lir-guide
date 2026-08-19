@@ -212,7 +212,8 @@ body::before {
   scrollbar-width: none;
   cursor: grab;
   user-select: none;
-  touch-action: pan-y;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
 }
 .feature-tabs:active { cursor: grabbing; }
 .feature-tabs::-webkit-scrollbar { display: none; }
@@ -901,7 +902,15 @@ tbody tr:nth-child(even) td { background: #f7f9fb; }
   .detail-hero h1 { font-size: 38px; line-height: 1.05; }
   .lobby-copy { width: auto; max-width: 330px; }
   .feature-carousel { margin-top: 38px; }
-  .carousel-button { display: none; }
+  .carousel-button {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    top: 55%;
+    background: rgba(8, 11, 16, .82);
+  }
+  .carousel-button.prev { left: -5px; }
+  .carousel-button.next { right: -5px; }
   .feature-card { flex-basis: 265px; min-height: 350px; }
   .feature-card.active,
   .feature-card.active:hover,

@@ -668,7 +668,7 @@ export default function App() {
   const [eventTab, setEventTab] = useState('[좀비 공성 및 좀비 폭군 이벤트].txt');
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const carouselRef = useRef(null);
-  const dragStateRef = useRef({ active: false, startX: 0, scrollLeft: 0, dragged: false, distance: 0, raf: null });
+  const dragStateRef = useRef({ active: false, startX: 0, startY: 0, scrollLeft: 0, dragged: false, distance: 0, raf: null });
   const copy = ui[lang];
   const sectionCopy = sectionLabels[lang];
   const activeSection = section ? sectionLabels[lang][section] : null;
@@ -740,9 +740,10 @@ export default function App() {
     carousel.scrollBy({ left: offset, behavior: 'smooth' });
   };
   const handleCarouselPointerDown = (event) => {
+    if (event.pointerType === 'touch') return;
     const carousel = carouselRef.current;
     if (!carousel) return;
-    dragStateRef.current = { active: true, startX: event.clientX, scrollLeft: carousel.scrollLeft, dragged: false, distance: 0, raf: null };
+    dragStateRef.current = { active: true, startX: event.clientX, startY: event.clientY, scrollLeft: carousel.scrollLeft, dragged: false, distance: 0, raf: null };
   };
   const handleCarouselPointerMove = (event) => {
     const carousel = carouselRef.current;
@@ -758,6 +759,38 @@ export default function App() {
     const carousel = carouselRef.current;
     const drag = dragStateRef.current;
     if (!carousel || !drag.active) return;
+    drag.active = false;
+    updateActiveCard();
+    window.setTimeout(snapActiveCardToCenter, 30);
+    if (drag.dragged) window.setTimeout(() => {
+      dragStateRef.current.dragged = false;
+      dragStateRef.current.distance = 0;
+    }, 160);
+  };
+  const handleCarouselTouchStart = (event) => {
+    const carousel = carouselRef.current;
+    const touch = event.touches[0];
+    if (!carousel || !touch) return;
+    dragStateRef.current = { active: true, startX: touch.clientX, startY: touch.clientY, scrollLeft: carousel.scrollLeft, dragged: false, distance: 0, raf: null };
+  };
+  const handleCarouselTouchMove = (event) => {
+    const carousel = carouselRef.current;
+    const touch = event.touches[0];
+    const drag = dragStateRef.current;
+    if (!carousel || !touch || !drag.active) return;
+    const deltaX = touch.clientX - drag.startX;
+    const deltaY = touch.clientY - drag.startY;
+    drag.distance = Math.max(drag.distance || 0, Math.abs(deltaX));
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      event.preventDefault();
+      if (drag.distance > 10) drag.dragged = true;
+      carousel.scrollLeft = drag.scrollLeft - deltaX;
+      scheduleActiveCardUpdate();
+    }
+  };
+  const handleCarouselTouchEnd = () => {
+    const drag = dragStateRef.current;
+    if (!drag.active) return;
     drag.active = false;
     updateActiveCard();
     window.setTimeout(snapActiveCardToCenter, 30);
@@ -863,6 +896,10 @@ export default function App() {
               onPointerUp={handleCarouselPointerUp}
               onPointerCancel={handleCarouselPointerUp}
               onPointerLeave={handleCarouselPointerUp}
+              onTouchStart={handleCarouselTouchStart}
+              onTouchMove={handleCarouselTouchMove}
+              onTouchEnd={handleCarouselTouchEnd}
+              onTouchCancel={handleCarouselTouchEnd}
             >
               {featuredSections.map(({ id, icon: Icon, image }, index) => {
                 const item = sectionLabels[lang][id];
