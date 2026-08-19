@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { AlertTriangle, CalendarDays, ChevronRight, Languages, Search, Shield, Swords, Table2, Users } from 'lucide-react';
+import { CalendarDays, ChevronRight, Languages, Search, Shield, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 
 const ui = {
@@ -55,21 +55,21 @@ const ui = {
 const notices = {
   ko: [
     { file: '[토요일 킬데이 규칙].txt', title: '토요일 킬데이 규칙', tone: 'danger', icon: Shield, body: ['우리 연맹은 강한 상대의 표적이 되기 쉬우므로 실드 사용이 필수입니다.', '리셋 후 빠르게 상대 서버를 약탈하고 실드를 사용해 복귀하세요.', '약탈하지 않는 인원은 리셋 후 바로 실드를 사용하세요.', '토요일 리셋 이후 실드가 없으면 사전 통보 없이 강퇴 처리되며, 추후 복귀는 가능합니다.', '같은 일이 3번 반복되면 영구 제명됩니다.'] },
-    { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['트럭 퀘스트나 현상 퀘스트는 서버전 중이면 상대 서버를 약탈하세요.', '서버전이 아닐 때는 같은 서버를 제외한 모든 서버에서 약탈하면 됩니다.', '자원 약탈은 NAP를 제외한 연맹을 대상으로 진행하세요.', '현재 NAP 8 기준이며, 연맹 랭킹에서 확인이 어렵다면 R4에게 문의하세요.'] },
+    { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['트럭 퀘스트나 현상 퀘스트는 서버전 중이면 상대 서버를 약탈하세요.', '서버전이 아닐 때는 같은 서버를 제외한 모든 서버에서 약탈하면 됩니다.', '자원 약탈은 NAP를 제외한 연맹을 대상으로 진행하세요.', '현재 NAP 8 기준이며, 연맹 랭킹에서 확인이 어렵다면 R4에게 문의하세요.', '약탈 인원 제한은 현재 4명 + 실드 지원 2명입니다. 반드시 인원 수를 확인한 뒤 텔레포트하세요.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: '좀비 공성 및 좀비 폭군 이벤트', tone: 'info', icon: CalendarDays, body: ['Lir은 한국인 멤버 비율이 높은 연맹입니다.', '대부분 이벤트 시작 시간은 아포칼립스 기준 10:00입니다.'] },
     { file: '[협곡 쟁탈전].txt', title: '협곡 쟁탈전', tone: 'info', icon: Users, body: ['협곡 쟁탈전은 아포칼립스 시간 기준 23:00에 진행됩니다.', '참여 인원은 연맹전 개인 점수와 전투력 기준의 참여 희망자 중 랜덤으로 선정됩니다.'] },
   ],
   en: [
-    { file: '[Saturday Kill Day Rules].txt', title: 'Saturday Kill Day Rules', tone: 'danger', icon: Shield, body: ['Our alliance is often targeted by stronger enemies, so using a shield is mandatory.', 'After reset, plunder the enemy server quickly, activate your shield, and return.', 'Members who do not plunder should activate a shield immediately after reset.', 'If you have no shield after Saturday reset, you may be removed without prior notice. Rejoining later is possible.', 'Repeating the same issue three times results in permanent expulsion.'] },
-    { file: '[Plunder Rules].txt', title: 'Plunder Rules', tone: 'warning', icon: Swords, body: ['For truck or bounty quests during server war, plunder the enemy server.', 'When server war is not active, plunder any server except our own.', 'For resource plunder, target alliances except NAP alliances.', 'Current standard is NAP 8. If you cannot check it in alliance rankings, ask R4.'] },
-    { file: '[Zombie Siege and Zombie Tyrant Event].txt', title: 'Zombie Siege and Zombie Tyrant Event', tone: 'info', icon: CalendarDays, body: ['Lir has a high ratio of Korean members.', 'Most events start at 10:00 Apocalypse Time.'] },
-    { file: '[Canyon Clash].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash is held at 23:00 Apocalypse Time.', 'Participants are randomly selected from applicants based on Alliance Duel personal score and combat power.'] },
+    { file: '[토요일 킬데이 규칙].txt', title: 'Saturday Kill Day Rules', tone: 'danger', icon: Shield, body: ['Our alliance is often targeted by stronger enemies, so using a shield is mandatory.', 'After reset, plunder the enemy server quickly, activate your shield, and return.', 'Members who do not plunder should activate a shield immediately after reset.', 'If you have no shield after Saturday reset, you may be removed without prior notice. Rejoining later is possible.', 'Repeating the same issue three times results in permanent expulsion.'] },
+    { file: '[약탈 규칙].txt', title: 'Plunder Rules', tone: 'warning', icon: Swords, body: ['For truck or bounty quests during server war, plunder the enemy server.', 'When server war is not active, plunder any server except our own.', 'For resource plunder, target alliances except NAP alliances.', 'Current standard is NAP 8. If you cannot check it in alliance rankings, ask R4.', 'Plunder participation is currently limited to 4 plunder members + 2 shield support members. Check the count before teleporting.'] },
+    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Zombie Siege and Zombie Tyrant Event', tone: 'info', icon: CalendarDays, body: ['Lir has a high ratio of Korean members.', 'Most events start at 10:00 Apocalypse Time.'] },
+    { file: '[협곡 쟁탈전].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash is held at 23:00 Apocalypse Time.', 'Participants are randomly selected from applicants based on Alliance Duel personal score and combat power.'] },
   ],
   es: [
-    { file: '[Reglas del Día de bajas del sábado].txt', title: 'Reglas del Día de bajas del sábado', tone: 'danger', icon: Shield, body: ['Nuestra alianza suele ser objetivo de rivales fuertes, por eso el escudo es obligatorio.', 'Después del reinicio, saquea rápidamente el servidor enemigo, activa el escudo y vuelve.', 'Quienes no saqueen deben activar el escudo inmediatamente después del reinicio.', 'Si no tienes escudo después del reinicio del sábado, puedes ser expulsado sin aviso previo. Es posible volver más adelante.', 'Si el mismo problema se repite tres veces, la expulsión será permanente.'] },
-    { file: '[Reglas de saqueo].txt', title: 'Reglas de saqueo', tone: 'warning', icon: Swords, body: ['Para misiones de camión o recompensa durante la guerra de servidores, saquea el servidor enemigo.', 'Si no hay guerra de servidores, saquea cualquier servidor excepto el nuestro.', 'Para recursos, ataca alianzas que no estén incluidas en NAP.', 'El estándar actual es NAP 8. Si no sabes revisarlo en el ranking de alianzas, pregunta a R4.'] },
-    { file: '[Evento Asedio zombi y Tirano zombi].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['Lir tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
-    { file: '[Disputa del Cañón].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['La Disputa del Cañón se realiza a las 23:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
+    { file: '[토요일 킬데이 규칙].txt', title: 'Reglas del Día de bajas del sábado', tone: 'danger', icon: Shield, body: ['Nuestra alianza suele ser objetivo de rivales fuertes, por eso el escudo es obligatorio.', 'Después del reinicio, saquea rápidamente el servidor enemigo, activa el escudo y vuelve.', 'Quienes no saqueen deben activar el escudo inmediatamente después del reinicio.', 'Si no tienes escudo después del reinicio del sábado, puedes ser expulsado sin aviso previo. Es posible volver más adelante.', 'Si el mismo problema se repite tres veces, la expulsión será permanente.'] },
+    { file: '[약탈 규칙].txt', title: 'Reglas de saqueo', tone: 'warning', icon: Swords, body: ['Para misiones de camión o recompensa durante la guerra de servidores, saquea el servidor enemigo.', 'Si no hay guerra de servidores, saquea cualquier servidor excepto el nuestro.', 'Para recursos, ataca alianzas que no estén incluidas en NAP.', 'El estándar actual es NAP 8. Si no sabes revisarlo en el ranking de alianzas, pregunta a R4.', 'El saqueo está limitado actualmente a 4 miembros de saqueo + 2 miembros de apoyo con escudo. Revisa el número antes de teletransportarte.'] },
+    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['Lir tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
+    { file: '[협곡 쟁탈전].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['La Disputa del Cañón se realiza a las 23:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
   ],
 };
 
@@ -99,9 +99,11 @@ function spanishSummary(entry) {
 }
 
 const fileTabs = [
-  { id: 'overview', label: { ko: '핵심 안내', en: 'Overview', es: 'Resumen' }, icon: AlertTriangle },
-  { id: 'excel', label: { ko: '엑셀 가이드', en: 'Workbook', es: 'Excel' }, icon: Table2 },
-  { id: 'rules', label: { ko: '메모장 규칙', en: 'Text Rules', es: 'Reglas TXT' }, icon: Shield },
+  { id: '2026 737서버.xlsx의 사본.xlsx', type: 'workbook', label: '2026 737서버.xlsx의 사본.xlsx', icon: Table2 },
+  { id: '[약탈 규칙].txt', type: 'notice', label: '[약탈 규칙].txt', icon: Swords },
+  { id: '[토요일 킬데이 규칙].txt', type: 'notice', label: '[토요일 킬데이 규칙].txt', icon: Shield },
+  { id: '[좀비 공성 및 좀비 폭군 이벤트].txt', type: 'notice', label: '[좀비 공성 및 좀비 폭군 이벤트].txt', icon: CalendarDays },
+  { id: '[협곡 쟁탈전].txt', type: 'notice', label: '[협곡 쟁탈전].txt', icon: Users },
 ];
 
 function useFiltered(query, lang) {
@@ -236,40 +238,19 @@ function WorkbookView({ lang }) {
   );
 }
 
-function Overview({ lang }) {
-  const top = notices[lang].slice(0, 4);
-  return (
-    <section className="content-block">
-      <div className="section-head">
-        <div>
-          <p className="section-kicker">{ui[lang].quick}</p>
-          <h2>{lang === 'ko' ? '처음 가입하면 반드시 볼 것' : lang === 'en' ? 'Read This First' : 'Lee esto primero'}</h2>
-        </div>
-      </div>
-      <div className="quick-grid">
-        <div><strong>3,000,000</strong><span>{lang === 'ko' ? '연맹 대결 주간 목표 점수' : lang === 'en' ? 'Weekly Alliance Duel target' : 'Meta semanal del Duelo de alianza'}</span></div>
-        <div><strong>10:00</strong><span>{lang === 'ko' ? '대부분 이벤트 시작, 아포칼립스 기준' : lang === 'en' ? 'Most event starts, Apocalypse Time' : 'Inicio de la mayoría de eventos, hora Apocalipsis'}</span></div>
-        <div><strong>23:00</strong><span>{lang === 'ko' ? '협곡 쟁탈전, 아포칼립스 기준' : lang === 'en' ? 'Canyon Clash, Apocalypse Time' : 'Disputa del Cañón, hora Apocalipsis'}</span></div>
-        <div><strong>NAP 8</strong><span>{lang === 'ko' ? '자원 약탈 제외 기준' : lang === 'en' ? 'Resource plunder exclusion' : 'Exclusión de saqueo de recursos'}</span></div>
-      </div>
-      <div className="notice-grid">
-        {top.map((item) => <NoticeCard key={item.title} item={item} />)}
-      </div>
-    </section>
-  );
-}
-
-function Rules({ lang }) {
+function FileNotice({ lang, file }) {
+  const item = notices[lang].find((notice) => notice.file === file);
+  if (!item) return null;
   return (
     <section className="content-block">
       <div className="section-head">
         <div>
           <p className="section-kicker">{ui[lang].source}</p>
-          <h2>{ui[lang].tabs}</h2>
+          <h2>{item.file}</h2>
         </div>
       </div>
       <div className="notice-grid single">
-        {notices[lang].map((item) => <NoticeCard key={item.title} item={item} />)}
+        <NoticeCard item={item} />
       </div>
     </section>
   );
@@ -277,7 +258,7 @@ function Rules({ lang }) {
 
 export default function App() {
   const [lang, setLang] = useState('ko');
-  const [tab, setTab] = useState('overview');
+  const [tab, setTab] = useState(fileTabs[0].id);
   const [query, setQuery] = useState('');
   const hasResult = useFiltered(query, lang);
   const copy = ui[lang];
@@ -310,7 +291,7 @@ export default function App() {
             {fileTabs.map(({ id, label, icon: Icon }) => (
               <button key={id} onClick={() => setTab(id)} className={tab === id ? 'active' : ''}>
                 <Icon size={18} />
-                <span>{label[lang]}</span>
+                <span>{label}</span>
                 <ChevronRight size={16} />
               </button>
             ))}
@@ -318,9 +299,8 @@ export default function App() {
           <p className="aside-note">{copy.note}</p>
         </aside>
         <div className="content">
-          {tab === 'overview' && <Overview lang={lang} />}
-          {tab === 'excel' && <WorkbookView lang={lang} />}
-          {tab === 'rules' && <Rules lang={lang} />}
+          {tab === '2026 737서버.xlsx의 사본.xlsx' && <WorkbookView lang={lang} />}
+          {tab !== '2026 737서버.xlsx의 사본.xlsx' && <FileNotice lang={lang} file={tab} />}
         </div>
       </div>
     </main>

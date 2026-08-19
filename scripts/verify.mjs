@@ -14,16 +14,16 @@ const checks = [];
 
 async function runViewport(name, viewport) {
   const page = await browser.newPage({ viewport });
-  await page.goto('http://localhost:5177/', { waitUntil: 'networkidle' });
+  await page.goto('http://127.0.0.1:5177/', { waitUntil: 'networkidle' });
   await page.screenshot({ path: path.join(outDir, `${name}-ko.png`), fullPage: true });
 
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await page.getByRole('button', { name: 'Workbook' }).click();
+  await page.getByRole('button', { name: '2026 737서버.xlsx의 사본.xlsx' }).click();
   await page.getByRole('button', { name: '캐러밴 표' }).click();
   await page.screenshot({ path: path.join(outDir, `${name}-en-caravan.png`), fullPage: true });
 
   await page.getByRole('button', { name: 'ES', exact: true }).click();
-  await page.getByRole('button', { name: 'Reglas TXT' }).click();
+  await page.getByRole('button', { name: '[약탈 규칙].txt' }).click();
   await page.screenshot({ path: path.join(outDir, `${name}-es-rules.png`), fullPage: true });
 
   const metrics = await page.evaluate(() => {
