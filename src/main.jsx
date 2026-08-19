@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { AlertTriangle, Calculator, CalendarDays, ChevronRight, Languages, ListChecks, Search, Shield, Swords, Table2, Users } from 'lucide-react';
+import { AlertTriangle, Calculator, CalendarDays, Languages, ListChecks, Search, Shield, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 
 const ui = {
@@ -288,6 +288,43 @@ const fileTabs = [
   { id: '[협곡 쟁탈전].txt', type: 'notice', label: '협곡 쟁탈전', icon: Users },
 ];
 
+const sectionLabels = {
+  ko: {
+    duel: { kicker: 'Weekly', title: '연맹 대전', desc: 'Day별 준비와 점수 루틴' },
+    caravan: { kicker: 'Power', title: '캐러밴', desc: '단계 선택 공식과 투력표' },
+    rules: { kicker: 'Battle', title: '전투 규칙', desc: '약탈과 킬데이 필수 규칙' },
+    events: { kicker: 'Event', title: '이벤트', desc: '좀비 공성, 폭군, 협곡 일정' },
+    open: '열기',
+    selectRule: '규칙 선택',
+    selectEvent: '이벤트 선택',
+  },
+  en: {
+    duel: { kicker: 'Weekly', title: 'Alliance Duel', desc: 'Daily prep and score routine' },
+    caravan: { kicker: 'Power', title: 'Caravan', desc: 'Stage formula and power table' },
+    rules: { kicker: 'Battle', title: 'Battle Rules', desc: 'Plunder and Kill Day essentials' },
+    events: { kicker: 'Event', title: 'Events', desc: 'Zombie, Tyrant, and Canyon timing' },
+    open: 'Open',
+    selectRule: 'Select Rule',
+    selectEvent: 'Select Event',
+  },
+  es: {
+    duel: { kicker: 'Weekly', title: 'Duelo', desc: 'Preparación diaria y puntos' },
+    caravan: { kicker: 'Power', title: 'Caravana', desc: 'Fórmula y tabla de poder' },
+    rules: { kicker: 'Battle', title: 'Reglas', desc: 'Saqueo y Día de bajas' },
+    events: { kicker: 'Event', title: 'Eventos', desc: 'Zombis, Tirano y Cañón' },
+    open: 'Abrir',
+    selectRule: 'Elegir regla',
+    selectEvent: 'Elegir evento',
+  },
+};
+
+const featuredSections = [
+  { id: 'duel', icon: Table2, image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=82' },
+  { id: 'caravan', icon: Calculator, image: 'https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?auto=format&fit=crop&w=800&q=82' },
+  { id: 'rules', icon: Swords, image: 'https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&w=800&q=82' },
+  { id: 'events', icon: CalendarDays, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=82' },
+];
+
 function useFiltered(query, lang) {
   return useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -472,52 +509,108 @@ function FileNotice({ lang, file }) {
   );
 }
 
+function SegmentedTabs({ label, items, value, onChange }) {
+  return (
+    <div className="segmented-wrap">
+      <p>{label}</p>
+      <div className="segmented-tabs">
+        {items.map((item) => (
+          <button key={item.id} className={value === item.id ? 'active' : ''} onClick={() => onChange(item.id)}>
+            <item.icon size={16} />
+            <span>{item.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState('ko');
-  const [tab, setTab] = useState(workbook.source);
+  const [section, setSection] = useState('duel');
+  const [ruleTab, setRuleTab] = useState('[약탈 규칙].txt');
+  const [eventTab, setEventTab] = useState('[좀비 공성 및 좀비 폭군 이벤트].txt');
   const [query, setQuery] = useState('');
   const hasResult = useFiltered(query, lang);
   const copy = ui[lang];
+  const sectionCopy = sectionLabels[lang];
+  const activeSection = sectionLabels[lang][section];
+  const ruleTabs = fileTabs.filter((item) => item.id === '[약탈 규칙].txt' || item.id === '[토요일 킬데이 규칙].txt');
+  const eventTabs = fileTabs.filter((item) => item.id === '[좀비 공성 및 좀비 폭군 이벤트].txt' || item.id === '[협곡 쟁탈전].txt');
+  const handleSectionChange = (id) => {
+    setSection(id);
+    window.setTimeout(() => {
+      document.querySelector('.window-shell')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
+  const renderContent = () => {
+    if (section === 'duel') return <WorkbookView lang={lang} />;
+    if (section === 'caravan') return <CaravanView lang={lang} />;
+    if (section === 'rules') {
+      return (
+        <>
+          <SegmentedTabs label={sectionCopy.selectRule} items={ruleTabs} value={ruleTab} onChange={setRuleTab} />
+          <FileNotice lang={lang} file={ruleTab} />
+        </>
+      );
+    }
+    return (
+      <>
+        <SegmentedTabs label={sectionCopy.selectEvent} items={eventTabs} value={eventTab} onChange={setEventTab} />
+        <FileNotice lang={lang} file={eventTab} />
+      </>
+    );
+  };
+
   return (
     <main>
       <header className="hero">
         <nav>
           <div className="brand"><span>Lir</span><small>Guide Hub</small></div>
+          <label className="search compact-search">
+            <Search size={18} />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={copy.search} />
+          </label>
           <div className="lang-switch" aria-label="Language">
             <Languages size={16} />
             {['ko', 'en', 'es'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
           </div>
         </nav>
         <div className="hero-inner">
-          <p>{copy.eyebrow}</p>
-          <h1>{copy.title}</h1>
-          <span>{copy.subtitle}</span>
+          <div className="hero-copy">
+            <p>{copy.eyebrow}</p>
+            <h1>{copy.title}</h1>
+            <span>{copy.subtitle}</span>
+          </div>
+          <div className="feature-tabs" aria-label={copy.tabs}>
+            {featuredSections.map(({ id, icon: Icon, image }, index) => {
+              const item = sectionLabels[lang][id];
+              return (
+                <button className={`feature-card ${section === id ? 'active' : ''}`} onClick={() => handleSectionChange(id)} key={id}>
+                  <img src={image} alt="" />
+                  <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="feature-kicker">{item.kicker}</span>
+                  <strong>{item.title}</strong>
+                  <em>{item.desc}</em>
+                  <span className="feature-action"><Icon size={17} /> {sectionCopy.open}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </header>
 
-      <div className="workspace">
-        <aside>
-          <label className="search">
-            <Search size={18} />
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={copy.search} />
-          </label>
-          {query && <p className={`search-result ${hasResult ? 'ok' : 'bad'}`}>{hasResult ? copy.all : copy.empty}</p>}
-          <p className="aside-title">{copy.tabs}</p>
-          <div className="main-tabs">
-            {fileTabs.map(({ id, label, icon: Icon }) => (
-              <button key={id} onClick={() => setTab(id)} className={tab === id ? 'active' : ''}>
-                <Icon size={18} />
-                <span>{label}</span>
-                <ChevronRight size={16} />
-              </button>
-            ))}
+      <div className="window-shell">
+        {query && <p className={`search-result ${hasResult ? 'ok' : 'bad'}`}>{hasResult ? copy.all : copy.empty}</p>}
+        <div className="window-bar">
+          <div>
+            <span>{activeSection.kicker}</span>
+            <strong>{activeSection.title}</strong>
           </div>
-          <p className="aside-note">{copy.note}</p>
-        </aside>
+          <p>{copy.note}</p>
+        </div>
         <div className="content">
-          {tab === workbook.source && <WorkbookView lang={lang} />}
-          {tab === '캐러밴 표' && <CaravanView lang={lang} />}
-          {tab !== workbook.source && tab !== '캐러밴 표' && <FileNotice lang={lang} file={tab} />}
+          {renderContent()}
         </div>
       </div>
     </main>
