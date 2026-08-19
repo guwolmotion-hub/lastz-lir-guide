@@ -570,13 +570,13 @@ export default function App() {
             <ArrowLeft size={18} />
             <span>{copy.home}</span>
           </button>
-          <div className="brand"><span>Lir</span><small>Guide Hub</small></div>
+          <div className="brand"><img src="brand/logo.png" alt="Lir" /><small>Guide Hub</small></div>
           <div className="lang-switch" aria-label="Language">
             <Languages size={16} />
             {['ko', 'en', 'es'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
           </div>
         </nav>
-        <section className="detail-hero">
+        <section className="detail-hero" style={{ '--hero-bg': 'url("brand/background.png")' }}>
           <p>{activeSection.kicker}</p>
           <h1>{activeSection.title}</h1>
           <span>{activeSection.desc}</span>
@@ -600,18 +600,18 @@ export default function App() {
   return (
     <main className="home-page">
       <nav className="topbar">
-        <div className="brand"><span>Lir</span><small>Guide Hub</small></div>
+        <div className="brand"><img src="brand/logo.png" alt="Lir" /><small>Guide Hub</small></div>
         <div className="lang-switch" aria-label="Language">
           <Languages size={16} />
           {['ko', 'en', 'es'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
         </div>
       </nav>
       <section className="lobby">
-        <div className="lobby-frame">
+        <div className="lobby-frame" style={{ '--hero-bg': 'url("brand/background.png")' }}>
           <div className="lobby-head">
             <div>
               <p>{copy.eyebrow}</p>
-              <h1>{copy.lobbyTitle}</h1>
+              <img className="lobby-logo" src="brand/logo.png" alt={copy.lobbyTitle} />
               <strong>{copy.lobbySubtitle}</strong>
             </div>
             <span>{copy.subtitle}</span>
