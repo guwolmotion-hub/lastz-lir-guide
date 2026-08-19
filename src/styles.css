@@ -17,11 +17,9 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 8%, rgba(238, 67, 76, .22), transparent 32%),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(255,255,255,.025) 1px, transparent 1px);
-  background-size: auto, 88px 88px, 88px 88px;
-  opacity: .7;
+    radial-gradient(circle at 52% 42%, rgba(228, 62, 72, .1), transparent 31%),
+    linear-gradient(90deg, rgba(5, 8, 12, .4), transparent 32%, transparent 68%, rgba(5, 8, 12, .48));
+  opacity: .72;
 }
 
 .home-page,
@@ -29,6 +27,9 @@ body::before {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  background:
+    linear-gradient(180deg, rgba(7, 10, 15, .22), rgba(7, 10, 15, .82) 72%, rgba(7, 10, 15, .94)),
+    var(--page-bg) center top / cover fixed;
 }
 
 .topbar {
@@ -51,10 +52,10 @@ body::before {
   color: #eef3f8;
 }
 .brand img {
-  width: 46px;
-  height: 46px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.38));
 }
 .brand small {
   color: #9da9b8;
@@ -95,8 +96,8 @@ body::before {
   border: 1px solid rgba(228, 62, 72, .5);
   border-radius: 8px;
   background:
-    linear-gradient(180deg, rgba(10, 14, 20, .56), rgba(8, 11, 16, .78)),
-    linear-gradient(90deg, rgba(7, 10, 15, .2), rgba(7, 10, 15, .72)),
+    linear-gradient(180deg, rgba(10, 14, 20, .18), rgba(8, 11, 16, .62)),
+    linear-gradient(90deg, rgba(7, 10, 15, .06), rgba(7, 10, 15, .56)),
     var(--hero-bg) center/cover;
   box-shadow: 0 30px 100px rgba(0, 0, 0, .38);
   padding: clamp(20px, 3vw, 38px);
@@ -107,7 +108,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 70px 36px 120px;
-  border: 1px solid rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.055);
   border-radius: 8px;
   pointer-events: none;
 }
@@ -116,8 +117,7 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, transparent 0 19%, rgba(255,255,255,.035) 19% 19.2%, transparent 19.2% 39%, rgba(255,255,255,.035) 39% 39.2%, transparent 39.2% 59%, rgba(255,255,255,.035) 59% 59.2%, transparent 59.2% 79%, rgba(255,255,255,.035) 79% 79.2%, transparent 79.2%),
-    radial-gradient(circle at 50% 48%, rgba(228, 62, 72, .18), transparent 35%);
+    radial-gradient(circle at 50% 48%, rgba(228, 62, 72, .1), transparent 35%);
   pointer-events: none;
 }
 
@@ -149,14 +149,14 @@ body::before {
 }
 .lobby-logo {
   display: block;
-  width: clamp(170px, 16vw, 260px);
+  width: clamp(104px, 10vw, 160px);
   height: auto;
   margin: 2px 0 0;
-  filter: drop-shadow(0 24px 42px rgba(0, 0, 0, .58));
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .52));
 }
 .lobby-head strong {
   display: block;
-  margin-top: 12px;
+  margin-top: 6px;
   color: #e7edf3;
   font-size: clamp(24px, 3.2vw, 46px);
   line-height: 1.1;
@@ -342,7 +342,7 @@ body::before {
   border: 1px solid rgba(228, 62, 72, .38);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(17, 24, 34, .94), rgba(14, 19, 27, .88)),
+    linear-gradient(135deg, rgba(17, 24, 34, .82), rgba(14, 19, 27, .72)),
     var(--hero-bg) center/cover;
   box-shadow: 0 24px 70px rgba(0,0,0,.32);
   position: relative;
@@ -784,6 +784,7 @@ tbody tr:nth-child(even) td { background: #f7f9fb; }
   .topbar {
     width: min(100% - 28px, 1220px);
     align-items: flex-start;
+    padding: 16px 0;
   }
   .detail-topbar {
     display: grid;
@@ -798,7 +799,9 @@ tbody tr:nth-child(even) td { background: #f7f9fb; }
   }
   .lobby-frame::before { inset: 88px 12px 106px; }
   .lobby-head h1 { font-size: 76px; line-height: .82; }
-  .lobby-logo { width: 150px; margin: 0; }
+  .brand img { width: 30px; height: 30px; }
+  .brand small { font-size: 11px; }
+  .lobby-logo { width: 112px; margin: 0; }
   .lobby-head strong { margin-top: 10px; font-size: 28px; line-height: 1.12; }
   .detail-hero h1 { font-size: 38px; line-height: 1.05; }
   .lobby-head > span { max-width: 310px; font-size: 14px; }

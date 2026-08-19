@@ -564,13 +564,13 @@ export default function App() {
 
   if (page === 'detail' && section) {
     return (
-      <main className="detail-page">
+      <main className="detail-page" style={{ '--page-bg': 'url("brand/background.png")' }}>
         <nav className="topbar detail-topbar">
           <button className="home-button" onClick={goHome}>
             <ArrowLeft size={18} />
             <span>{copy.home}</span>
           </button>
-          <div className="brand"><img src="brand/logo.png" alt="Lir" /><small>Guide Hub</small></div>
+          <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>Guide Hub</small></div>
           <div className="lang-switch" aria-label="Language">
             <Languages size={16} />
             {['ko', 'en', 'es'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
@@ -598,9 +598,9 @@ export default function App() {
   }
 
   return (
-    <main className="home-page">
+    <main className="home-page" style={{ '--page-bg': 'url("brand/background.png")' }}>
       <nav className="topbar">
-        <div className="brand"><img src="brand/logo.png" alt="Lir" /><small>Guide Hub</small></div>
+        <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>Guide Hub</small></div>
         <div className="lang-switch" aria-label="Language">
           <Languages size={16} />
           {['ko', 'en', 'es'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
@@ -611,7 +611,7 @@ export default function App() {
           <div className="lobby-head">
             <div>
               <p>{copy.eyebrow}</p>
-              <img className="lobby-logo" src="brand/logo.png" alt={copy.lobbyTitle} />
+              <img className="lobby-logo" src="brand/logo-transparent.png" alt={copy.lobbyTitle} />
               <strong>{copy.lobbySubtitle}</strong>
             </div>
             <span>{copy.subtitle}</span>
