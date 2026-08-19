@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { CalendarDays, ChevronRight, Languages, Search, Shield, Swords, Table2, Users } from 'lucide-react';
+import { AlertTriangle, Calculator, CalendarDays, ChevronRight, Languages, ListChecks, Search, Shield, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 
 const ui = {
@@ -71,6 +71,159 @@ const notices = {
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['Lir tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
     { file: '[협곡 쟁탈전].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['La Disputa del Cañón se realiza a las 23:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
   ],
+};
+
+const noticeSummaries = {
+  ko: {
+    '[약탈 규칙].txt': [
+      { label: '서버전 중', value: '상대 서버 약탈' },
+      { label: '평상시', value: '같은 서버 제외' },
+      { label: '인원 제한', value: '약탈 4명 + 실드 2명' },
+    ],
+    '[토요일 킬데이 규칙].txt': [
+      { label: '필수 행동', value: '실드 사용' },
+      { label: '리셋 직후', value: '약탈 후 실드 또는 즉시 실드' },
+      { label: '반복 위반', value: '3회 시 영구 제명' },
+    ],
+    '[좀비 공성 및 좀비 폭군 이벤트].txt': [
+      { label: '연맹 특성', value: '한국인 멤버 비율 높음' },
+      { label: '기준 시간', value: '아포칼립스 시간' },
+      { label: '주요 시작', value: '대부분 10:00' },
+    ],
+    '[협곡 쟁탈전].txt': [
+      { label: '진행 시간', value: '아포칼립스 23:00' },
+      { label: '선정 기준', value: '연맹전 개인 점수' },
+      { label: '선정 방식', value: '희망자 중 랜덤' },
+    ],
+  },
+  en: {
+    '[약탈 규칙].txt': [
+      { label: 'Server war', value: 'Plunder enemy server' },
+      { label: 'Normal days', value: 'Avoid our own server' },
+      { label: 'Limit', value: '4 plunder + 2 shield support' },
+    ],
+    '[토요일 킬데이 규칙].txt': [
+      { label: 'Required', value: 'Use a shield' },
+      { label: 'After reset', value: 'Plunder then shield, or shield now' },
+      { label: 'Repeat issue', value: 'Permanent removal after 3 times' },
+    ],
+    '[좀비 공성 및 좀비 폭군 이벤트].txt': [
+      { label: 'Alliance', value: 'Many Korean members' },
+      { label: 'Time basis', value: 'Apocalypse Time' },
+      { label: 'Main start', value: 'Mostly 10:00' },
+    ],
+    '[협곡 쟁탈전].txt': [
+      { label: 'Event time', value: '23:00 Apocalypse' },
+      { label: 'Selection', value: 'Alliance Duel personal score' },
+      { label: 'Method', value: 'Random among applicants' },
+    ],
+  },
+  es: {
+    '[약탈 규칙].txt': [
+      { label: 'Guerra', value: 'Saquear servidor enemigo' },
+      { label: 'Días normales', value: 'Evitar nuestro servidor' },
+      { label: 'Límite', value: '4 saqueo + 2 apoyo escudo' },
+    ],
+    '[토요일 킬데이 규칙].txt': [
+      { label: 'Obligatorio', value: 'Usar escudo' },
+      { label: 'Tras reinicio', value: 'Saquear y escudo, o escudo directo' },
+      { label: 'Repetición', value: 'Expulsión permanente tras 3 veces' },
+    ],
+    '[좀비 공성 및 좀비 폭군 이벤트].txt': [
+      { label: 'Alianza', value: 'Muchos miembros coreanos' },
+      { label: 'Hora base', value: 'Hora de Apocalipsis' },
+      { label: 'Inicio', value: 'Casi siempre 10:00' },
+    ],
+    '[협곡 쟁탈전].txt': [
+      { label: 'Horario', value: '23:00 Apocalipsis' },
+      { label: 'Criterio', value: 'Puntos personales del Duelo' },
+      { label: 'Método', value: 'Aleatorio entre solicitantes' },
+    ],
+  },
+};
+
+const workbookSummaries = {
+  ko: [
+    { label: '주간 목표', value: '3,000,000점' },
+    { label: '핵심 방식', value: 'Day별 아이템을 모아 지정일에 사용' },
+    { label: '탭 구성', value: '공지부터 Day 6까지 분리 확인' },
+  ],
+  en: [
+    { label: 'Weekly target', value: '3,000,000 points' },
+    { label: 'Core flow', value: 'Save items and use them on the right day' },
+    { label: 'Layout', value: 'Notice through Day 6 as separate tabs' },
+  ],
+  es: [
+    { label: 'Meta semanal', value: '3,000,000 puntos' },
+    { label: 'Flujo clave', value: 'Guarda objetos y úsalos el día correcto' },
+    { label: 'Formato', value: 'Aviso a Día 6 en pestañas separadas' },
+  ],
+};
+
+const caravanCopy = {
+  ko: {
+    title: '캐러밴 단계 선택 기준',
+    formulaLabel: '단계 선택 공식',
+    formula: '내 투력 x 1.1 > 표의 End',
+    formulaHint: '진영 버프와 상성이 앞설 때 약 10% 보너스를 보고 계산합니다.',
+    stepsTitle: '진행 순서',
+    steps: [
+      { title: '진영별 편성', text: '출전할 영웅을 진영별로 구성하고 가장 좋은 장비를 착용합니다.' },
+      { title: '투력 측정', text: '캐러밴 선택 전에 아레나 방어 섹션에서 현재 투력을 확인합니다.' },
+      { title: '단계 결정', text: '내 투력에 1.1을 곱한 값이 End보다 높으면 해당 스테이지를 선택합니다.' },
+      { title: '부족할 때', text: '대통령관저 공격/방어 장관을 활용하고, 그래도 어렵다면 이전 단계로 내려갑니다.' },
+    ],
+    alerts: [
+      '캐러밴은 실제 보유 병력으로 계산되므로, 병력이 많이 죽은 뒤에는 아레나 투력과 차이가 납니다.',
+      '각 속성 최고 부대의 최대 인원수를 채운 뒤 도전하세요.',
+      '빠른 전투는 VIP 8이거나 블러디전장 20스테이지 클리어 후 사용할 수 있습니다.',
+    ],
+    tableTitle: '스테이지별 필요 투력',
+    tableHint: '단위는 원본 표 기준 K/M 표기입니다.',
+    columns: ['단계', '시작', '끝'],
+  },
+  en: {
+    title: 'Caravan Stage Selection',
+    formulaLabel: 'Selection Formula',
+    formula: 'Your power x 1.1 > table End',
+    formulaHint: 'Use the 10% estimate only when faction buff and advantage apply.',
+    stepsTitle: 'Flow',
+    steps: [
+      { title: 'Build by faction', text: 'Set the heroes for each faction and equip your best gear.' },
+      { title: 'Measure power', text: 'Before selecting Caravan, check power in Arena defense.' },
+      { title: 'Pick a stage', text: 'Choose the stage when your power multiplied by 1.1 is above the End value.' },
+      { title: 'If short', text: 'Use President attack/defense ministers, then drop one stage if it still fails.' },
+    ],
+    alerts: [
+      'Caravan uses actual troops, so power can differ from Arena after heavy troop losses.',
+      'Fill the maximum count of your best troop type before attempting Caravan.',
+      'Quick battle is available at VIP 8 or after clearing Bloody Battlefield stage 20.',
+    ],
+    tableTitle: 'Power Needed by Stage',
+    tableHint: 'Values keep the K/M notation from the source table.',
+    columns: ['Stage', 'Start', 'End'],
+  },
+  es: {
+    title: 'Selección de etapa de Caravana',
+    formulaLabel: 'Fórmula de selección',
+    formula: 'Tu poder x 1.1 > final de la tabla',
+    formulaHint: 'Usa el 10% solo si tienes bonificación y ventaja de formación.',
+    stepsTitle: 'Flujo',
+    steps: [
+      { title: 'Formación', text: 'Configura héroes por formación y equipa el mejor equipo.' },
+      { title: 'Medir poder', text: 'Antes de elegir Caravana, revisa el poder en defensa de Arena.' },
+      { title: 'Elegir etapa', text: 'Elige una etapa si tu poder x 1.1 supera el valor final.' },
+      { title: 'Si falta poder', text: 'Usa ministros de ataque/defensa y baja una etapa si todavía no alcanza.' },
+    ],
+    alerts: [
+      'Caravana calcula con tropas reales, así que puede diferir de Arena tras perder muchas tropas.',
+      'Llena el máximo de tus mejores tropas por atributo antes de intentarlo.',
+      'La batalla rápida requiere VIP 8 o completar Campo de batalla sangriento etapa 20.',
+    ],
+    tableTitle: 'Poder necesario por etapa',
+    tableHint: 'Los valores mantienen la notación K/M de la tabla original.',
+    columns: ['Etapa', 'Inicio', 'Final'],
+  },
 };
 
 const spanishDuel = {
@@ -167,57 +320,107 @@ function NoticeCard({ item }) {
   );
 }
 
+function SummaryStrip({ items }) {
+  return (
+    <div className="summary-strip">
+      {items.map((item) => (
+        <div className="summary-item" key={`${item.label}-${item.value}`}>
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function DuelGuide({ lang }) {
   const entries = workbook.sheets['연맹 대결 가이드'].entries;
   const [activeDay, setActiveDay] = useState(entries[0]?.date);
   const activeEntry = entries.find((entry) => entry.date === activeDay) || entries[0];
   return (
-    <div className="duel-shell">
-      <div className="day-tabs" aria-label="Alliance duel days">
-        {entries.map((entry) => (
-          <button className={activeEntry.date === entry.date ? 'active' : ''} onClick={() => setActiveDay(entry.date)} key={entry.date}>
-            <strong>{dayLabel(entry.date, lang)}</strong>
-            <span>{dayTitle(entry, lang)}</span>
-          </button>
-        ))}
+    <div className="organized-stack">
+      <SummaryStrip items={workbookSummaries[lang]} />
+      <div className="duel-shell">
+        <div className="day-tabs" aria-label="Alliance duel days">
+          {entries.map((entry) => (
+            <button className={activeEntry.date === entry.date ? 'active' : ''} onClick={() => setActiveDay(entry.date)} key={entry.date}>
+              <strong>{dayLabel(entry.date, lang)}</strong>
+              <span>{dayTitle(entry, lang)}</span>
+            </button>
+          ))}
+        </div>
+        <article className="day-detail">
+          <div className="day-detail-head">
+            <span>{dayLabel(activeEntry.date, lang)}</span>
+            <h3>{dayTitle(activeEntry, lang)}</h3>
+          </div>
+          <div className="day-copy">
+            {lang === 'ko' && <TextBlock text={activeEntry.ko} />}
+            {lang === 'en' && <TextBlock text={activeEntry.en || activeEntry.ko} />}
+            {lang === 'es' && <ul className="spanish-list">{spanishSummary(activeEntry).map((line) => <li key={line}>{line}</li>)}</ul>}
+          </div>
+        </article>
       </div>
-      <article className="day-detail">
-        <div className="day-detail-head">
-          <span>{dayLabel(activeEntry.date, lang)}</span>
-          <h3>{dayTitle(activeEntry, lang)}</h3>
-        </div>
-        <div className="day-copy">
-          {lang === 'ko' && <TextBlock text={activeEntry.ko} />}
-          {lang === 'en' && <TextBlock text={activeEntry.en || activeEntry.ko} />}
-          {lang === 'es' && <ul className="spanish-list">{spanishSummary(activeEntry).map((line) => <li key={line}>{line}</li>)}</ul>}
-        </div>
-      </article>
     </div>
   );
 }
 
 function Caravan({ lang }) {
   const data = workbook.sheets['캐러밴 표'];
-  const introTitle = lang === 'ko' ? '캐러밴 투력표 이용법' : lang === 'en' ? 'How to Use the Caravan Power Table' : 'Cómo usar la tabla de poder de Caravana';
+  const copy = caravanCopy[lang];
   return (
-    <div className="sheet-layout">
-      <section className="guide-copy">
-        <h3>{introTitle}</h3>
-        {(lang === 'ko' ? data.intro : [
-          lang === 'en' ? 'Equip your best heroes and gear by faction, then measure power in Arena defense before choosing a Caravan stage.' : 'Equipa tus mejores héroes y equipo por formación, y mide el poder en defensa de Arena antes de elegir etapa.',
-          lang === 'en' ? 'If faction buff and advantage apply, consider about a 10% bonus. Select a stage when your power x 1.1 is above the End value.' : 'Si aplican bonificación y ventaja de formación, considera cerca de 10% extra. Elige una etapa cuando tu poder x 1.1 supere el valor final.',
-          lang === 'en' ? 'If you cannot clear the highest stage, drop to the previous clearable stage and secure honor badges.' : 'Si no puedes superar la etapa más alta, baja a una etapa que puedas completar y asegura insignias de honor.',
-          lang === 'en' ? 'Quick battle unlocks at VIP 8 or after clearing Bloody Battlefield stage 20.' : 'La batalla rápida se desbloquea con VIP 8 o tras completar Campo de batalla sangriento etapa 20.',
-        ]).map((line, i) => <p key={i}>{line}</p>)}
+    <div className="caravan-layout">
+      <section className="formula-panel">
+        <div className="formula-icon"><Calculator size={24} /></div>
+        <div>
+          <p>{copy.formulaLabel}</p>
+          <strong>{copy.formula}</strong>
+          <span>{copy.formulaHint}</span>
+        </div>
       </section>
-      <div className="table-wrap compact">
+      <section className="step-panel">
+        <div className="panel-title">
+          <ListChecks size={19} />
+          <h3>{copy.stepsTitle}</h3>
+        </div>
+        <div className="step-list">
+          {copy.steps.map((step, index) => (
+            <article className="step-item" key={step.title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <strong>{step.title}</strong>
+                <p>{step.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="alert-panel">
+        <div className="panel-title">
+          <AlertTriangle size={19} />
+          <h3>{lang === 'ko' ? '주의사항' : lang === 'en' ? 'Warnings' : 'Avisos'}</h3>
+        </div>
+        <ul>
+          {copy.alerts.map((line) => <li key={line}>{line}</li>)}
+        </ul>
+      </section>
+      <section className="table-section">
+        <div className="table-heading">
+          <div>
+            <p className="section-kicker">{copy.tableHint}</p>
+            <h3>{copy.tableTitle}</h3>
+          </div>
+          <span>{data.levels.length} Levels</span>
+        </div>
+        <div className="table-wrap compact">
         <table>
-          <thead><tr><th>Level</th><th>Start</th><th>End</th></tr></thead>
+          <thead><tr>{copy.columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
           <tbody>
             {data.levels.map((row) => <tr key={row.level}><td>{row.level}</td><td>{row.start}</td><td>{row.end || '-'}</td></tr>)}
           </tbody>
         </table>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
@@ -242,7 +445,7 @@ function CaravanView({ lang }) {
       <div className="section-head">
         <div>
           <p className="section-kicker">{displayName(workbook.source)}</p>
-          <h2>캐러밴 표</h2>
+          <h2>{caravanCopy[lang].title}</h2>
         </div>
       </div>
       <Caravan lang={lang} />
@@ -261,6 +464,7 @@ function FileNotice({ lang, file }) {
           <h2>{displayName(item.file)}</h2>
         </div>
       </div>
+      <SummaryStrip items={noticeSummaries[lang][file]} />
       <div className="notice-grid single">
         <NoticeCard item={item} />
       </div>
