@@ -608,13 +608,16 @@ export default function App() {
       </nav>
       <section className="lobby">
         <div className="lobby-frame" style={{ '--hero-bg': 'url("brand/background.png")' }}>
+          <img className="lobby-bg" src="brand/background.png" alt="" aria-hidden="true" />
           <div className="lobby-head">
-            <div>
+            <div className="lobby-title-mark">
               <p>{copy.eyebrow}</p>
               <img className="lobby-logo" src="brand/logo-transparent.png" alt={copy.lobbyTitle} />
-              <strong>{copy.lobbySubtitle}</strong>
             </div>
-            <span>{copy.subtitle}</span>
+            <div className="lobby-copy">
+              <strong>{copy.lobbySubtitle}</strong>
+              <span>{copy.subtitle}</span>
+            </div>
           </div>
           <div className="feature-tabs" aria-label={copy.tabs}>
             {featuredSections.map(({ id, icon: Icon, image }, index) => {
