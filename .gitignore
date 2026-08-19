@@ -1,5 +1,8 @@
 node_modules/
 dist/
 qa/
+.wrangler/
+.next/
+.vinext/
 .env
 .DS_Store

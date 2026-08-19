@@ -1,8 +1,8 @@
+'use client';
+
 import React, { useMemo, useState } from 'react';
-import { createRoot } from 'react-dom/client';
 import { AlertTriangle, CalendarDays, ChevronRight, Languages, Search, Shield, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
-import './styles.css';
 
 const ui = {
   ko: {
@@ -275,7 +275,7 @@ function Rules({ lang }) {
   );
 }
 
-function App() {
+export default function App() {
   const [lang, setLang] = useState('ko');
   const [tab, setTab] = useState('overview');
   const [query, setQuery] = useState('');
@@ -326,5 +326,3 @@ function App() {
     </main>
   );
 }
-
-createRoot(document.getElementById('root')).render(<App />);

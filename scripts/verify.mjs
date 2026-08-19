@@ -14,7 +14,7 @@ const checks = [];
 
 async function runViewport(name, viewport) {
   const page = await browser.newPage({ viewport });
-  await page.goto('http://127.0.0.1:5177/', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:5177/', { waitUntil: 'networkidle' });
   await page.screenshot({ path: path.join(outDir, `${name}-ko.png`), fullPage: true });
 
   await page.getByRole('button', { name: 'EN', exact: true }).click();
