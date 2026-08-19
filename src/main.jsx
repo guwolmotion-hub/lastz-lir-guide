@@ -325,10 +325,10 @@ const sectionLabels = {
 };
 
 const featuredSections = [
-  { id: 'duel', icon: Table2, image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=82' },
-  { id: 'caravan', icon: Calculator, image: 'https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?auto=format&fit=crop&w=800&q=82' },
-  { id: 'rules', icon: Swords, image: 'https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&w=800&q=82' },
-  { id: 'events', icon: CalendarDays, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=82' },
+  { id: 'duel', icon: Table2, image: 'cards/1.png' },
+  { id: 'caravan', icon: Calculator, image: 'cards/2.png' },
+  { id: 'rules', icon: Swords, image: 'cards/3.png' },
+  { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
 ];
 
 function TextBlock({ text }) {
