@@ -77,7 +77,7 @@ const buildingNames = {
 
 const hqUpgradeCopy = {
   ko: {
-    title: '본부 업그레이드',
+    title: '본부 레벨업',
     kicker: 'HQ',
     file: '본부 업글시 Lv. 별 필요 자원 정리',
     desc: '레벨별 필요 자원과 선행건물',
@@ -90,10 +90,10 @@ const hqUpgradeCopy = {
     prereqTitle: '선행건물 고레벨 필요 자원',
     columns: ['레벨', '음식', '목재', '코인', '강철', '선행건물'],
     prereqColumns: ['선행건물', '레벨', '음식', '목재', '코인', '강철'],
-    notes: ['Lv.30 이상부터 강철이 본격적으로 필요하므로 미리 확보하십시오.', '본부 업그레이드는 실험실과 병영, 성벽, 연맹센터 조건을 함께 확인해야 합니다.', '표 수치는 2025-11-17 수정본 기준이며 서버나 연구 상태에 따라 체감 필요량은 달라질 수 있습니다.'],
+    notes: ['Lv.30 이상부터 강철이 본격적으로 필요하므로 미리 확보하십시오.', '본부 레벨업은 실험실과 병영, 성벽, 연맹센터 조건을 함께 확인해야 합니다.', '표 수치는 2025-11-17 수정본 기준이며 서버나 연구 상태에 따라 체감 필요량은 달라질 수 있습니다.'],
   },
   en: {
-    title: 'HQ Upgrade',
+    title: 'HQ Level Up',
     kicker: 'HQ',
     file: 'HQ level resource requirements',
     desc: 'Resources and prerequisite buildings by level',
@@ -109,7 +109,7 @@ const hqUpgradeCopy = {
     notes: ['From Lv.30 onward, steel becomes a major bottleneck, so stockpile it early.', 'Check Lab, training grounds, Wall, and Alliance Center requirements together before starting HQ upgrades.', 'Values follow the 2025-11-17 revision and may feel different depending on server and research reductions.'],
   },
   es: {
-    title: 'Mejora de Base',
+    title: 'Subida de Base',
     kicker: 'HQ',
     file: 'Recursos necesarios por nivel de base',
     desc: 'Recursos y edificios previos por nivel',
