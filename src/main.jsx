@@ -1,8 +1,133 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { AlertTriangle, ArrowLeft, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, Users } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
+
+const hqUpgradeRows = [
+  ['16 -> 17', '18.2M', '18.2M', '3.5M', '-', '16', 'labWall'],
+  ['17 -> 18', '31.9M', '31.9M', '6.2M', '-', '17', 'labAlliance'],
+  ['18 -> 19', '38.2M', '38.2M', '7.5M', '-', '18', 'labStrikerCamp'],
+  ['19 -> 20', '68.9M', '68.9M', '13.5M', '-', '19', 'labArcherCamp'],
+  ['20 -> 21', '96.4M', '96.4M', '18.9M', '-', '20', 'labRiderCamp'],
+  ['21 -> 22', '119.1M', '119.1M', '23.3M', '-', '21', 'labWall'],
+  ['22 -> 23', '156.3M', '156.3M', '30.7M', '-', '22', 'labAlliance'],
+  ['23 -> 24', '196M', '196M', '38.4M', '-', '23', 'labStrikerCamp'],
+  ['24 -> 25', '277.7M', '277.7M', '55.5M', '-', '24', 'labArcherCamp'],
+  ['25 -> 26', '443.1M', '443.1M', '86.8M', '-', '25', 'labRiderCamp'],
+  ['26 -> 27', '576.1M', '576.1M', '113M', '-', '26', 'labWall'],
+  ['27 -> 28', '721.6M', '721.6M', '141.4M', '-', '27', 'labAlliance'],
+  ['28 -> 29', '1G', '1G', '198M', '-', '28', 'labStrikerCamp'],
+  ['29 -> 30', '1.6G', '1.6G', '293M', '-', '29', 'labArcherCamp'],
+  ['30 -> 31', '1.2G', '1.2G', '241.4M', '2.2M', '30', 'labRiderCamp'],
+  ['31 -> 32', '1.4G', '1.4G', '289.8M', '3.1M', '31', 'wall'],
+  ['32 -> 33', '1.7G', '1.7G', '347.6M', '4.1M', '32', 'alliance'],
+  ['33 -> 34', '2.0G', '2.0G', '399.5M', '5.3M', '33', 'strikerGround'],
+  ['34 -> 35', '2.4G', '2.4G', '449M', '6.2M', '34', 'archerGround'],
+];
+
+const prerequisiteRows = [
+  ['wall', '30 -> 31', '402.3M', '402.3M', '160.6M', '1.5M'],
+  ['alliance', '30 -> 31', '620.3M', '620.3M', '80.4M', '754.7K'],
+  ['alliance', '31 -> 32', '744.3M', '744.3M', '96.9M', '1.0M'],
+  ['strikerGround', '30 -> 31', '201.1M', '201.1M', '120.7M', '1.1M'],
+  ['strikerGround', '31 -> 32', '241.4M', '241.4M', '144.5M', '1.5M'],
+  ['strikerGround', '32 -> 33', '289.7M', '289.7M', '173.4M', '2.0M'],
+  ['shooterGround', '30 -> 31', '201.1M', '201.1M', '120.7M', '1.1M'],
+  ['shooterGround', '31 -> 32', '241.4M', '241.4M', '144.5M', '1.5M'],
+  ['shooterGround', '32 -> 33', '289.7M', '289.7M', '173.4M', '2.0M'],
+  ['shooterGround', '33 -> 34', '325.3M', '325.3M', '195M', '2.6M'],
+];
+
+const buildingNames = {
+  ko: {
+    labWall: '실험실, 성벽',
+    labAlliance: '실험실, 연맹센터',
+    labStrikerCamp: '실험실, 돌격 훈련소',
+    labArcherCamp: '실험실, 야처 훈련소',
+    labRiderCamp: '실험실, 라이더 훈련소',
+    wall: '성벽',
+    alliance: '연맹센터',
+    strikerGround: '돌격 훈련병영',
+    archerGround: '야처 훈련병영',
+    shooterGround: '슈터 훈련병영',
+  },
+  en: {
+    labWall: 'Lab, Wall',
+    labAlliance: 'Lab, Alliance Center',
+    labStrikerCamp: 'Lab, Striker Training Camp',
+    labArcherCamp: 'Lab, Archer Training Camp',
+    labRiderCamp: 'Lab, Rider Training Camp',
+    wall: 'Wall',
+    alliance: 'Alliance Center',
+    strikerGround: 'Striker Training Ground',
+    archerGround: 'Archer Training Ground',
+    shooterGround: 'Shooter Training Ground',
+  },
+  es: {
+    labWall: 'Laboratorio, Muro',
+    labAlliance: 'Laboratorio, Centro de alianza',
+    labStrikerCamp: 'Laboratorio, Campo de asalto',
+    labArcherCamp: 'Laboratorio, Campo de arqueros',
+    labRiderCamp: 'Laboratorio, Campo de jinetes',
+    wall: 'Muro',
+    alliance: 'Centro de alianza',
+    strikerGround: 'Campo de asalto',
+    archerGround: 'Campo de arqueros',
+    shooterGround: 'Campo de tiradores',
+  },
+};
+
+const hqUpgradeCopy = {
+  ko: {
+    title: '본부 업그레이드',
+    kicker: 'HQ',
+    file: '본부 업글시 Lv. 별 필요 자원 정리',
+    desc: '레벨별 필요 자원과 선행건물',
+    summary: [
+      { label: '적용 기준', value: '신규 강철 RSS 시즌 3 진입부터 적용' },
+      { label: '핵심 구간', value: 'Lv.30부터 강철 필요량이 크게 증가' },
+      { label: '주의 사항', value: '영웅, 테크, 통달센터 등은 개인 자원 감소 차이가 있음' },
+    ],
+    hqTitle: '본부 레벨별 필요 자원',
+    prereqTitle: '선행건물 고레벨 필요 자원',
+    columns: ['레벨', '음식', '목재', '코인', '강철', '선행건물'],
+    prereqColumns: ['선행건물', '레벨', '음식', '목재', '코인', '강철'],
+    notes: ['Lv.30 이상부터 강철이 본격적으로 필요하므로 미리 확보하십시오.', '본부 업그레이드는 실험실과 병영, 성벽, 연맹센터 조건을 함께 확인해야 합니다.', '표 수치는 2025-11-17 수정본 기준이며 서버나 연구 상태에 따라 체감 필요량은 달라질 수 있습니다.'],
+  },
+  en: {
+    title: 'HQ Upgrade',
+    kicker: 'HQ',
+    file: 'HQ level resource requirements',
+    desc: 'Resources and prerequisite buildings by level',
+    summary: [
+      { label: 'Applies from', value: 'New steel RSS, season 3 entry onward' },
+      { label: 'Key range', value: 'Steel demand rises sharply from Lv.30' },
+      { label: 'Caution', value: 'Hero, tech, and mastery reductions can differ by player' },
+    ],
+    hqTitle: 'HQ Resource Requirements by Level',
+    prereqTitle: 'High-Level Prerequisite Buildings',
+    columns: ['Level', 'Food', 'Wood', 'Coins', 'Steel', 'Prerequisite'],
+    prereqColumns: ['Prerequisite', 'Level', 'Food', 'Wood', 'Coins', 'Steel'],
+    notes: ['From Lv.30 onward, steel becomes a major bottleneck, so stockpile it early.', 'Check Lab, training grounds, Wall, and Alliance Center requirements together before starting HQ upgrades.', 'Values follow the 2025-11-17 revision and may feel different depending on server and research reductions.'],
+  },
+  es: {
+    title: 'Mejora de Base',
+    kicker: 'HQ',
+    file: 'Recursos necesarios por nivel de base',
+    desc: 'Recursos y edificios previos por nivel',
+    summary: [
+      { label: 'Aplicacion', value: 'Nuevo RSS de acero desde la entrada a temporada 3' },
+      { label: 'Tramo clave', value: 'El acero aumenta mucho desde Lv.30' },
+      { label: 'Aviso', value: 'Heroes, tecnologia y maestria pueden reducir recursos de forma distinta' },
+    ],
+    hqTitle: 'Recursos de Base por Nivel',
+    prereqTitle: 'Edificios Previos de Nivel Alto',
+    columns: ['Nivel', 'Comida', 'Madera', 'Monedas', 'Acero', 'Requisito'],
+    prereqColumns: ['Requisito', 'Nivel', 'Comida', 'Madera', 'Monedas', 'Acero'],
+    notes: ['Desde Lv.30 el acero se vuelve un cuello de botella importante, asi que conviene guardarlo antes.', 'Antes de mejorar la base, revisa Laboratorio, campos de entrenamiento, Muro y Centro de alianza.', 'Los valores siguen la revision del 2025-11-17 y pueden variar en la practica segun servidor e investigacion.'],
+  },
+};
 
 const ui = {
   ko: {
@@ -437,11 +562,12 @@ const sectionLabels = {
 
 const featuredSections = [
   { id: 'duel', icon: Table2, image: 'cards/1.png' },
-  { id: 'caravan', icon: Calculator, image: 'cards/2.png' },
+  { id: 'hq', icon: Building2, image: 'cards/7.png' },
+  { id: 'daily', icon: ClipboardCheck, image: 'cards/5.png' },
   { id: 'rules', icon: Swords, image: 'cards/3.png' },
   { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
-  { id: 'daily', icon: ClipboardCheck, image: 'cards/5.png' },
   { id: 'popular', icon: Sparkles, image: 'cards/6.png' },
+  { id: 'caravan', icon: Calculator, image: 'cards/2.png' },
 ];
 
 function TextBlock({ text }) {
@@ -477,6 +603,86 @@ function SummaryStrip({ items }) {
         </div>
       ))}
     </div>
+  );
+}
+
+function GuideTable({ columns, rows }) {
+  return (
+    <div className="table-wrap guide-table-wrap">
+      <table>
+        <thead>
+          <tr>{columns.map((column) => <th key={column}>{column}</th>)}</tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.join('|')}>
+              {row.map((cell, index) => <td key={`${row[0]}-${index}`}>{cell}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function hqRowsForLang(lang) {
+  return hqUpgradeRows.map(([level, food, wood, coin, steel, buildingLevel, buildingKey]) => [
+    level,
+    food,
+    wood,
+    coin,
+    steel,
+    `Lv.${buildingLevel} ${buildingNames[lang][buildingKey]}`,
+  ]);
+}
+
+function prerequisiteRowsForLang(lang) {
+  return prerequisiteRows.map(([buildingKey, ...rest]) => [
+    buildingNames[lang][buildingKey],
+    ...rest,
+  ]);
+}
+
+function HqUpgradeView({ lang }) {
+  const copy = hqUpgradeCopy[lang];
+  return (
+    <section className="content-block">
+      <div className="section-head">
+        <div>
+          <p className="section-kicker">{copy.file}</p>
+          <h2>{copy.title}</h2>
+        </div>
+      </div>
+      <SummaryStrip items={copy.summary} />
+      <div className="hq-guide-layout">
+        <article className="guide-section-card hq-note-card">
+          <h3>{lang === 'ko' ? '확인 포인트' : lang === 'en' ? 'Checkpoints' : 'Puntos clave'}</h3>
+          <ul>
+            {copy.notes.map((line) => <li key={line}>{line}</li>)}
+          </ul>
+        </article>
+        <section className="table-section">
+          <div className="table-heading">
+            <div>
+              <p className="section-kicker">{copy.kicker}</p>
+              <h3>{copy.hqTitle}</h3>
+            </div>
+            <span>Lv.16 - Lv.35</span>
+          </div>
+          <GuideTable columns={copy.columns} rows={hqRowsForLang(lang)} />
+        </section>
+        <section className="table-section">
+          <div className="table-heading">
+            <div>
+              <p className="section-kicker">{copy.kicker}</p>
+              <h3>{copy.prereqTitle}</h3>
+            </div>
+            <span>5 Star</span>
+          </div>
+          <GuideTable columns={copy.prereqColumns} rows={prerequisiteRowsForLang(lang)} />
+        </section>
+      </div>
+    </section>
   );
 }
 
@@ -671,7 +877,9 @@ export default function App() {
   const dragStateRef = useRef({ active: false, startX: 0, startY: 0, scrollLeft: 0, dragged: false, distance: 0, raf: null });
   const copy = ui[lang];
   const sectionCopy = sectionLabels[lang];
-  const activeSection = section ? sectionLabels[lang][section] : null;
+  const activeSection = section === 'hq'
+    ? { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc }
+    : section ? sectionLabels[lang][section] : null;
   const ruleTabs = fileTabs.filter((item) => item.id === '[약탈 규칙].txt' || item.id === '[토요일 킬데이 규칙].txt');
   const eventTabs = fileTabs.filter((item) => item.id === '[좀비 공성 및 좀비 폭군 이벤트].txt' || item.id === '[협곡 쟁탈전].txt');
   const updateActiveCard = () => {
@@ -807,6 +1015,7 @@ export default function App() {
   }, [page, lang]);
   const renderContent = () => {
     if (section === 'duel') return <WorkbookView lang={lang} />;
+    if (section === 'hq') return <HqUpgradeView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
     if (section === 'daily' || section === 'popular') return <ExtraGuideView lang={lang} id={section} />;
     if (section === 'rules') {
@@ -902,7 +1111,9 @@ export default function App() {
               onTouchCancel={handleCarouselTouchEnd}
             >
               {featuredSections.map(({ id, icon: Icon, image }, index) => {
-                const item = sectionLabels[lang][id];
+                const item = id === 'hq'
+                  ? { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc }
+                  : sectionLabels[lang][id];
                 return (
                   <button className={`feature-card ${activeCardIndex === index ? 'active' : ''}`} onClick={() => handleSectionChange(id)} key={id}>
                     <img src={image} alt="" />
