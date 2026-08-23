@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, Users } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, DoorOpen, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 
 const hqUpgradeRows = [
@@ -304,6 +304,37 @@ const extraGuides = {
         { title: '영예휘장', lines: ['캐러밴, 탐색, 영웅전장에서 얻는 영예휘장으로 피난민 모집권, 만능 주황 조각, 에너지코어, 렌치를 구매하세요.', '시즌 영웅과 영웅 장비를 준비한다면 만능 장비 조각도 구매하세요.', '피난민 모집권은 화요일 주황 외교관 모집에 매우 중요합니다.'] },
       ],
     },
+    indoor: {
+      file: '임시 인도어 페이지',
+      title: '인도어',
+      kicker: 'Indoor',
+      desc: '추가 자료를 받을 때까지 쓰는 임시 안내',
+      summary: [
+        { label: '상태', value: '임시 페이지' },
+        { label: '용도', value: '신규 연맹원 안내 공간' },
+        { label: '다음 작업', value: '자료 전달 후 세부 내용 교체' },
+      ],
+      sections: [
+        { title: '임시 운영 메모', lines: ['인도어 관련 세부 규칙이나 이미지가 들어오면 이 페이지에 정리합니다.', '현재는 신규 연맹원이 헷갈리지 않도록 빈 탭 대신 임시 안내로 구성했습니다.', '추가 자료를 받으면 카드 이미지와 본문을 함께 교체하면 됩니다.'] },
+        { title: '정리 기준', lines: ['한 페이지 안에서 목적, 참여 조건, 진행 순서, 주의사항 순서로 정리합니다.', '숫자와 시간은 표로 분리하고, 반복 체크가 필요한 내용은 체크리스트로 나눕니다.', '한국어, 영어, 스페인어 번역을 같은 구조로 맞춥니다.'] },
+      ],
+    },
+    powerOrder: {
+      file: '임시 전투력 성장 순서',
+      title: '전투력 올리는 순서',
+      kicker: 'Power Up',
+      desc: '영웅을 1순위로 두는 성장 루틴',
+      summary: [
+        { label: '1순위', value: '주력 영웅 집중 성장' },
+        { label: '2순위', value: '장비와 스킬 강화' },
+        { label: '3순위', value: '연구, 차량, 병력 보강' },
+      ],
+      sections: [
+        { title: '왜 영웅이 1순위인가', lines: ['전투는 결국 편성된 영웅의 레벨, 별, 스킬, 장비가 부대 능력치를 크게 끌어올리는 구조입니다.', '영웅을 넓게 나눠 키우기보다 주력 1부대 영웅을 먼저 집중하면 전투력과 실제 전투 효율이 같이 오릅니다.', '같은 타입이나 같은 진영 조합을 맞추면 편성 보너스를 받기 쉬워 초반 성장 효율이 좋아집니다.'] },
+        { title: '영웅을 올리려면', lines: ['영웅 경험치와 조각을 주력 영웅에게 먼저 사용합니다.', '별 승급, 스킬 레벨, 전용 장비 또는 영웅 장비를 순서대로 챙깁니다.', '무료 보상, 이벤트 상점, 인기 이벤트, 명예 상점에서 영웅 조각과 성장 재료를 꾸준히 확보합니다.'] },
+        { title: '추천 순서', lines: ['1. 주력 1부대 영웅 레벨과 별을 먼저 올립니다.', '2. 주력 영웅 장비와 스킬을 보강합니다.', '3. 병종과 편성에 맞는 연구를 진행합니다.', '4. 차량, 드론, 장비, 부품류를 주력 부대 기준으로 맞춥니다.', '5. 본부 레벨업과 병력 훈련은 자원 부담을 보며 꾸준히 따라갑니다.'] },
+      ],
+    },
   },
   en: {
     daily: {
@@ -338,6 +369,37 @@ const extraGuides = {
         { title: 'Honor Badges', lines: ['Use honor badges from Caravan, Exploration, and Hero Battlefield to buy refugee tickets, universal orange fragments, energy cores, and wrenches.', 'If preparing season heroes and hero equipment, also buy universal equipment fragments.', 'Refugee tickets are very important for Tuesday orange diplomat recruitment.'] },
       ],
     },
+    indoor: {
+      file: 'Temporary Indoor page',
+      title: 'Indoor',
+      kicker: 'Indoor',
+      desc: 'Temporary guide page until source details are added',
+      summary: [
+        { label: 'Status', value: 'Temporary page' },
+        { label: 'Use', value: 'Guide space for new members' },
+        { label: 'Next step', value: 'Replace details when source material arrives' },
+      ],
+      sections: [
+        { title: 'Temporary Notes', lines: ['When Indoor rules or images are provided, this page will be organized with the final content.', 'For now, it prevents the guide from having an empty tab and gives new members a clear placeholder.', 'After the source arrives, replace the card image and body together.'] },
+        { title: 'Organization Standard', lines: ['Use the order: purpose, entry conditions, process, and cautions.', 'Put numbers and times into tables, and split repeat checks into checklists.', 'Keep Korean, English, and Spanish pages in the same structure.'] },
+      ],
+    },
+    powerOrder: {
+      file: 'Temporary combat power growth order',
+      title: 'Power Growth Order',
+      kicker: 'Power Up',
+      desc: 'Growth route that puts heroes first',
+      summary: [
+        { label: 'Priority 1', value: 'Focus main squad heroes' },
+        { label: 'Priority 2', value: 'Upgrade gear and skills' },
+        { label: 'Priority 3', value: 'Add research, vehicle, and troops' },
+      ],
+      sections: [
+        { title: 'Why Heroes Come First', lines: ['Combat power is heavily driven by the heroes placed in your squad: level, stars, skills, and gear all affect battle stats.', 'Spreading materials across too many heroes is weaker than building one main squad first.', 'Matching hero type or faction synergy makes early growth more efficient.'] },
+        { title: 'How to Raise Heroes', lines: ['Spend hero EXP and shards on your main-squad heroes first.', 'Work through star upgrades, skill levels, exclusive gear, and hero gear in that order.', 'Use free claims, event shops, popular events, and honor shops to keep hero shards and growth materials flowing.'] },
+        { title: 'Recommended Order', lines: ['1. Raise main squad hero level and stars first.', '2. Upgrade main hero gear and skills.', '3. Research the branch that fits your troop type and formation.', '4. Align vehicle, drone, gear, and components around the main squad.', '5. Keep HQ level-ups and troop training moving as resources allow.'] },
+      ],
+    },
   },
   es: {
     daily: {
@@ -370,6 +432,37 @@ const extraGuides = {
         { title: 'Tienda de Privilegios', lines: ['Según tu VIP, compra madera, comida, barriles de 50 combustible, teletransportes avanzados, llaves e insignias de policía.', 'Núcleos de energía, aceleradores universales de 8 horas y fragmentos naranjas universales también son compras clave.', 'Compra Z-coins y electricidad solo si faltan.', 'Omite compras de ítems si tienes 30,000 diamantes o menos.'] },
         { title: 'Tienda de Mérito', lines: ['Usa medallas de guerrero de Arena, Cañón y Capital para comprar primero cajas de equipo naranja.', 'Cuando tengas suficientes medallas, compra solo núcleos de energía con descuento y omite lo demás.'] },
         { title: 'Insignias de Honor', lines: ['Usa insignias de honor de Caravana, Exploración y Campo de héroes para comprar tickets de refugiados, fragmentos naranjas universales, núcleos de energía y llaves.', 'Si preparas héroes de temporada y equipo de héroe, compra también fragmentos universales de equipo.', 'Los tickets de refugiados son muy importantes para reclutar diplomáticos naranjas los martes.'] },
+      ],
+    },
+    indoor: {
+      file: 'Pagina temporal Indoor',
+      title: 'Indoor',
+      kicker: 'Indoor',
+      desc: 'Pagina temporal hasta agregar materiales finales',
+      summary: [
+        { label: 'Estado', value: 'Pagina temporal' },
+        { label: 'Uso', value: 'Espacio de guia para nuevos miembros' },
+        { label: 'Siguiente', value: 'Reemplazar cuando llegue el material' },
+      ],
+      sections: [
+        { title: 'Notas Temporales', lines: ['Cuando lleguen reglas o imagenes de Indoor, esta pagina se organizara con el contenido final.', 'Por ahora evita dejar una pestana vacia y da a los nuevos miembros una guia clara.', 'Cuando llegue el material, cambiaremos juntos la imagen de la tarjeta y el cuerpo.'] },
+        { title: 'Criterio de Organizacion', lines: ['Usa el orden: objetivo, condiciones de entrada, proceso y avisos.', 'Coloca numeros y horarios en tablas, y separa revisiones repetidas como checklist.', 'Mantiene la misma estructura en coreano, ingles y espanol.'] },
+      ],
+    },
+    powerOrder: {
+      file: 'Orden temporal para subir poder',
+      title: 'Orden para Subir Poder',
+      kicker: 'Power Up',
+      desc: 'Ruta de crecimiento que prioriza heroes',
+      summary: [
+        { label: 'Prioridad 1', value: 'Concentrar heroes principales' },
+        { label: 'Prioridad 2', value: 'Mejorar equipo y habilidades' },
+        { label: 'Prioridad 3', value: 'Sumar investigacion, vehiculo y tropas' },
+      ],
+      sections: [
+        { title: 'Por que Heroes Primero', lines: ['El poder de combate depende mucho de los heroes en la formacion: nivel, estrellas, habilidades y equipo afectan las estadisticas.', 'Repartir materiales entre demasiados heroes rinde menos que fortalecer primero una escuadra principal.', 'La sinergia por tipo o faccion ayuda a crecer mejor al inicio.'] },
+        { title: 'Como Subir Heroes', lines: ['Usa EXP y fragmentos primero en los heroes de la escuadra principal.', 'Avanza por estrellas, habilidades, equipo exclusivo y equipo de heroe.', 'Usa recompensas gratis, tiendas de evento, eventos populares y tiendas de honor para obtener fragmentos y materiales.'] },
+        { title: 'Orden Recomendado', lines: ['1. Sube primero nivel y estrellas de la escuadra principal.', '2. Mejora equipo y habilidades de esos heroes.', '3. Investiga la rama que encaje con tu tipo de tropa y formacion.', '4. Alinea vehiculo, dron, equipo y componentes con la escuadra principal.', '5. Mantén base y entrenamiento de tropas al ritmo que permitan los recursos.'] },
       ],
     },
   },
@@ -565,7 +658,18 @@ const featuredSections = [
   { id: 'rules', icon: Swords, image: 'cards/3.png' },
   { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
   { id: 'popular', icon: Sparkles, image: 'cards/6.png' },
+  { id: 'indoor', icon: DoorOpen, image: 'cards/8.svg' },
+  { id: 'powerOrder', icon: TrendingUp, image: 'cards/9.svg' },
 ];
+
+function getSectionMeta(lang, id) {
+  if (id === 'hq') return { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc };
+  if (id === 'indoor' || id === 'powerOrder') {
+    const guide = extraGuides[lang][id];
+    return { kicker: guide.kicker, title: guide.title, desc: guide.desc };
+  }
+  return sectionLabels[lang][id];
+}
 
 function TextBlock({ text }) {
   return String(text || '').split('\n').filter(Boolean).map((line, idx) => {
@@ -874,9 +978,7 @@ export default function App() {
   const dragStateRef = useRef({ active: false, startX: 0, startY: 0, scrollLeft: 0, dragged: false, distance: 0, raf: null });
   const copy = ui[lang];
   const sectionCopy = sectionLabels[lang];
-  const activeSection = section === 'hq'
-    ? { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc }
-    : section ? sectionLabels[lang][section] : null;
+  const activeSection = section ? getSectionMeta(lang, section) : null;
   const ruleTabs = fileTabs.filter((item) => item.id === '[약탈 규칙].txt' || item.id === '[토요일 킬데이 규칙].txt');
   const eventTabs = fileTabs.filter((item) => item.id === '[좀비 공성 및 좀비 폭군 이벤트].txt' || item.id === '[협곡 쟁탈전].txt');
   const updateActiveCard = () => {
@@ -1014,7 +1116,7 @@ export default function App() {
     if (section === 'duel') return <WorkbookView lang={lang} />;
     if (section === 'hq') return <HqUpgradeView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
-    if (section === 'daily' || section === 'popular') return <ExtraGuideView lang={lang} id={section} />;
+    if (section === 'daily' || section === 'popular' || section === 'indoor' || section === 'powerOrder') return <ExtraGuideView lang={lang} id={section} />;
     if (section === 'rules') {
       return (
         <>
@@ -1108,9 +1210,7 @@ export default function App() {
               onTouchCancel={handleCarouselTouchEnd}
             >
               {featuredSections.map(({ id, icon: Icon, image }, index) => {
-                const item = id === 'hq'
-                  ? { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc }
-                  : sectionLabels[lang][id];
+                const item = getSectionMeta(lang, id);
                 return (
                   <button className={`feature-card ${activeCardIndex === index ? 'active' : ''}`} onClick={() => handleSectionChange(id)} key={id}>
                     <img src={image} alt="" />
