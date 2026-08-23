@@ -189,6 +189,8 @@ body::before {
   line-height: 1.55;
   font-size: 17px;
   font-weight: 700;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .detail-hero h1 {
@@ -340,6 +342,8 @@ body::before {
   line-height: .95;
   font-weight: 1000;
   text-transform: uppercase;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .feature-card em {
   position: absolute;
@@ -352,6 +356,8 @@ body::before {
   line-height: 1.25;
   font-style: normal;
   font-weight: 750;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .feature-action {
   position: absolute;
@@ -474,6 +480,8 @@ body::before {
   font-size: 13px;
   line-height: 1.45;
   text-align: right;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .content {
   min-width: 0;
@@ -573,6 +581,8 @@ h3 { margin: 0 0 10px; color: #17202a; font-size: 21px; line-height: 1.3; }
   color: #17202a;
   font-size: 17px;
   line-height: 1.32;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .duel-shell {
@@ -701,12 +711,16 @@ h3 { margin: 0 0 10px; color: #17202a; font-size: 21px; line-height: 1.3; }
   margin: 0;
   color: #17202a;
   font-size: 21px;
+  line-height: 1.25;
+  word-break: keep-all;
 }
 .guide-section-card ul {
   margin: 14px 0 0;
   padding-left: 20px;
   color: #31404d;
   line-height: 1.74;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .guide-section-card li + li { margin-top: 8px; }
 
@@ -932,13 +946,15 @@ tbody tr:nth-child(even) td { background: #f7f9fb; }
   }
   .carousel-button.prev { left: -5px; }
   .carousel-button.next { right: -5px; }
-  .feature-tabs { gap: 18px; }
-  .feature-card { flex-basis: 265px; min-height: 350px; }
+  .feature-tabs { gap: 22px; padding-left: 18px; padding-right: 18px; }
+  .feature-card { flex-basis: min(280px, calc(100vw - 76px)); min-height: 350px; }
   .feature-card.active,
   .feature-card.active:hover,
   .feature-card:nth-child(even).active,
   .feature-card:nth-child(even).active:hover { transform: scale(1.035) translateY(-4px); }
-  .feature-card strong { font-size: 29px; }
+  .feature-card strong { font-size: 28px; line-height: 1.05; }
+  .feature-card em { line-height: 1.35; }
+  .summary-item strong { font-size: 16px; line-height: 1.42; }
   .lobby-footer {
     margin-top: 30px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
