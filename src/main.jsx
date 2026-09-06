@@ -227,25 +227,25 @@ const ui = {
 const notices = {
   ko: [
     { file: '[토요일 킬데이 규칙].txt', title: '토요일 킬데이 규칙', tone: 'danger', icon: Shield, body: ['우리 연맹은 강한 상대의 표적이 되기 쉬우므로 실드 사용이 필수입니다.', '리셋 후 빠르게 상대 서버를 약탈하고 실드를 사용해 복귀하세요.', '약탈하지 않는 인원은 리셋 후 바로 실드를 사용하세요.', '토요일 리셋 이후 실드가 없으면 사전 통보 없이 강퇴 처리되며, 추후 복귀는 가능합니다.', '같은 일이 3번 반복되면 영구 제명됩니다.'] },
-    { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['트럭 퀘스트나 현상 퀘스트는 서버전 중이면 상대 서버를 약탈하세요.', '서버전이 아닐 때는 같은 서버를 제외한 모든 서버에서 약탈하면 됩니다.', '자원 약탈은 NAP를 제외한 연맹을 대상으로 진행하세요.', '현재 NAP 8 기준이며, 연맹 랭킹에서 확인이 어렵다면 R4에게 문의하세요.', '약탈 인원 제한은 현재 4명 + 실드 지원 2명입니다. 반드시 인원 수를 확인한 뒤 텔레포트하세요.'] },
+    { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['약탈 인원 제한은 없습니다.', '제로잉은 절대 금지입니다. 상대 도시 병력을 0에 가깝게 만들 정도로 반복 공격하지 마세요.', 'NAP 연맹끼리는 서로 공격할 수 없습니다.', '아카데미 연맹은 공격 가능하지만, 닉네임에 Farm이 적힌 아카데미 계정은 공격 금지입니다.', '위 규칙 위반이 적발되면 경고 없이 강퇴 처리됩니다.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: '좀비 공성 및 좀비 폭군 이벤트', tone: 'info', icon: CalendarDays, body: ['Lir은 한국인 멤버 비율이 높은 연맹입니다.', '대부분 이벤트 시작 시간은 아포칼립스 기준 10:00입니다.'] },
     { file: '[협곡 쟁탈전].txt', title: '협곡 쟁탈전', tone: 'info', icon: Users, body: ['협곡 쟁탈전은 아포칼립스 시간 기준 23:00에 진행됩니다.', '참여 인원은 연맹전 개인 점수와 전투력 기준의 참여 희망자 중 랜덤으로 선정됩니다.'] },
   ],
   en: [
     { file: '[토요일 킬데이 규칙].txt', title: 'Saturday Kill Day Rules', tone: 'danger', icon: Shield, body: ['Our alliance is often targeted by stronger enemies, so using a shield is mandatory.', 'After reset, plunder the enemy server quickly, activate your shield, and return.', 'Members who do not plunder should activate a shield immediately after reset.', 'If you have no shield after Saturday reset, you may be removed without prior notice. Rejoining later is possible.', 'Repeating the same issue three times results in permanent expulsion.'] },
-    { file: '[약탈 규칙].txt', title: 'Plunder Rules', tone: 'warning', icon: Swords, body: ['For truck or bounty quests during server war, plunder the enemy server.', 'When server war is not active, plunder any server except our own.', 'For resource plunder, target alliances except NAP alliances.', 'Current standard is NAP 8. If you cannot check it in alliance rankings, ask R4.', 'Plunder participation is currently limited to 4 plunder members + 2 shield support members. Check the count before teleporting.'] },
+    { file: '[약탈 규칙].txt', title: 'Plunder Rules', tone: 'warning', icon: Swords, body: ['There is no limit on the number of plunder participants.', 'Zeroing is strictly forbidden. Do not repeatedly attack a city until its troops are nearly wiped out.', 'NAP alliances cannot attack each other.', 'Academy alliances may be attacked, but academy accounts with Farm in the nickname must not be attacked.', 'If a violation is confirmed, the member will be removed without warning.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Zombie Siege and Zombie Tyrant Event', tone: 'info', icon: CalendarDays, body: ['Lir has a high ratio of Korean members.', 'Most events start at 10:00 Apocalypse Time.'] },
     { file: '[협곡 쟁탈전].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash is held at 23:00 Apocalypse Time.', 'Participants are randomly selected from applicants based on Alliance Duel personal score and combat power.'] },
   ],
   es: [
     { file: '[토요일 킬데이 규칙].txt', title: 'Reglas del Día de bajas del sábado', tone: 'danger', icon: Shield, body: ['Nuestra alianza suele ser objetivo de rivales fuertes, por eso el escudo es obligatorio.', 'Después del reinicio, saquea rápidamente el servidor enemigo, activa el escudo y vuelve.', 'Quienes no saqueen deben activar el escudo inmediatamente después del reinicio.', 'Si no tienes escudo después del reinicio del sábado, puedes ser expulsado sin aviso previo. Es posible volver más adelante.', 'Si el mismo problema se repite tres veces, la expulsión será permanente.'] },
-    { file: '[약탈 규칙].txt', title: 'Reglas de saqueo', tone: 'warning', icon: Swords, body: ['Para misiones de camión o recompensa durante la guerra de servidores, saquea el servidor enemigo.', 'Si no hay guerra de servidores, saquea cualquier servidor excepto el nuestro.', 'Para recursos, ataca alianzas que no estén incluidas en NAP.', 'El estándar actual es NAP 8. Si no sabes revisarlo en el ranking de alianzas, pregunta a R4.', 'El saqueo está limitado actualmente a 4 miembros de saqueo + 2 miembros de apoyo con escudo. Revisa el número antes de teletransportarte.'] },
+    { file: '[약탈 규칙].txt', title: 'Reglas de saqueo', tone: 'warning', icon: Swords, body: ['No hay límite de participantes para el saqueo.', 'El zeroing está estrictamente prohibido. No ataques repetidamente una ciudad hasta dejar sus tropas casi en cero.', 'Las alianzas NAP no pueden atacarse entre sí.', 'Las alianzas academia pueden ser atacadas, pero las cuentas de academia con Farm en el nombre no deben ser atacadas.', 'Si se confirma una infracción, el miembro será expulsado sin advertencia.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['Lir tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
     { file: '[협곡 쟁탈전].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['La Disputa del Cañón se realiza a las 23:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
   ],
   hi: [
     { file: '[토요일 킬데이 규칙].txt', title: 'Saturday Kill Day नियम', tone: 'danger', icon: Shield, body: ['हमारा alliance अक्सर मजबूत दुश्मनों का target बनता है, इसलिए shield जरूरी है.', 'Reset के बाद enemy server को जल्दी plunder करें, shield लगाएं और वापस आएं.', 'जो सदस्य plunder नहीं करते, वे reset के तुरंत बाद shield लगाएं.', 'Saturday reset के बाद shield नहीं होने पर बिना notice remove किया जा सकता है.', 'एक ही समस्या 3 बार दोहराने पर permanent removal होगा.'] },
-    { file: '[약탈 규칙].txt', title: 'Plunder नियम', tone: 'warning', icon: Swords, body: ['Truck या bounty quest server war के दौरान enemy server पर करें.', 'Server war नहीं हो तो अपने server को छोड़कर किसी भी server पर plunder करें.', 'Resource plunder में NAP alliances को छोड़कर target चुनें.', 'मौजूदा 기준 NAP 8 है. 확인이 어렵다면 R4에게 पूछें.', 'Plunder limit अभी 4 plunder members + 2 shield support members है. Teleport से पहले संख्या 확인 करें.'] },
+    { file: '[약탈 규칙].txt', title: 'Plunder नियम', tone: 'warning', icon: Swords, body: ['Plunder participants की कोई limit नहीं है.', 'Zeroing सख्त मना है. किसी city पर बार-बार हमला करके troops को लगभग zero न करें.', 'NAP alliances एक-दूसरे पर attack नहीं कर सकते.', 'Academy alliances पर attack कर सकते हैं, लेकिन nickname में Farm लिखे academy account पर attack मना है.', 'Violation confirm होने पर बिना warning member remove किया जाएगा.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Zombie Siege और Zombie Tyrant', tone: 'info', icon: CalendarDays, body: ['Lir में Korean members का अनुपात ज्यादा है.', 'अधिकांश events Apocalypse Time 기준 10:00 पर शुरू होते हैं.'] },
     { file: '[협곡 쟁탈전].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash Apocalypse Time 기준 23:00 पर होता है.', 'Participants alliance duel personal score और power 기준으로 신청자 중 random चुने जाते हैं.'] },
   ],
@@ -254,9 +254,9 @@ const notices = {
 const noticeSummaries = {
   ko: {
     '[약탈 규칙].txt': [
-      { label: '서버전 중', value: '상대 서버 약탈' },
-      { label: '평상시', value: '같은 서버 제외' },
-      { label: '인원 제한', value: '약탈 4명 + 실드 2명' },
+      { label: '인원 제한', value: '없음' },
+      { label: '절대 금지', value: '제로잉' },
+      { label: '공격 제한', value: 'NAP 및 Farm 닉네임 금지' },
     ],
     '[토요일 킬데이 규칙].txt': [
       { label: '필수 행동', value: '실드 사용' },
@@ -276,9 +276,9 @@ const noticeSummaries = {
   },
   en: {
     '[약탈 규칙].txt': [
-      { label: 'Server war', value: 'Plunder enemy server' },
-      { label: 'Normal days', value: 'Avoid our own server' },
-      { label: 'Limit', value: '4 plunder + 2 shield support' },
+      { label: 'Participant limit', value: 'None' },
+      { label: 'Strictly forbidden', value: 'Zeroing' },
+      { label: 'Do not attack', value: 'NAP and Farm nicknames' },
     ],
     '[토요일 킬데이 규칙].txt': [
       { label: 'Required', value: 'Use a shield' },
@@ -298,9 +298,9 @@ const noticeSummaries = {
   },
   es: {
     '[약탈 규칙].txt': [
-      { label: 'Guerra', value: 'Saquear servidor enemigo' },
-      { label: 'Días normales', value: 'Evitar nuestro servidor' },
-      { label: 'Límite', value: '4 saqueo + 2 apoyo escudo' },
+      { label: 'Límite', value: 'Sin límite' },
+      { label: 'Prohibido', value: 'Zeroing' },
+      { label: 'No atacar', value: 'NAP y nombres con Farm' },
     ],
     '[토요일 킬데이 규칙].txt': [
       { label: 'Obligatorio', value: 'Usar escudo' },
@@ -320,9 +320,9 @@ const noticeSummaries = {
   },
   hi: {
     '[약탈 규칙].txt': [
-      { label: 'Server war', value: 'Enemy server plunder' },
-      { label: 'Normal day', value: 'Own server छोड़ें' },
-      { label: 'Limit', value: '4 plunder + 2 shield' },
+      { label: 'Limit', value: 'कोई limit नहीं' },
+      { label: 'Strict ban', value: 'Zeroing' },
+      { label: 'Do not attack', value: 'NAP और Farm nicknames' },
     ],
     '[토요일 킬데이 규칙].txt': [
       { label: 'जरूरी', value: 'Shield लगाएं' },
