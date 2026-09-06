@@ -227,7 +227,7 @@ const ui = {
 const notices = {
   ko: [
     { file: '[토요일 킬데이 규칙].txt', title: '토요일 킬데이 규칙', tone: 'danger', icon: Shield, body: ['우리 연맹은 강한 상대의 표적이 되기 쉬우므로 실드 사용이 필수입니다.', '리셋 후 빠르게 상대 서버를 약탈하고 실드를 사용해 복귀하세요.', '약탈하지 않는 인원은 리셋 후 바로 실드를 사용하세요.', '토요일 리셋 이후 실드가 없으면 사전 통보 없이 강퇴 처리되며, 추후 복귀는 가능합니다.', '같은 일이 3번 반복되면 영구 제명됩니다.'] },
-    { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['약탈 인원 제한은 없습니다.', '제로잉은 절대 금지입니다. 상대 도시 병력을 0에 가깝게 만들 정도로 반복 공격하지 마세요.', 'NAP 연맹끼리는 서로 공격할 수 없습니다.', '아카데미 연맹은 공격 가능하지만, 닉네임에 Farm이 적힌 아카데미 계정은 공격 금지입니다.', '위 규칙 위반이 적발되면 경고 없이 강퇴 처리됩니다.'] },
+    { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['참여 인원: 약탈에 참여할 수 있는 인원은 제한이 없습니다.', '제로잉 절대 금지: 상대 도시의 병력이 거의 남지 않을 때까지 반복 공격하지 마세요.', 'NAP 공격 금지: NAP 연맹은 서로 공격할 수 없습니다.', '아카데미 공격 기준: 아카데미 연맹은 공격할 수 있습니다. 단, 닉네임에 Farm이 포함된 아카데미 계정은 공격 금지입니다.', '위반 시 조치: 적발되면 경고 없이 강퇴 처리됩니다.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: '좀비 공성 및 좀비 폭군 이벤트', tone: 'info', icon: CalendarDays, body: ['Lir은 한국인 멤버 비율이 높은 연맹입니다.', '대부분 이벤트 시작 시간은 아포칼립스 기준 10:00입니다.'] },
     { file: '[협곡 쟁탈전].txt', title: '협곡 쟁탈전', tone: 'info', icon: Users, body: ['협곡 쟁탈전은 아포칼립스 시간 기준 23:00에 진행됩니다.', '참여 인원은 연맹전 개인 점수와 전투력 기준의 참여 희망자 중 랜덤으로 선정됩니다.'] },
   ],
@@ -709,6 +709,7 @@ function dayLabel(date, lang) {
 }
 
 function dayTitle(entry, lang) {
+  if (entry.date === '※ 공지\nAnnouncement') return { ko: '주간 목표와 사전 준비', en: 'Weekly target and preparation', es: 'Objetivo semanal y preparación', hi: 'साप्ताहिक लक्ष्य और तैयारी' }[lang];
   const text = lang === 'ko' ? entry.ko : lang === 'es' ? spanishSummary(entry).join('\n') : lang === 'hi' ? hindiSummary(entry).join('\n') : entry.en || entry.ko;
   const first = String(text).split('\n').find(Boolean) || dayLabel(entry.date, lang);
   return first.replace(/[🔳■]/g, '').trim();
@@ -819,9 +820,14 @@ function getSectionMeta(lang, id) {
 }
 
 function TextBlock({ text }) {
-  return String(text || '').split('\n').filter(Boolean).map((line, idx) => {
-    const isBullet = line.trim().startsWith('-') || line.trim().startsWith('*');
-    return <p key={idx} className={isBullet ? 'bullet-line' : 'text-line'}>{line.replace(/^[-*]\s*/, '')}</p>;
+  return String(text || '').split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => {
+    const lines = paragraph.split('\n').map((line) => line.trim()).filter(Boolean);
+    if (lines[0]?.startsWith('🔳')) return null;
+    const heading = /^\d+(?:-\d+)?\)/.test(lines[0]) ? lines.shift() : null;
+    return <section className="reading-section" key={index}>
+      {heading && <h4>{heading.replace(/^\d+(?:-\d+)?\)\s*/, '')}</h4>}
+      {lines.map((line, idx) => <p key={idx} className={/^[-*]/.test(line) ? 'bullet-line' : 'text-line'}>{line.replace(/^[-*]\s*/, '')}</p>)}
+    </section>;
   });
 }
 
@@ -831,10 +837,11 @@ function NoticeCard({ item }) {
     <article className={`notice ${item.tone}`}>
       <div className="notice-icon"><Icon size={20} /></div>
       <div>
-        <p className="file-name">{displayName(item.file)}</p>
-        <h3>{item.title}</h3>
         <ul>
-          {item.body.map((line) => <li key={line}>{line}</li>)}
+          {item.body.map((line) => {
+            const separator = line.indexOf(': ');
+            return <li key={line}>{separator > 0 && separator < 30 ? <><strong className="rule-heading">{line.slice(0, separator)}</strong><span>{line.slice(separator + 2)}</span></> : line}</li>;
+          })}
         </ul>
       </div>
     </article>
@@ -1088,7 +1095,7 @@ function FileNotice({ lang, file }) {
       <div className="section-head">
         <div>
           <p className="section-kicker">{ui[lang].source}</p>
-          <h2>{displayName(item.file)}</h2>
+          <h2>{item.title}</h2>
         </div>
       </div>
       <SummaryStrip items={noticeSummaries[lang][file]} />
@@ -1127,8 +1134,9 @@ export default function App() {
   const copy = ui[lang];
   const sectionCopy = sectionLabels[lang];
   const activeSection = section ? getSectionMeta(lang, section) : null;
-  const ruleTabs = fileTabs.filter((item) => item.id === '[약탈 규칙].txt' || item.id === '[토요일 킬데이 규칙].txt');
-  const eventTabs = fileTabs.filter((item) => item.id === '[좀비 공성 및 좀비 폭군 이벤트].txt' || item.id === '[협곡 쟁탈전].txt');
+  const translatedTabs = fileTabs.map((item) => ({ ...item, label: notices[lang].find((notice) => notice.file === item.id)?.title || item.label }));
+  const ruleTabs = translatedTabs.filter((item) => item.id === '[약탈 규칙].txt' || item.id === '[토요일 킬데이 규칙].txt');
+  const eventTabs = translatedTabs.filter((item) => item.id === '[좀비 공성 및 좀비 폭군 이벤트].txt' || item.id === '[협곡 쟁탈전].txt');
   const updateActiveCard = () => {
     const carousel = carouselRef.current;
     if (!carousel) return;
@@ -1283,7 +1291,7 @@ export default function App() {
 
   if (page === 'detail' && section) {
     return (
-      <main className="detail-page" style={{ '--page-bg': 'url("brand/background.png")' }}>
+      <main className="detail-page" lang={lang}>
         <nav className="topbar detail-topbar">
           <button className="home-button" onClick={goHome}>
             <ArrowLeft size={18} />
@@ -1295,22 +1303,25 @@ export default function App() {
             {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
           </div>
         </nav>
-        <section className="detail-hero" style={{ '--hero-bg': 'url("brand/background.png")' }}>
+        <div className="detail-layout">
+        <aside className="guide-navigation" aria-label={copy.tabs}>
+          <p>Lir / GUIDE</p>
+          {featuredSections.map(({ id, icon: Icon }, index) => <button key={id} aria-current={section === id ? 'page' : undefined} onClick={() => handleSectionChange(id)}>
+            <Icon size={18} /><span>{getSectionMeta(lang, id).title}</span><small>{String(index + 1).padStart(2, '0')}</small>
+          </button>)}
+        </aside>
+        <div className="detail-document">
+        <section className="detail-hero">
           <p>{activeSection.kicker}</p>
           <h1>{activeSection.title}</h1>
           <span>{activeSection.desc}</span>
         </section>
         <div className="window-shell">
-          <div className="window-bar">
-            <div>
-              <span>{activeSection.kicker}</span>
-              <strong>{activeSection.title}</strong>
-            </div>
-            <p>{copy.note}</p>
-          </div>
           <div className="content">
             {renderContent()}
           </div>
+        </div>
+        </div>
         </div>
       </main>
     );
