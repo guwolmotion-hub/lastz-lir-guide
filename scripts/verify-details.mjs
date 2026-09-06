@@ -11,11 +11,19 @@ try {
     for (const lang of ['KO', 'EN', 'ES', 'HI']) {
       await page.getByRole('button', { name: lang, exact: true }).click();
       for (let index = 0; index < 8; index++) {
-        await page.locator('.guide-navigation button').nth(index).click();
+        await page.locator('.home-button').click();
+        await page.locator('.feature-card').nth(index).click();
+        assert.equal(await page.locator('.guide-navigation').count(), 0);
+        const localTabs = page.locator('.segmented-tabs button');
+        for (let tab = 0; tab < await localTabs.count(); tab++) {
+          await localTabs.nth(tab).click();
+          assert.ok((await page.locator('.content').innerText()).trim().length > 0);
+        }
+        if (await localTabs.count()) await localTabs.first().click();
         const problems = await page.evaluate(() => ({
           pageOverflow: document.body.scrollWidth > innerWidth + 2,
           clippedContent: [...document.querySelectorAll('.day-copy, .notice, .guide-section-card, .formula-panel')].some(el => el.getBoundingClientRect().right > innerWidth + 2),
-          textOverflow: [...document.querySelectorAll('.detail-document h1, .detail-document h3, .detail-document p, .detail-document li, .summary-item strong')].filter(el => el.scrollWidth > el.clientWidth + 2).map(el => el.textContent),
+          textOverflow: [...document.querySelectorAll('.detail-document h1, .detail-document h3, .detail-document p, .detail-document li, .summary-item strong')].filter(el => el.getClientRects().length && el.scrollWidth > el.clientWidth + 2).map(el => el.textContent),
         }));
         assert.equal(problems.pageOverflow, false, `${width}/${lang}/${index}: page overflow`);
         assert.equal(problems.clippedContent, false, `${width}/${lang}/${index}: clipped content`);

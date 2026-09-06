@@ -807,7 +807,7 @@ const featuredSections = [
   { id: 'rules', icon: Swords, image: 'cards/3.png' },
   { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
   { id: 'popular', icon: Sparkles, image: 'cards/6.png' },
-  { id: 'powerOrder', icon: TrendingUp, image: 'cards/9.svg' },
+  { id: 'powerOrder', icon: TrendingUp, image: 'cards/power.png' },
 ];
 
 function getSectionMeta(lang, id) {
@@ -900,8 +900,10 @@ function prerequisiteRowsForLang(lang) {
 
 function HqUpgradeView({ lang }) {
   const copy = hqUpgradeCopy[lang];
+  const [tab, setTab] = useState('hq');
   return (
     <section className="content-block">
+      <SegmentedTabs label={copy.title} value={tab} onChange={setTab} items={[{ id: 'hq', label: copy.hqTitle, icon: Building2 }, { id: 'prerequisite', label: copy.prereqTitle, icon: ListChecks }]} />
       <div className="section-head">
         <div>
           <p className="section-kicker">{copy.file}</p>
@@ -916,7 +918,7 @@ function HqUpgradeView({ lang }) {
             {copy.notes.map((line) => <li key={line}>{line}</li>)}
           </ul>
         </article>
-        <section className="table-section">
+        <section className="table-section" hidden={tab !== 'hq'}>
           <div className="table-heading">
             <div>
               <p className="section-kicker">{copy.kicker}</p>
@@ -926,7 +928,7 @@ function HqUpgradeView({ lang }) {
           </div>
           <GuideTable columns={copy.columns} rows={hqRowsForLang(lang)} />
         </section>
-        <section className="table-section">
+        <section className="table-section" hidden={tab !== 'prerequisite'}>
           <div className="table-heading">
             <div>
               <p className="section-kicker">{copy.kicker}</p>
@@ -977,8 +979,10 @@ function DuelGuide({ lang }) {
 function Caravan({ lang }) {
   const data = workbook.sheets['캐러밴 표'];
   const copy = caravanCopy[lang];
+  const [tab, setTab] = useState('steps');
   return (
     <div className="caravan-layout">
+      <SegmentedTabs label={copy.title} value={tab} onChange={setTab} items={[{ id: 'steps', label: copy.stepsTitle, icon: ListChecks }, { id: 'table', label: copy.tableTitle, icon: Table2 }]} />
       <section className="formula-panel">
         <div className="formula-icon"><Calculator size={24} /></div>
         <div>
@@ -987,7 +991,7 @@ function Caravan({ lang }) {
           <span>{copy.formulaHint}</span>
         </div>
       </section>
-      <section className="step-panel">
+      <section className="step-panel" hidden={tab !== 'steps'}>
         <div className="panel-title">
           <ListChecks size={19} />
           <h3>{copy.stepsTitle}</h3>
@@ -1004,7 +1008,7 @@ function Caravan({ lang }) {
           ))}
         </div>
       </section>
-      <section className="alert-panel">
+      <section className="alert-panel" hidden={tab !== 'steps'}>
         <div className="panel-title">
           <AlertTriangle size={19} />
           <h3>{lang === 'ko' ? '주의사항' : lang === 'es' ? 'Avisos' : lang === 'hi' ? 'Warnings' : 'Warnings'}</h3>
@@ -1013,7 +1017,7 @@ function Caravan({ lang }) {
           {copy.alerts.map((line) => <li key={line}>{line}</li>)}
         </ul>
       </section>
-      <section className="table-section">
+      <section className="table-section" hidden={tab !== 'table'}>
         <div className="table-heading">
           <div>
             <p className="section-kicker">{copy.tableHint}</p>
@@ -1064,6 +1068,7 @@ function CaravanView({ lang }) {
 
 function ExtraGuideView({ lang, id }) {
   const guide = extraGuides[lang][id];
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <section className="content-block">
       <div className="section-head">
@@ -1073,8 +1078,9 @@ function ExtraGuideView({ lang, id }) {
         </div>
       </div>
       <SummaryStrip items={guide.summary} />
+      <SegmentedTabs label={guide.title} value={activeIndex} onChange={setActiveIndex} items={guide.sections.map((section, index) => ({ id: index, label: section.title, icon: ListChecks }))} />
       <div className="guide-section-grid">
-        {guide.sections.map((section) => (
+        {guide.sections.filter((_, index) => index === activeIndex).map((section) => (
           <article className="guide-section-card" key={section.title}>
             <h3>{section.title}</h3>
             <ul>
@@ -1304,12 +1310,6 @@ export default function App() {
           </div>
         </nav>
         <div className="detail-layout">
-        <aside className="guide-navigation" aria-label={copy.tabs}>
-          <p>Lir / GUIDE</p>
-          {featuredSections.map(({ id, icon: Icon }, index) => <button key={id} aria-current={section === id ? 'page' : undefined} onClick={() => handleSectionChange(id)}>
-            <Icon size={18} /><span>{getSectionMeta(lang, id).title}</span><small>{String(index + 1).padStart(2, '0')}</small>
-          </button>)}
-        </aside>
         <div className="detail-document">
         <section className="detail-hero">
           <p>{activeSection.kicker}</p>

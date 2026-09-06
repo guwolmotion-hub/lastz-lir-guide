@@ -14,10 +14,8 @@
 }
 .detail-page .home-button { background: transparent; font-size: 13px; font-weight: 600; }
 .detail-layout {
-  display: grid;
-  grid-template-columns: 218px minmax(0, 1fr);
-  gap: 60px;
-  max-width: 1320px;
+  display: block;
+  max-width: 1040px;
   margin: auto;
   padding: 0 24px;
   align-items: start;
@@ -165,3 +163,65 @@
   .detail-page .segmented-tabs { gap: 18px; padding-bottom: 0; }
   .detail-page .segmented-tabs button { font-size: 13px; }
 }
+
+.detail-page { color-scheme: dark; background: #111315; color: #e7e8ea; }
+.detail-page [hidden] { display: none !important; }
+.detail-page .detail-topbar { background: #17191c; border-color: #303237; }
+.detail-page .detail-hero { border-color: #34363b; }
+.detail-page .detail-hero h1,
+.detail-page .section-head h2,
+.detail-page .guide-section-card h3,
+.detail-page .day-detail-head h3,
+.detail-page .panel-title h3,
+.detail-page .table-heading h3,
+.detail-page .reading-section h4,
+.detail-page .step-item strong,
+.detail-page .rule-heading { color: #f1f2f3; }
+.detail-page .detail-hero > span { color: #aeb1b9; }
+.detail-page .detail-hero > p,
+.detail-page .section-kicker,
+.detail-page .panel-title,
+.detail-page .notice li::before,
+.detail-page .day-detail-head span { color: #ff8993; }
+.detail-page .summary-strip { background: #1e2125; }
+.detail-page .summary-item { border-color: #393c42; }
+.detail-page .summary-item span { color: #aeb1b9; }
+.detail-page .summary-item strong { color: #f0f1f3; }
+.detail-page .segmented-wrap { border-color: #393c42; margin-bottom: 24px; }
+.detail-page .segmented-tabs button { color: #b6b9c1; }
+.detail-page .segmented-tabs button.active { color: #ff939c; border-color: #ff7886; }
+.detail-page .segmented-tabs button:hover { color: #fff; }
+.detail-page .guide-section-card { grid-template-columns: 1fr; gap: 16px; border-color: #34363b; }
+.detail-page .guide-section-card ul,
+.detail-page .notice li,
+.detail-page .text-line,
+.detail-page .bullet-line,
+.detail-page .step-item p,
+.detail-page .spanish-list { color: #c8cbd2; }
+.detail-page .notice li,
+.detail-page .reading-section,
+.detail-page .step-item,
+.detail-page .step-item:first-child { border-color: #34363b; }
+.detail-page li::marker { color: #ff8993; }
+.detail-page .day-detail { background: transparent; }
+.detail-page .day-tabs { border-color: #393c42; }
+.detail-page .day-tabs button strong { color: #b6b9c1; }
+.detail-page .day-tabs button.active { background: #342327; border-color: #ff7886; }
+.detail-page .day-tabs button.active strong { color: #ff939c; }
+.detail-page .formula-panel { background: #192b27; border-color: #69bfa3; color: #d5f0e6; }
+.detail-page .formula-panel p, .detail-page .formula-icon { color: #91d4bc; }
+.detail-page .formula-panel span { color: #b3d0c5; }
+.detail-page .step-item > span { background: #25282e; color: #d4d6dc; }
+.detail-page .alert-panel { background: #2b2024; border-color: #f07c8b; }
+.detail-page .alert-panel ul { color: #e0c5cb; }
+.detail-page .table-wrap { background: #181b1e; border-color: #3a3d43; }
+.detail-page .table-heading { border-color: #393c42; }
+.detail-page .table-heading span { color: #d0d3d9; border-color: #44474e; }
+.detail-page th { background: #292c32; color: #e2e4e9; }
+.detail-page td { color: #d1d4db; }
+.detail-page th, .detail-page td { border-color: #35383e; }
+.detail-page tbody tr:nth-child(even) td { background: #202328; }
+.detail-page tbody tr:hover td { background: #2b3531; }
+.detail-page button:focus-visible { outline-color: #ff939c; }
+.detail-page .content-block > .segmented-wrap ~ .section-head { display: none; }
+.detail-page .content > .content-block:not(:first-child) { border: 0; border-radius: 0; }
