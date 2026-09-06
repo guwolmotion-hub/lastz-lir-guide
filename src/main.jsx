@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
+import { hindi, hindiDays } from './hindi.js';
 
 const hqUpgradeRows = [
   ['16 -> 17', '18.2M', '18.2M', '3.5M', '-', '16', 'labWall'],
@@ -73,17 +74,7 @@ const buildingNames = {
     strikerGround: 'Campo de asalto',
     shooterGround: 'Campo de tiradores',
   },
-  hi: {
-    labWall: 'लैब, दीवार',
-    labAlliance: 'लैब, अलायंस सेंटर',
-    labStrikerCamp: 'लैब, स्ट्राइकर ट्रेनिंग कैंप',
-    labShooterCamp: 'लैब, शूटर ट्रेनिंग कैंप',
-    labRiderCamp: 'लैब, राइडर ट्रेनिंग कैंप',
-    wall: 'दीवार',
-    alliance: 'अलायंस सेंटर',
-    strikerGround: 'स्ट्राइकर ट्रेनिंग ग्राउंड',
-    shooterGround: 'शूटर ट्रेनिंग ग्राउंड',
-  },
+  hi: hindi.buildings,
 };
 
 const hqUpgradeCopy = {
@@ -135,22 +126,7 @@ const hqUpgradeCopy = {
     prereqColumns: ['Requisito', 'Nivel', 'Comida', 'Madera', 'Monedas', 'Acero'],
     notes: ['Desde Lv.30 el acero se vuelve un cuello de botella importante, asi que conviene guardarlo antes.', 'Antes de mejorar la base, revisa Laboratorio, campos de entrenamiento, Muro y Centro de alianza.', 'Los valores siguen la revision del 2025-11-17 y pueden variar en la practica segun servidor e investigacion.'],
   },
-  hi: {
-    title: 'HQ लेवल अप',
-    kicker: 'HQ',
-    file: 'HQ लेवल के लिए जरूरी संसाधन',
-    desc: 'हर लेवल के संसाधन और पहले चाहिए भवन',
-    summary: [
-      { label: 'लागू चरण', value: 'नया स्टील RSS, season 3 से' },
-      { label: 'मुख्य चरण', value: 'Lv.30 के बाद स्टील बहुत जरूरी होता है' },
-      { label: 'ध्यान दें', value: 'हीरो, टेक और मास्टरी से खर्च अलग हो सकता है' },
-    ],
-    hqTitle: 'HQ लेवल별 जरूरी संसाधन',
-    prereqTitle: 'उच्च लेवल के पहले चाहिए भवन',
-    columns: ['लेवल', 'खाना', 'लकड़ी', 'कॉइन', 'स्टील', 'पहले चाहिए'],
-    prereqColumns: ['पहले चाहिए', 'लेवल', 'खाना', 'लकड़ी', 'कॉइन', 'स्टील'],
-    notes: ['Lv.30 के बाद स्टील बड़ा bottleneck बनता है, इसलिए पहले से जमा रखें.', 'HQ लेवल अप से पहले लैब, ट्रेनिंग ग्राउंड, दीवार और अलायंस सेंटर की शर्तें साथ में देखें.', 'ये आंकड़े 2025-11-17 revision 기준 हैं और server या research status के अनुसार बदल सकते हैं.'],
-  },
+  hi: hindi.hq,
 };
 
 const ui = {
@@ -205,23 +181,7 @@ const ui = {
     memberNote: 'La hoja tipo lista se muestra como tabla web desde el libro original.',
     columns: ['Estado', 'Actual', 'Ajuste', 'Nombre', 'Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5', 'Día 6', 'Total', 'Nota'],
   },
-  hi: {
-    eyebrow: 'Last Z 737 Server',
-    title: 'Lir नए अलायंस सदस्य गाइड',
-    lobbyTitle: 'Lir',
-    lobbySubtitle: 'नए अलायंस सदस्य गाइड',
-    subtitle: 'Alliance Duel, Kill Day, plunder, events, Canyon, Caravan और power guide एक जगह देखें.',
-    source: 'Source files',
-    quick: 'मुख्य check',
-    tabs: 'गाइड टैब',
-    excelTabs: 'वर्कबुक शीट',
-    all: 'सब',
-    note: 'Management notice 기준으로 updated web guide है.',
-    home: 'होम',
-    lobbyNav: ['Alliance Duel', 'Caravan', 'Guide', 'Rules', 'Events'],
-    memberNote: 'Original Excel content को web table में बदला गया है.',
-    columns: ['स्थिति', 'Current', 'Adjusted', 'Nickname', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'कुल', 'नोट'],
-  },
+  hi: hindi.ui,
 };
 
 const notices = {
@@ -243,12 +203,7 @@ const notices = {
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['Lir tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
     { file: '[협곡 쟁탈전].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['La Disputa del Cañón se realiza a las 23:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
   ],
-  hi: [
-    { file: '[토요일 킬데이 규칙].txt', title: 'Saturday Kill Day नियम', tone: 'danger', icon: Shield, body: ['हमारा alliance अक्सर मजबूत दुश्मनों का target बनता है, इसलिए shield जरूरी है.', 'Reset के बाद enemy server को जल्दी plunder करें, shield लगाएं और वापस आएं.', 'जो सदस्य plunder नहीं करते, वे reset के तुरंत बाद shield लगाएं.', 'Saturday reset के बाद shield नहीं होने पर बिना notice remove किया जा सकता है.', 'एक ही समस्या 3 बार दोहराने पर permanent removal होगा.'] },
-    { file: '[약탈 규칙].txt', title: 'Plunder नियम', tone: 'warning', icon: Swords, body: ['Plunder participants की कोई limit नहीं है.', 'Zeroing सख्त मना है. किसी city पर बार-बार हमला करके troops को लगभग zero न करें.', 'NAP alliances एक-दूसरे पर attack नहीं कर सकते.', 'Academy alliances पर attack कर सकते हैं, लेकिन nickname में Farm लिखे academy account पर attack मना है.', 'Violation confirm होने पर बिना warning member remove किया जाएगा.'] },
-    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Zombie Siege और Zombie Tyrant', tone: 'info', icon: CalendarDays, body: ['Lir में Korean members का अनुपात ज्यादा है.', 'अधिकांश events Apocalypse Time 기준 10:00 पर शुरू होते हैं.'] },
-    { file: '[협곡 쟁탈전].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash Apocalypse Time 기준 23:00 पर होता है.', 'Participants alliance duel personal score और power 기준으로 신청자 중 random चुने जाते हैं.'] },
-  ],
+  hi: hindi.notices.map((item, index) => ({ ...item, file: ['[토요일 킬데이 규칙].txt', '[약탈 규칙].txt', '[좀비 공성 및 좀비 폭군 이벤트].txt', '[협곡 쟁탈전].txt'][index], icon: [Shield, Swords, CalendarDays, Users][index], tone: ['danger', 'warning', 'info', 'info'][index] })),
 };
 
 const noticeSummaries = {
@@ -318,28 +273,7 @@ const noticeSummaries = {
       { label: 'Método', value: 'Aleatorio entre solicitantes' },
     ],
   },
-  hi: {
-    '[약탈 규칙].txt': [
-      { label: 'Limit', value: 'कोई limit नहीं' },
-      { label: 'Strict ban', value: 'Zeroing' },
-      { label: 'Do not attack', value: 'NAP और Farm nicknames' },
-    ],
-    '[토요일 킬데이 규칙].txt': [
-      { label: 'जरूरी', value: 'Shield लगाएं' },
-      { label: 'Reset के बाद', value: 'Plunder फिर shield' },
-      { label: 'Repeat', value: '3 बार पर permanent removal' },
-    ],
-    '[좀비 공성 및 좀비 폭군 이벤트].txt': [
-      { label: 'Alliance', value: 'Korean members ज्यादा' },
-      { label: 'Time 기준', value: 'Apocalypse Time' },
-      { label: 'Start', value: 'ज्यादातर 10:00' },
-    ],
-    '[협곡 쟁탈전].txt': [
-      { label: 'Time', value: '23:00 Apocalypse' },
-      { label: 'Selection', value: 'Alliance Duel personal score' },
-      { label: 'Method', value: 'Applicants में random' },
-    ],
-  },
+  hi: hindi.noticeSummaries,
 };
 
 const extraGuides = {
@@ -499,58 +433,7 @@ const extraGuides = {
       ],
     },
   },
-  hi: {
-    daily: {
-      file: '[매일 진행해야하는 퀘스트].txt',
-      title: 'Daily Quest Checklist',
-      kicker: 'Daily',
-      summary: [
-        { label: 'Left', value: 'Profile rewards, trucks, bounty quests' },
-        { label: 'Right', value: 'Event Center और Alliance Duel' },
-        { label: 'Center', value: 'HQ gifts और free fuel' },
-      ],
-      sections: [
-        { title: 'Screen Left', lines: ['Profile photo के नीचे number पर tap करके दो free rewards लें.', 'Truck reward में universal orange fragments 2 या ज्यादा हों तो plunder करें.', 'अपना truck हर दिन भेजें, और Wednesday/Saturday को orange S-grade truck prioritize करें.', 'Bounty quests में personal dispatch, alliance help, और cross-server supply plunder देखें.', 'Tuesday और Saturday को orange S-grade bounty quests पहले करें.'] },
-        { title: 'Screen Right', lines: ['Event Center में Full Preparedness quests देखें.', 'Canyon Clash (CC) में application और assignment status 확인 करें.', 'Land of Chaos, Raider Boss, और Trial Zombie event quests न छोड़ें.', 'Alliance Duel में alliance help, auto rally, tech donation, और alliance gifts daily करें.'] },
-        { title: 'Screen Center', lines: ['HQ के नीचे gift chest लें.', 'Free fuel 07:00 और 19:00 पर लें.', '11:00 reset के बाद extra 100 Katrina S-grade hero shards 확인 करें.'] },
-      ],
-    },
-    popular: {
-      file: '[필수 인기 이벤트].txt',
-      title: 'Essential Popular Events',
-      kicker: 'Popular',
-      summary: [
-        { label: 'Rotation', value: '4 events weekly rotate' },
-        { label: 'Core currency', value: 'Diamonds जमा करें' },
-        { label: 'Buy rule', value: '80%+ discount prioritize' },
-      ],
-      sections: [
-        { title: 'Rotating Events', lines: ['Lucky Shake, Shooting Range Treasure Hunt, Lucky Discount Shop, और Lucky Roulette weekly rotate होते हैं.', 'इन events के लिए diamonds steadily जमा करें.'] },
-        { title: 'Timed Events', lines: ['Z-coin items और 80%+ discount items खरीदें, electricity 제외.', 'Fuel और police badges discount न हो तब भी खरीदें.', 'Fuel और badges long-term में जरूरी रहते हैं.'] },
-        { title: 'Privilege Shop', lines: ['VIP level के अनुसार wood, food, fuel barrels, advanced teleports, wrenches, और police badges खरीदें.', 'Energy cores, 8-hour universal speedups, और universal orange fragments भी key buys हैं.', 'Z-coins और electricity सिर्फ shortage में खरीदें.', 'Diamonds 30,000 이하 हों तो item purchases skip करें.'] },
-        { title: 'Merit Shop', lines: ['Arena, Canyon Clash, और Capital Clash medals से orange gear selection boxes पहले खरीदें.', 'Medals काफी हों तो discounted energy cores तक खरीदें और बाकी skip करें.'] },
-        { title: 'Honor Badges', lines: ['Caravan, Exploration, और Hero Battlefield honor badges से refugee tickets, orange fragments, energy cores, और wrenches खरीदें.', 'Season heroes और hero gear तैयार कर रहे हों तो universal equipment fragments भी खरीदें.', 'Refugee tickets Tuesday orange diplomat recruitment के लिए बहुत जरूरी हैं.'] },
-      ],
-    },
-    powerOrder: {
-      file: 'Combat power growth order',
-      title: 'Combat Power बढ़ाने का क्रम',
-      kicker: 'Power Up',
-      desc: 'Heroes, tech और vehicle को अलग करके growth route',
-      summary: [
-        { label: 'Priority 1', value: 'Main squad heroes' },
-        { label: 'Priority 2', value: 'Tech और troop research' },
-        { label: 'Priority 3', value: 'Vehicle, gear और troops' },
-      ],
-      sections: [
-        { title: '1. Heroes', lines: ['Combat में squad heroes का level, stars, skills और gear troop stats को बहुत बढ़ाते हैं.', 'शुरुआत में resources बहुत heroes में न बांटें. पहले main squad के 5 heroes मजबूत करें.', 'Hero EXP, shards, skill books, और exclusive gear materials पहले main heroes पर लगाएं.', 'Type या faction synergy मिलाने से real fight efficiency भी बढ़ती है.'] },
-        { title: '2. Tech', lines: ['Tech permanent bonus देता है, इसलिए long-term value अच्छी है.', 'Main troop branch के attack, defense, HP को पहले बढ़ाएं, फिर march size और training speed लें.', 'Alliance tech donation daily करें, और संभव हो तो speedups/badges research day पर use करें.', 'Early game में हर branch बराबर करने से बेहतर है कि main branch पर focus करें.'] },
-        { title: '3. Vehicle', lines: ['Vehicle squad को extra stats देता है, इसलिए first squad vehicle पहले build करें.', 'Vehicle level, parts, और skill-like options main squad vehicle पर पहले लगाएं.', 'कई vehicles में बांटने से पहले एक combat vehicle पूरा करें.', 'Vehicle materials events और shops से जमा करें, लेकिन hero shards और core materials की कीमत पर overbuy न करें.'] },
-        { title: '4. Gear and Troops', lines: ['Hero gear main heroes पर पहले लगाएं, फिर grade और enhancement धीरे-धीरे बढ़ाएं.', 'HQ level-up stronger troop tiers और content unlock करता है, इसलिए resources हों तो 꾸준히 बढ़ाएं.', 'सबसे high tier troops train करें और fights के बाद hospital capacity का ध्यान रखें.', 'Drone, components, और general gear main squad के बाद second और third squad पर जाएं.'] },
-        { title: 'Recommended Order', lines: ['1. Main squad hero level, stars, skills पहले बढ़ाएं.', '2. Main troop branch tech और alliance tech daily stack करें.', '3. Main squad vehicle और parts upgrade करें.', '4. Hero gear, drone और components main squad के हिसाब से align करें.', '5. HQ level-up और troop training resources के अनुसार steadily करें.'] },
-      ],
-    },
-  },
+  hi: hindi.extra,
 };
 
 const workbookSummaries = {
@@ -569,11 +452,7 @@ const workbookSummaries = {
     { label: 'Flujo clave', value: 'Guarda objetos y úsalos el día correcto' },
     { label: 'Formato', value: 'Aviso a Día 6 en pestañas separadas' },
   ],
-  hi: [
-    { label: 'Weekly target', value: '3,000,000 points' },
-    { label: 'Core flow', value: 'Day별 items बचाकर सही दिन use करें' },
-    { label: 'Layout', value: 'Notice से Day 6 तक tabs में देखें' },
-  ],
+  hi: hindi.workbook,
 };
 
 const caravanCopy = {
@@ -640,27 +519,7 @@ const caravanCopy = {
     tableHint: 'Los valores mantienen la notación K/M de la tabla original.',
     columns: ['Etapa', 'Inicio', 'Final'],
   },
-  hi: {
-    title: 'Caravan Stage Selection',
-    formulaLabel: 'Stage चुनने का formula',
-    formula: 'आपकी power x 1.1 > table End',
-    formulaHint: 'Faction buff और advantage हो तभी लगभग 10% bonus मानकर 계산 करें.',
-    stepsTitle: 'Flow',
-    steps: [
-      { title: 'Faction build', text: 'हर faction के heroes set करें और best gear लगाएं.' },
-      { title: 'Power check', text: 'Caravan चुनने से पहले Arena defense में current power देखें.' },
-      { title: 'Stage pick', text: 'आपकी power x 1.1 End value से ऊपर हो तो वही stage चुनें.' },
-      { title: 'Power कम हो', text: 'President attack/defense ministers use करें, फिर भी मुश्किल हो तो एक stage नीचे जाएं.' },
-    ],
-    alerts: [
-      'Caravan actual troops से calculate करता है, इसलिए troops मरने के बाद Arena power से फर्क हो सकता है.',
-      'Attempt से पहले best troop type की max count भरें.',
-      'Quick battle VIP 8 या Bloody Battlefield stage 20 clear के बाद मिलता है.',
-    ],
-    tableTitle: 'Stage별 जरूरी power',
-    tableHint: 'Values source table की K/M notation 그대로 रखते हैं.',
-    columns: ['Stage', 'Start', 'End'],
-  },
+  hi: hindi.caravan,
 };
 
 const spanishDuel = {
@@ -674,16 +533,6 @@ const spanishDuel = {
   'Day 6': 'Día 6',
 };
 
-const hindiDuel = {
-  '※ 공지\nAnnouncement': 'Notice',
-  'Day 0': 'Day 0',
-  'Day 1': 'Day 1',
-  'Day 2': 'Day 2',
-  'Day 3': 'Day 3',
-  'Day 4': 'Day 4',
-  'Day 5': 'Day 5',
-  'Day 6': 'Day 6',
-};
 
 const displayNames = {
   '[연맹 대전 준비사항].xlsx': '연맹 대전 준비사항',
@@ -700,17 +549,18 @@ function displayName(name) {
 }
 
 function dayLabel(date, lang) {
+  if (lang === 'hi') return date.startsWith('Day ') ? date.replace('Day ', 'दिन ') : 'सूचना';
   if (date === '※ 공지\nAnnouncement') {
     return lang === 'ko' ? '공지' : lang === 'es' ? 'Aviso' : 'Notice';
   }
   if (lang === 'es') return spanishDuel[date] || date;
-  if (lang === 'hi') return hindiDuel[date] || date;
   return date;
 }
 
 function dayTitle(entry, lang) {
+  if (lang === 'hi') return hindiDays[entry.date].title;
   if (entry.date === '※ 공지\nAnnouncement') return { ko: '주간 목표와 사전 준비', en: 'Weekly target and preparation', es: 'Objetivo semanal y preparación', hi: 'साप्ताहिक लक्ष्य और तैयारी' }[lang];
-  const text = lang === 'ko' ? entry.ko : lang === 'es' ? spanishSummary(entry).join('\n') : lang === 'hi' ? hindiSummary(entry).join('\n') : entry.en || entry.ko;
+  const text = lang === 'ko' ? entry.ko : lang === 'es' ? spanishSummary(entry).join('\n') : entry.en || entry.ko;
   const first = String(text).split('\n').find(Boolean) || dayLabel(entry.date, lang);
   return first.replace(/[🔳■]/g, '').trim();
 }
@@ -727,20 +577,6 @@ function spanishSummary(entry) {
     'Day 6': ['Haz recompensas y comercio urbano con grado S.', 'Prioriza derrotar unidades de la alianza rival.', 'Como segunda prioridad, derrota unidades fuera de la alianza rival.'],
   };
   return map[entry.date] || [entry.ko || entry.en];
-}
-
-function hindiSummary(entry) {
-  const map = {
-    '※ 공지\nAnnouncement': ['Weekly target: 3,000,000 points.', 'हर day के items पहले से save करें.', 'Badges, contracts, orders और speedups को recommended day पर use करें.'],
-    'Day 0': ['Sunday को radar complete करें, reward claim न करें.', 'Preparation के लिए 8 empty slots छोड़ें.'],
-    'Day 1': ['Radar rewards claim करें.', 'Golden wrench, blueprints और outer module boxes use करें.', 'Deadline से पहले troops mines से निकालें.'],
-    'Day 2': ['जरूरत हो तो dispatch orders से S bounty quests करें.', 'Refugee tickets को 500씩 use करें.', 'Buildings को recommended time window में complete करें.'],
-    'Day 3': ['Trade contracts से S trucks करें.', 'Research speedups और badges use करें.', 'Alliance Recon research में invest करना अच्छा है.'],
-    'Day 4': ['Heroes recruit करें और shards से stars बढ़ाएं.', 'Orange skill books और gear materials use करें.', 'Radar rewards claim किए बिना prepare करें.'],
-    'Day 5': ['Radar rewards claim करें.', 'Buildings, research और training को time window में complete करें.', 'Construction, research और training speedups use करें.'],
-    'Day 6': ['Bounty और city trade S grade से करें.', 'Rival alliance units को defeat करना first priority है.', 'Second priority rival alliance के बाहर units defeat करना है.'],
-  };
-  return map[entry.date] || [entry.en || entry.ko];
 }
 
 const fileTabs = [
@@ -786,17 +622,7 @@ const sectionLabels = {
     selectRule: 'Elegir regla',
     selectEvent: 'Elegir evento',
   },
-  hi: {
-    duel: { kicker: 'Weekly', title: 'Alliance Duel', desc: 'Daily preparation और score routine' },
-    caravan: { kicker: 'Power', title: 'Caravan', desc: 'Stage formula और power table' },
-    rules: { kicker: 'Battle', title: 'Battle Rules', desc: 'Plunder और Kill Day essentials' },
-    events: { kicker: 'Event', title: 'Events', desc: 'Zombie, Tyrant और Canyon timing' },
-    daily: { kicker: 'Daily', title: 'Daily Quests', desc: 'हर दिन देखने वाला checklist' },
-    popular: { kicker: 'Popular', title: 'Popular Events', desc: 'Diamond और shop purchase standards' },
-    open: 'खोलें',
-    selectRule: 'Rule चुनें',
-    selectEvent: 'Event चुनें',
-  },
+  hi: hindi.labels,
 };
 
 const featuredSections = [
@@ -887,7 +713,7 @@ function hqRowsForLang(lang) {
     wood,
     coin,
     steel,
-    `Lv.${buildingLevel} ${buildingNames[lang][buildingKey]}`,
+    `${lang === 'hi' ? 'स्तर ' : 'Lv.'}${buildingLevel} ${buildingNames[lang][buildingKey]}`,
   ]);
 }
 
@@ -913,7 +739,7 @@ function HqUpgradeView({ lang }) {
       <SummaryStrip items={copy.summary} />
       <div className="hq-guide-layout">
         <article className="guide-section-card hq-note-card">
-          <h3>{lang === 'ko' ? '확인 포인트' : lang === 'es' ? 'Puntos clave' : lang === 'hi' ? 'Checkpoints' : 'Checkpoints'}</h3>
+          <h3>{lang === 'ko' ? '확인 포인트' : lang === 'es' ? 'Puntos clave' : lang === 'hi' ? 'मुख्य बातें' : 'Checkpoints'}</h3>
           <ul>
             {copy.notes.map((line) => <li key={line}>{line}</li>)}
           </ul>
@@ -924,7 +750,7 @@ function HqUpgradeView({ lang }) {
               <p className="section-kicker">{copy.kicker}</p>
               <h3>{copy.hqTitle}</h3>
             </div>
-            <span>Lv.16 - Lv.35</span>
+            <span>{lang === 'hi' ? 'स्तर 16 - 35' : 'Lv.16 - Lv.35'}</span>
           </div>
           <GuideTable columns={copy.columns} rows={hqRowsForLang(lang)} />
         </section>
@@ -934,7 +760,7 @@ function HqUpgradeView({ lang }) {
               <p className="section-kicker">{copy.kicker}</p>
               <h3>{copy.prereqTitle}</h3>
             </div>
-            <span>5 Star</span>
+            <span>{lang === 'hi' ? '5 सितारे' : '5 Star'}</span>
           </div>
           <GuideTable columns={copy.prereqColumns} rows={prerequisiteRowsForLang(lang)} />
         </section>
@@ -968,7 +794,7 @@ function DuelGuide({ lang }) {
             {lang === 'ko' && <TextBlock text={activeEntry.ko} />}
             {lang === 'en' && <TextBlock text={activeEntry.en || activeEntry.ko} />}
             {lang === 'es' && <ul className="spanish-list">{spanishSummary(activeEntry).map((line) => <li key={line}>{line}</li>)}</ul>}
-            {lang === 'hi' && <ul className="spanish-list">{hindiSummary(activeEntry).map((line) => <li key={line}>{line}</li>)}</ul>}
+            {lang === 'hi' && <TextBlock text={hindiDays[activeEntry.date].text} />}
           </div>
         </article>
       </div>
@@ -1011,7 +837,7 @@ function Caravan({ lang }) {
       <section className="alert-panel" hidden={tab !== 'steps'}>
         <div className="panel-title">
           <AlertTriangle size={19} />
-          <h3>{lang === 'ko' ? '주의사항' : lang === 'es' ? 'Avisos' : lang === 'hi' ? 'Warnings' : 'Warnings'}</h3>
+          <h3>{lang === 'ko' ? '주의사항' : lang === 'es' ? 'Avisos' : lang === 'hi' ? 'सावधानियां' : 'Warnings'}</h3>
         </div>
         <ul>
           {copy.alerts.map((line) => <li key={line}>{line}</li>)}
@@ -1023,7 +849,7 @@ function Caravan({ lang }) {
             <p className="section-kicker">{copy.tableHint}</p>
             <h3>{copy.tableTitle}</h3>
           </div>
-          <span>{data.levels.length} Levels</span>
+          <span>{data.levels.length} {lang === 'hi' ? 'चरण' : 'Levels'}</span>
         </div>
         <div className="table-wrap compact">
         <table>
@@ -1044,7 +870,7 @@ function WorkbookView({ lang }) {
       <div className="section-head">
         <div>
           <p className="section-kicker">{displayName(workbook.source)}</p>
-          <h2>{lang === 'ko' ? '가이드 항목' : lang === 'es' ? 'Secciones de guía' : lang === 'hi' ? 'Guide Sections' : 'Guide Sections'}</h2>
+          <h2>{lang === 'ko' ? '가이드 항목' : lang === 'es' ? 'Secciones de guía' : lang === 'hi' ? 'मार्गदर्शिका के विषय' : 'Guide Sections'}</h2>
         </div>
       </div>
       <DuelGuide lang={lang} />
@@ -1303,7 +1129,7 @@ export default function App() {
             <ArrowLeft size={18} />
             <span>{copy.home}</span>
           </button>
-          <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>Guide Hub</small></div>
+          <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
           <div className="lang-switch" aria-label="Language">
             <Languages size={16} />
             {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
@@ -1328,9 +1154,9 @@ export default function App() {
   }
 
   return (
-    <main className="home-page" style={{ '--page-bg': 'url("brand/background.png")' }}>
+    <main className="home-page" lang={lang} style={{ '--page-bg': 'url("brand/background.png")' }}>
       <nav className="topbar">
-        <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>Guide Hub</small></div>
+        <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
         <div className="lang-switch" aria-label="Language">
           <Languages size={16} />
           {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
