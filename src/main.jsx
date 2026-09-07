@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 import { hindi, hindiDays } from './hindi.js';
+import { popularEvents, eventUi } from './popular-events.js';
 
 const hqUpgradeRows = [
   ['16 -> 17', '18.2M', '18.2M', '3.5M', '-', '16', 'labWall'],
@@ -895,6 +896,9 @@ function CaravanView({ lang }) {
 function ExtraGuideView({ lang, id }) {
   const guide = extraGuides[lang][id];
   const [activeIndex, setActiveIndex] = useState(0);
+  const sections = id === 'popular' ? [...popularEvents[lang], ...guide.sections.slice(1)] : guide.sections;
+  const active = sections[activeIndex] || sections[0];
+  const labels = eventUi[lang];
   return (
     <section className="content-block">
       <div className="section-head">
@@ -904,9 +908,29 @@ function ExtraGuideView({ lang, id }) {
         </div>
       </div>
       <SummaryStrip items={guide.summary} />
-      <SegmentedTabs label={guide.title} value={activeIndex} onChange={setActiveIndex} items={guide.sections.map((section, index) => ({ id: index, label: section.title, icon: ListChecks }))} />
+      <SegmentedTabs label={guide.title} value={activeIndex} onChange={setActiveIndex} items={sections.map((section, index) => ({ id: index, label: section.title, icon: ListChecks }))} />
+      {active.budget ? <article className="event-guide">
+        <h3>{active.title}</h3>
+        <p className="text-line">{active.intro}</p>
+        <section className="reading-section">
+          <h4>{labels.budget}</h4>
+          <GuideTable columns={labels.columns} rows={active.budget} />
+        </section>
+        <section className="reading-section">
+          <h4>{labels.rewards}</h4>
+          {active.rewards.map(line => <p className="bullet-line" key={line}>{line}</p>)}
+        </section>
+        <section className="reading-section">
+          <h4>{labels.strategy}</h4>
+          {active.strategy.map(line => <p className="bullet-line" key={line}>{line}</p>)}
+        </section>
+        <footer className="event-sources">
+          <p>{labels.note}</p>
+          <div><span>{labels.checked}</span><span>{labels.sources}: {active.sources.map((url, index) => <a href={url} key={url} target="_blank" rel="noopener noreferrer">{labels.source} {index + 1}</a>)}</span></div>
+        </footer>
+      </article> :
       <div className="guide-section-grid">
-        {guide.sections.filter((_, index) => index === activeIndex).map((section) => (
+        {[active].map((section) => (
           <article className="guide-section-card" key={section.title}>
             <h3>{section.title}</h3>
             <ul>
@@ -915,6 +939,7 @@ function ExtraGuideView({ lang, id }) {
           </article>
         ))}
       </div>
+      }
     </section>
   );
 }

@@ -225,3 +225,16 @@
 .detail-page button:focus-visible { outline-color: #ff939c; }
 .detail-page .content-block > .segmented-wrap ~ .section-head { display: none; }
 .detail-page .content > .content-block:not(:first-child) { border: 0; border-radius: 0; }
+.detail-page .event-guide > h3 { color: #f1f2f3; font-size: 22px; line-height: 1.6; }
+.detail-page .event-guide .table-wrap { max-height: none; }
+.detail-page .event-guide table { table-layout: fixed; }
+.detail-page .event-guide th, .detail-page .event-guide td { white-space: normal; min-width: 0; line-height: 1.8; overflow-wrap: anywhere; word-break: normal; }
+.detail-page .event-guide th:first-child { width: 34%; }
+.detail-page .event-sources { padding-top: 18px; border-top: 1px solid #34363b; color: #aeb1b9; font-size: 12px; line-height: 1.8; }
+.event-sources p { margin: 0 0 12px; }
+.event-sources > div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.event-sources a { display: inline-block; color: #91d4bc; margin-left: 10px; text-underline-offset: 3px; }
+@media (max-width: 620px) {
+  .detail-page .event-guide th, .detail-page .event-guide td { padding: 12px 10px; font-size: 13px; }
+  .detail-page .event-guide th:first-child { width: 35%; }
+}
