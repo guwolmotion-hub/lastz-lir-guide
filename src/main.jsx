@@ -190,19 +190,19 @@ const notices = {
     { file: '[토요일 킬데이 규칙].txt', title: '토요일 킬데이 규칙', tone: 'danger', icon: Shield, body: ['우리 연맹은 강한 상대의 표적이 되기 쉬우므로 실드 사용이 필수입니다.', '리셋 후 빠르게 상대 서버를 약탈하고 실드를 사용해 복귀하세요.', '약탈하지 않는 인원은 리셋 후 바로 실드를 사용하세요.', '토요일 리셋 이후 실드가 없으면 사전 통보 없이 강퇴 처리되며, 추후 복귀는 가능합니다.', '같은 일이 3번 반복되면 영구 제명됩니다.'] },
     { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['참여 인원: 약탈에 참여할 수 있는 인원은 제한이 없습니다.', '제로잉 절대 금지: 상대 도시의 병력이 거의 남지 않을 때까지 반복 공격하지 마세요.', 'NAP 공격 금지: NAP 연맹은 서로 공격할 수 없습니다.', '아카데미 공격 기준: 아카데미 연맹은 공격할 수 있습니다. 단, 닉네임에 Farm이 포함된 아카데미 계정은 공격 금지입니다.', '위반 시 조치: 적발되면 경고 없이 강퇴 처리됩니다.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: '좀비 공성 및 좀비 폭군 이벤트', tone: 'info', icon: CalendarDays, body: ['Lir은 한국인 멤버 비율이 높은 연맹입니다.', '대부분 이벤트 시작 시간은 아포칼립스 기준 10:00입니다.'] },
-    { file: '[협곡 쟁탈전].txt', title: '협곡 쟁탈전', tone: 'info', icon: Users, body: ['협곡 쟁탈전은 아포칼립스 시간 기준 23:00에 진행됩니다.', '참여 인원은 연맹전 개인 점수와 전투력 기준의 참여 희망자 중 랜덤으로 선정됩니다.'] },
+    { file: '[협곡 쟁탈전].txt', title: '협곡 쟁탈전', tone: 'info', icon: Users, body: ['협곡쟁탈전 1팀: 아포칼립스 시간 23:00', '협곡쟁탈전 2팀: 아포칼립스 시간 09:00', '참여 인원은 연맹전 개인 점수와 전투력 기준의 참여 희망자 중 랜덤으로 선정됩니다.'] },
   ],
   en: [
     { file: '[토요일 킬데이 규칙].txt', title: 'Saturday Kill Day Rules', tone: 'danger', icon: Shield, body: ['Our alliance is often targeted by stronger enemies, so using a shield is mandatory.', 'After reset, plunder the enemy server quickly, activate your shield, and return.', 'Members who do not plunder should activate a shield immediately after reset.', 'If you have no shield after Saturday reset, you may be removed without prior notice. Rejoining later is possible.', 'Repeating the same issue three times results in permanent expulsion.'] },
     { file: '[약탈 규칙].txt', title: 'Plunder Rules', tone: 'warning', icon: Swords, body: ['There is no limit on the number of plunder participants.', 'Zeroing is strictly forbidden. Do not repeatedly attack a city until its troops are nearly wiped out.', 'NAP alliances cannot attack each other.', 'Academy alliances may be attacked, but academy accounts with Farm in the nickname must not be attacked.', 'If a violation is confirmed, the member will be removed without warning.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Zombie Siege and Zombie Tyrant Event', tone: 'info', icon: CalendarDays, body: ['Lir has a high ratio of Korean members.', 'Most events start at 10:00 Apocalypse Time.'] },
-    { file: '[협곡 쟁탈전].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash is held at 23:00 Apocalypse Time.', 'Participants are randomly selected from applicants based on Alliance Duel personal score and combat power.'] },
+    { file: '[협곡 쟁탈전].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash Team 1: 23:00 Apocalypse Time.', 'Canyon Clash Team 2: 09:00 Apocalypse Time.', 'Participants are randomly selected from applicants based on Alliance Duel personal score and combat power.'] },
   ],
   es: [
     { file: '[토요일 킬데이 규칙].txt', title: 'Reglas del Día de bajas del sábado', tone: 'danger', icon: Shield, body: ['Nuestra alianza suele ser objetivo de rivales fuertes, por eso el escudo es obligatorio.', 'Después del reinicio, saquea rápidamente el servidor enemigo, activa el escudo y vuelve.', 'Quienes no saqueen deben activar el escudo inmediatamente después del reinicio.', 'Si no tienes escudo después del reinicio del sábado, puedes ser expulsado sin aviso previo. Es posible volver más adelante.', 'Si el mismo problema se repite tres veces, la expulsión será permanente.'] },
     { file: '[약탈 규칙].txt', title: 'Reglas de saqueo', tone: 'warning', icon: Swords, body: ['No hay límite de participantes para el saqueo.', 'El zeroing está estrictamente prohibido. No ataques repetidamente una ciudad hasta dejar sus tropas casi en cero.', 'Las alianzas NAP no pueden atacarse entre sí.', 'Las alianzas academia pueden ser atacadas, pero las cuentas de academia con Farm en el nombre no deben ser atacadas.', 'Si se confirma una infracción, el miembro será expulsado sin advertencia.'] },
     { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['Lir tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
-    { file: '[협곡 쟁탈전].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['La Disputa del Cañón se realiza a las 23:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
+    { file: '[협곡 쟁탈전].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['Disputa del Cañón, equipo 1: 23:00, hora de Apocalipsis.', 'Disputa del Cañón, equipo 2: 09:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
   ],
   hi: hindi.notices.map((item, index) => ({ ...item, file: ['[토요일 킬데이 규칙].txt', '[약탈 규칙].txt', '[좀비 공성 및 좀비 폭군 이벤트].txt', '[협곡 쟁탈전].txt'][index], icon: [Shield, Swords, CalendarDays, Users][index], tone: ['danger', 'warning', 'info', 'info'][index] })),
 };
@@ -225,7 +225,7 @@ const noticeSummaries = {
       { label: '주요 시작', value: '대부분 10:00' },
     ],
     '[협곡 쟁탈전].txt': [
-      { label: '진행 시간', value: '아포칼립스 23:00' },
+      { label: '아포칼립스 시간', value: '1팀 23:00 / 2팀 09:00' },
       { label: '선정 기준', value: '연맹전 개인 점수' },
       { label: '선정 방식', value: '희망자 중 랜덤' },
     ],
@@ -247,7 +247,7 @@ const noticeSummaries = {
       { label: 'Main start', value: 'Mostly 10:00' },
     ],
     '[협곡 쟁탈전].txt': [
-      { label: 'Event time', value: '23:00 Apocalypse' },
+      { label: 'Apocalypse Time', value: 'Team 1 23:00 / Team 2 09:00' },
       { label: 'Selection', value: 'Alliance Duel personal score' },
       { label: 'Method', value: 'Random among applicants' },
     ],
@@ -269,7 +269,7 @@ const noticeSummaries = {
       { label: 'Inicio', value: 'Casi siempre 10:00' },
     ],
     '[협곡 쟁탈전].txt': [
-      { label: 'Horario', value: '23:00 Apocalipsis' },
+      { label: 'Hora de Apocalipsis', value: 'Equipo 1 23:00 / Equipo 2 09:00' },
       { label: 'Criterio', value: 'Puntos personales del Duelo' },
       { label: 'Método', value: 'Aleatorio entre solicitantes' },
     ],
@@ -296,8 +296,8 @@ const extraGuides = {
     },
     popular: {
       file: '[필수 인기 이벤트].txt',
-      title: '필수 인기 이벤트',
-      kicker: 'Popular',
+      title: '아이템 이벤트',
+      kicker: 'Items',
       summary: [
         { label: '로테이션', value: '4개 이벤트가 주간 순환' },
         { label: '핵심 재화', value: '다이아를 꾸준히 모으기' },
@@ -348,8 +348,8 @@ const extraGuides = {
     },
     popular: {
       file: '[필수 인기 이벤트].txt',
-      title: 'Essential Popular Events',
-      kicker: 'Popular',
+      title: 'Item Events',
+      kicker: 'Items',
       summary: [
         { label: 'Rotation', value: '4 events rotate weekly' },
         { label: 'Core currency', value: 'Save diamonds steadily' },
@@ -400,8 +400,8 @@ const extraGuides = {
     },
     popular: {
       file: '[필수 인기 이벤트].txt',
-      title: 'Eventos populares esenciales',
-      kicker: 'Popular',
+      title: 'Eventos de objetos',
+      kicker: 'Items',
       summary: [
         { label: 'Rotación', value: '4 eventos semanales' },
         { label: 'Recurso clave', value: 'Ahorrar diamantes' },
@@ -596,7 +596,7 @@ const sectionLabels = {
     rules: { kicker: 'Battle', title: '전투 규칙', desc: '약탈과 킬데이 필수 규칙' },
     events: { kicker: 'Event', title: '이벤트', desc: '좀비 공성, 폭군, 협곡 일정' },
     daily: { kicker: 'Daily', title: '매일 퀘스트', desc: '매일 확인할 필수 체크리스트' },
-    popular: { kicker: 'Popular', title: '인기 이벤트', desc: '다이아와 상점 구매 기준' },
+    popular: { kicker: 'Items', title: '아이템 이벤트', desc: '다이아와 상점 구매 기준' },
     open: '열기',
     selectRule: '규칙 선택',
     selectEvent: '이벤트 선택',
@@ -607,7 +607,7 @@ const sectionLabels = {
     rules: { kicker: 'Battle', title: 'Battle Rules', desc: 'Plunder and Kill Day essentials' },
     events: { kicker: 'Event', title: 'Events', desc: 'Zombie, Tyrant, and Canyon timing' },
     daily: { kicker: 'Daily', title: 'Daily Quests', desc: 'Essential checklist to review every day' },
-    popular: { kicker: 'Popular', title: 'Popular Events', desc: 'Diamond and shop purchase standards' },
+    popular: { kicker: 'Items', title: 'Item Events', desc: 'Diamond and shop purchase standards' },
     open: 'Open',
     selectRule: 'Select Rule',
     selectEvent: 'Select Event',
@@ -618,7 +618,7 @@ const sectionLabels = {
     rules: { kicker: 'Battle', title: 'Reglas', desc: 'Saqueo y Día de bajas' },
     events: { kicker: 'Event', title: 'Eventos', desc: 'Zombis, Tirano y Cañón' },
     daily: { kicker: 'Daily', title: 'Misiones diarias', desc: 'Lista esencial para revisar a diario' },
-    popular: { kicker: 'Popular', title: 'Eventos populares', desc: 'Diamantes y reglas de compra' },
+    popular: { kicker: 'Items', title: 'Eventos de objetos', desc: 'Diamantes y reglas de compra' },
     open: 'Abrir',
     selectRule: 'Elegir regla',
     selectEvent: 'Elegir evento',
