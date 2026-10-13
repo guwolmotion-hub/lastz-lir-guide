@@ -37,7 +37,12 @@ try {
       assert.equal(layout.overflow, false, width + '/' + lang + ': page overflow');
       cardHeight ??= layout.height;
       assert.equal(layout.height, cardHeight, 'Translation resized cards');
-      await page.locator('.feature-card').last().scrollIntoViewIfNeeded();
+      await page.locator('.feature-card').last().evaluate(card => card.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' }));
+      await page.waitForFunction(() => {
+        const card = document.querySelector('.feature-card:last-child').getBoundingClientRect();
+        const track = document.querySelector('.feature-tabs').getBoundingClientRect();
+        return Math.min(card.right, track.right) - Math.max(card.left, track.left) > card.width * .9;
+      });
       if (lang === 'KO' && [390, 1440].includes(width)) await page.screenshot({ path: 'qa/power-card-' + width + '.png', fullPage: true });
       await page.locator('.feature-card').last().click();
       const tabs = page.locator('.segmented-tabs button');
