@@ -126,7 +126,7 @@ body::before {
   inset: 0;
   background:
     linear-gradient(90deg, rgba(5, 8, 12, .74) 0%, rgba(5, 8, 12, .38) 32%, rgba(5, 8, 12, .1) 58%, rgba(5, 8, 12, .46) 100%),
-    linear-gradient(180deg, rgba(5, 8, 12, .18), rgba(5, 8, 12, .04) 42%, rgba(5, 8, 12, .62) 100%);
+    linear-gradient(180deg, rgba(5, 8, 12, .58), rgba(5, 8, 12, .12) 42%, rgba(5, 8, 12, .68) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -171,6 +171,7 @@ body::before {
   width: min(54vw, 620px);
   padding-top: 20px;
   text-align: left;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, .85);
 }
 .lobby-copy strong {
   display: block;
@@ -321,49 +322,46 @@ body::before {
   font-size: 12px;
   font-weight: 1000;
 }
-.feature-kicker {
+.feature-copy {
   position: absolute;
   left: 24px;
-  bottom: 136px;
+  right: 24px;
+  bottom: 22px;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.feature-kicker {
   color: #ff6d75;
   font-size: 12px;
   font-weight: 1000;
   text-transform: uppercase;
 }
 .feature-card strong {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 76px;
-  z-index: 3;
+  display: block;
+  width: 100%;
   color: #fff;
-  font-size: clamp(26px, 3vw, 38px);
-  line-height: .95;
+  font-size: 30px;
+  line-height: 1.2;
   font-weight: 1000;
   text-transform: uppercase;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 .feature-card em {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 46px;
-  z-index: 3;
+  display: block;
+  width: 100%;
   color: rgba(238, 243, 248, .9);
   font-size: 13px;
-  line-height: 1.25;
+  line-height: 1.5;
   font-style: normal;
   font-weight: 750;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 .feature-action {
-  position: absolute;
-  left: 24px;
-  bottom: 20px;
-  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -997,8 +995,7 @@ tbody tr:hover td { background: #eef4f8; }
   .feature-card.active:hover,
   .feature-card:nth-child(even).active,
   .feature-card:nth-child(even).active:hover { transform: scale(1.035) translateY(-4px); }
-  .feature-card strong { font-size: 28px; line-height: 1.05; }
-  .feature-card em { line-height: 1.35; }
+  .feature-card strong { font-size: 26px; line-height: 1.25; }
   .summary-item strong { font-size: 16px; line-height: 1.42; }
   .lobby-footer {
     margin-top: 30px;

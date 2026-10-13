@@ -1164,7 +1164,7 @@ export default function App() {
             <ArrowLeft size={18} />
             <span>{copy.home}</span>
           </button>
-          <div className="brand"><img src="brand/logo-nova.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
+          <div className="brand"><img src="brand/logo-gold.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
           <div className="lang-switch" aria-label="Language">
             <Languages size={16} />
             {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
@@ -1189,21 +1189,21 @@ export default function App() {
   }
 
   return (
-    <main className="home-page" lang={lang} style={{ '--page-bg': 'url("brand/background.png")' }}>
+    <main className="home-page" lang={lang} style={{ '--page-bg': 'url("brand/background-v2.png")' }}>
       <nav className="topbar">
-        <div className="brand"><img src="brand/logo-nova.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
+        <div className="brand"><img src="brand/logo-gold.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
         <div className="lang-switch" aria-label="Language">
           <Languages size={16} />
           {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
         </div>
       </nav>
       <section className="lobby">
-        <div className="lobby-frame" style={{ '--hero-bg': 'url("brand/background.png")' }}>
-          <img className="lobby-bg" src="brand/background.png" alt="" aria-hidden="true" />
+        <div className="lobby-frame" style={{ '--hero-bg': 'url("brand/background-v2.png")' }}>
+          <img className="lobby-bg" src="brand/background-v2.png" alt="" aria-hidden="true" />
           <div className="lobby-head">
             <div className="lobby-title-mark">
               <p>{copy.eyebrow}</p>
-              <img className="lobby-logo" src="brand/logo-nova.png" alt={copy.lobbyTitle} />
+              <img className="lobby-logo" src="brand/logo-gold.png" alt={copy.lobbyTitle} />
             </div>
             <div className="lobby-copy">
               <strong>{copy.lobbySubtitle}</strong>
@@ -1235,10 +1235,12 @@ export default function App() {
                   <button className={`feature-card ${activeCardIndex === index ? 'active' : ''}`} onClick={() => handleSectionChange(id)} key={id}>
                     <img src={image} alt="" />
                     <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
-                    <span className="feature-kicker">{item.kicker}</span>
-                    <strong>{item.title}</strong>
-                    <em>{item.desc}</em>
-                    <span className="feature-action"><Icon size={17} /> {sectionCopy.open}</span>
+                    <span className="feature-copy">
+                      <span className="feature-kicker">{item.kicker}</span>
+                      <strong>{item.title}</strong>
+                      <em>{item.desc}</em>
+                      <span className="feature-action"><Icon size={17} /> {sectionCopy.open}</span>
+                    </span>
                   </button>
                 );
               })}
