@@ -2,7 +2,7 @@ import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
 const browser = await chromium.launch({ ...(process.env.GUIDE_BROWSER_EXECUTABLE ? { executablePath: process.env.GUIDE_BROWSER_EXECUTABLE } : { channel: 'msedge' }), headless: true });
-const allowed = new Set(['Lir', 'Last', 'LAST', 'Z', 'NAP', 'Farm', 'VIP', 'S', 'A', 'K', 'M', 'G', 'KO', 'EN', 'ES', 'HI']);
+const allowed = new Set(['NoVa', 'Last', 'LAST', 'Z', 'NAP', 'Farm', 'VIP', 'S', 'A', 'K', 'M', 'G', 'KO', 'EN', 'ES', 'HI']);
 let checks = 0;
 try {
   for (const width of [390, 1440]) {

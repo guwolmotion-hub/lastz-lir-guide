@@ -1,6 +1,6 @@
 export const season2 = {
   ko: {
-    title: '시즌2 시작 가이드', kicker: '시즌 2', file: '시즌2',
+    title: '시즌2 준비', kicker: '시즌 2', file: '시즌2',
     desc: '첫날 준비부터 건물 성장과 매일 루틴까지',
     summary: [
       { label: '성장 중심', value: '의약 연구소 + 디지털 온실' },
@@ -54,7 +54,7 @@ export const season2 = {
     ],
   },
   en: {
-    title: 'Season 2 Starter Guide', kicker: 'Season 2', file: 'Season 2',
+    title: 'Season 2 Preparation', kicker: 'Season 2', file: 'Season 2',
     desc: 'First-day preparation, building growth and a daily routine',
     summary: [
       { label: 'Growth focus', value: 'Medical Lab + Digital Greenhouse' },
@@ -108,7 +108,7 @@ export const season2 = {
     ],
   },
   es: {
-    title: 'Guía inicial de temporada 2', kicker: 'Temporada 2', file: 'Temporada 2',
+    title: 'Preparación de temporada 2', kicker: 'Temporada 2', file: 'Temporada 2',
     desc: 'Preparación del primer día, mejora de edificios y rutina diaria',
     summary: [
       { label: 'Prioridad', value: 'Laboratorio médico + Invernadero digital' },
@@ -162,7 +162,7 @@ export const season2 = {
     ],
   },
   hi: {
-    title: 'सीजन 2 की शुरुआती मार्गदर्शिका', kicker: 'सीजन 2', file: 'सीजन 2',
+    title: 'सीजन 2 की तैयारी', kicker: 'सीजन 2', file: 'सीजन 2',
     desc: 'पहले दिन की तैयारी, भवन विकास और दैनिक क्रम',
     summary: [
       { label: 'विकास का केंद्र', value: 'चिकित्सा प्रयोगशाला + डिजिटल ग्रीनहाउस' },

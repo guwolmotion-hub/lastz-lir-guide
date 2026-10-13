@@ -33,7 +33,7 @@ const copy = {
       intro: '쿠폰으로 할인율을 뽑고, 열린 상점에서 다이아로 물품을 구매합니다. 아래 금액은 쿠폰 가격이 아닌 물품 구매 예산입니다.',
       budget: [['9회 상점 방문 참고', '평균 약 20,000 / 여유분 포함 26,000–28,000'], ['18회 상점 방문 참고', '평균 약 41,000 / 여유분 포함 49,000–52,000'], ['적용 조건', '매 회차 경찰휘장+연료를 구매한 플레이어 추산']],
       rewards: ['경찰휘장, 연료, 건축·연구 가속 등을 구매할 수 있습니다. 휘장은 연구 진행에 필요한 만큼 우선 확보하세요.'],
-      strategy: ['5·9·18·32번째의 90% 할인 보장 조건을 게임 규칙에서 확인하세요. 쿠폰과 구매용 다이아를 함께 준비해야 합니다.', 'Lir 기존 기준인 80% 이상 할인 우선 원칙을 적용하면 구매액이 달라집니다. 90% 할인에서 필요한 물품만 구매하는 예산과 위 추산을 혼동하지 마세요.', '전기 제외, 연료·휘장 예외 등 기존 연맹 구매 기준은 다른 상점 탭에 유지했습니다.'],
+      strategy: ['5·9·18·32번째의 90% 할인 보장 조건을 게임 규칙에서 확인하세요. 쿠폰과 구매용 다이아를 함께 준비해야 합니다.', 'NoVa 기존 기준인 80% 이상 할인 우선 원칙을 적용하면 구매액이 달라집니다. 90% 할인에서 필요한 물품만 구매하는 예산과 위 추산을 혼동하지 마세요.', '전기 제외, 연료·휘장 예외 등 기존 연맹 구매 기준은 다른 상점 탭에 유지했습니다.'],
     },
     {
       title: '행운룰렛',
@@ -60,7 +60,7 @@ const copy = {
       title: 'Lucky Discounter', intro: 'Coupons reveal a discount; diamonds buy stock in the resulting shop. These budgets cover purchases, not coupon costs.',
       budget: [['9 shop visits: reference', 'About 20,000 average / 26,000–28,000 with buffer'], ['18 shop visits: reference', 'About 41,000 average / 49,000–52,000 with buffer'], ['Assumption', 'Player estimate: buy badges and fuel at every visit']],
       rewards: ['Buy badges, fuel and construction/research speedups. Prioritize badges needed for your research.'],
-      strategy: ['Check the guaranteed 90% discounts at draws 5, 9, 18 and 32. Prepare both coupons and purchase funds.', 'Lir prioritizes discounts of at least 80%. Buying only selected 90%-off items will cost differently from the estimates above.', 'Existing alliance exceptions for fuel and badges, and the electricity exclusion, remain in the shop tabs.'],
+      strategy: ['Check the guaranteed 90% discounts at draws 5, 9, 18 and 32. Prepare both coupons and purchase funds.', 'NoVa prioritizes discounts of at least 80%. Buying only selected 90%-off items will cost differently from the estimates above.', 'Existing alliance exceptions for fuel and badges, and the electricity exclusion, remain in the shop tabs.'],
     },
     {
       title: 'Lucky Wheel', intro: 'A circular wheel with selectable rewards and cumulative-draw chests, distinct from the capsule event.',
@@ -86,7 +86,7 @@ const copy = {
       title: 'Tienda de descuentos', intro: 'Los cupones revelan descuentos; los diamantes pagan los productos. El presupuesto no incluye comprar cupones.',
       budget: [['Referencia: 9 visitas', 'Media de 20,000 / margen de 26,000–28,000'], ['Referencia: 18 visitas', 'Media de 41,000 / margen de 49,000–52,000'], ['Supuesto', 'Estimación de jugadores: insignias y combustible en cada visita']],
       rewards: ['Insignias, combustible y aceleradores de construcción o investigación. Prioriza las insignias que necesitas.'],
-      strategy: ['Comprueba las garantías del 90% en los intentos 5, 9, 18 y 32. Reserva cupones y diamantes.', 'Lir prioriza descuentos del 80% o más. Comprar solo lo necesario al 90% no cuesta lo mismo que el plan estimado.', 'Las excepciones de combustible e insignias y la exclusión de electricidad siguen en las otras pestañas de tiendas.'],
+      strategy: ['Comprueba las garantías del 90% en los intentos 5, 9, 18 y 32. Reserva cupones y diamantes.', 'NoVa prioriza descuentos del 80% o más. Comprar solo lo necesario al 90% no cuesta lo mismo que el plan estimado.', 'Las excepciones de combustible e insignias y la exclusión de electricidad siguen en las otras pestañas de tiendas.'],
     },
     {
       title: 'Ruleta de la suerte', intro: 'Ruleta circular con premios seleccionables y cofres por intentos acumulados. No es el sorteo de cápsulas.',
@@ -112,7 +112,7 @@ const copy = {
       title: 'भाग्यशाली छूट की दुकान', intro: 'कूपन से छूट निकलती है और हीरों से सामान खरीदा जाता है। नीचे सामान का बजट है, कूपन की कीमत नहीं।',
       budget: [['9 बार खरीदारी का संदर्भ', 'औसत लगभग 20,000 / अतिरिक्त गुंजाइश सहित 26,000–28,000'], ['18 बार खरीदारी का संदर्भ', 'औसत लगभग 41,000 / अतिरिक्त गुंजाइश सहित 49,000–52,000'], ['गणना की शर्त', 'खिलाड़ी अनुमान: हर बार पुलिस बैज और ईंधन खरीदना']],
       rewards: ['पुलिस बैज, ईंधन तथा निर्माण और शोध की गति-वृद्धि खरीद सकते हैं। आवश्यक शोध के बैज पहले लें।'],
-      strategy: ['5वें, 9वें, 18वें और 32वें प्रयास की 90% छूट की गारंटी खेल में जांचें। कूपन और खरीद के हीरे दोनों बचाएं।', 'Lir में कम से कम 80% छूट को प्राथमिकता है। केवल जरूरी 90% छूट का सामान खरीदने का खर्च ऊपर के अनुमान से अलग होगा।', 'ईंधन व बैज के अपवाद और बिजली न खरीदने के पुराने नियम बाकी दुकान विषयों में मौजूद हैं।'],
+      strategy: ['5वें, 9वें, 18वें और 32वें प्रयास की 90% छूट की गारंटी खेल में जांचें। कूपन और खरीद के हीरे दोनों बचाएं।', 'NoVa में कम से कम 80% छूट को प्राथमिकता है। केवल जरूरी 90% छूट का सामान खरीदने का खर्च ऊपर के अनुमान से अलग होगा।', 'ईंधन व बैज के अपवाद और बिजली न खरीदने के पुराने नियम बाकी दुकान विषयों में मौजूद हैं।'],
     },
     {
       title: 'भाग्यशाली रूलेट', intro: 'गोल पहिए में चुने हुए पुरस्कार और कुल प्रयासों के बक्से मिलते हैं। इसे कैप्सूल आयोजन से अलग समझें।',

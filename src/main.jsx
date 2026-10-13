@@ -134,8 +134,8 @@ const hqUpgradeCopy = {
 const ui = {
   ko: {
     eyebrow: 'Last Z 737 Server',
-    title: 'Lir 신규 연맹원 가이드',
-    lobbyTitle: 'Lir',
+    title: 'NoVa 신규 연맹원 가이드',
+    lobbyTitle: 'NoVa',
     lobbySubtitle: '신규 연맹원 가이드',
     subtitle: '연맹 대결, 킬데이, 약탈, 공성 이벤트, 협곡, 캐러밴 기준을 한곳에서 확인하세요.',
     source: '원본 자료',
@@ -151,8 +151,8 @@ const ui = {
   },
   en: {
     eyebrow: 'Last Z 737 Server',
-    title: 'Lir New Alliance Member Guide',
-    lobbyTitle: 'Lir',
+    title: 'NoVa New Alliance Member Guide',
+    lobbyTitle: 'NoVa',
     lobbySubtitle: 'New Alliance Member Guide',
     subtitle: 'Check Alliance Duel, Kill Day, plunder, zombie events, Canyon Clash, and Caravan power ranges in one place.',
     source: 'Source files',
@@ -168,8 +168,8 @@ const ui = {
   },
   es: {
     eyebrow: 'Servidor 737 de Last Z',
-    title: 'Guía para nuevos miembros de Lir',
-    lobbyTitle: 'Lir',
+    title: 'Guía para nuevos miembros de NoVa',
+    lobbyTitle: 'NoVa',
     lobbySubtitle: 'Guía para nuevos miembros',
     subtitle: 'Consulta en un solo lugar el Duelo de alianza, Día de bajas, saqueo, eventos zombi, Cañón y rangos de Caravana.',
     source: 'Archivos fuente',
@@ -190,19 +190,19 @@ const notices = {
   ko: [
     { file: '[토요일 킬데이 규칙].txt', title: '토요일 킬데이 규칙', tone: 'danger', icon: Shield, body: ['우리 연맹은 강한 상대의 표적이 되기 쉬우므로 실드 사용이 필수입니다.', '리셋 후 빠르게 상대 서버를 약탈하고 실드를 사용해 복귀하세요.', '약탈하지 않는 인원은 리셋 후 바로 실드를 사용하세요.', '토요일 리셋 이후 실드가 없으면 사전 통보 없이 강퇴 처리되며, 추후 복귀는 가능합니다.', '같은 일이 3번 반복되면 영구 제명됩니다.'] },
     { file: '[약탈 규칙].txt', title: '약탈 규칙', tone: 'warning', icon: Swords, body: ['참여 인원: 약탈에 참여할 수 있는 인원은 제한이 없습니다.', '제로잉 절대 금지: 상대 도시의 병력이 거의 남지 않을 때까지 반복 공격하지 마세요.', 'NAP 공격 금지: NAP 연맹은 서로 공격할 수 없습니다.', '아카데미 공격 기준: 아카데미 연맹은 공격할 수 있습니다. 단, 닉네임에 Farm이 포함된 아카데미 계정은 공격 금지입니다.', '위반 시 조치: 적발되면 경고 없이 강퇴 처리됩니다.'] },
-    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: '좀비 공성 및 좀비 폭군 이벤트', tone: 'info', icon: CalendarDays, body: ['Lir은 한국인 멤버 비율이 높은 연맹입니다.', '대부분 이벤트 시작 시간은 아포칼립스 기준 10:00입니다.'] },
+    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: '좀비 공성 및 좀비 폭군 이벤트', tone: 'info', icon: CalendarDays, body: ['NoVa는 한국인 멤버 비율이 높은 연맹입니다.', '대부분 이벤트 시작 시간은 아포칼립스 기준 10:00입니다.'] },
     { file: '[협곡 쟁탈전].txt', title: '협곡 쟁탈전', tone: 'info', icon: Users, body: ['협곡쟁탈전 1팀: 아포칼립스 시간 23:00', '협곡쟁탈전 2팀: 아포칼립스 시간 09:00', '참여 인원은 연맹전 개인 점수와 전투력 기준의 참여 희망자 중 랜덤으로 선정됩니다.'] },
   ],
   en: [
     { file: '[토요일 킬데이 규칙].txt', title: 'Saturday Kill Day Rules', tone: 'danger', icon: Shield, body: ['Our alliance is often targeted by stronger enemies, so using a shield is mandatory.', 'After reset, plunder the enemy server quickly, activate your shield, and return.', 'Members who do not plunder should activate a shield immediately after reset.', 'If you have no shield after Saturday reset, you may be removed without prior notice. Rejoining later is possible.', 'Repeating the same issue three times results in permanent expulsion.'] },
     { file: '[약탈 규칙].txt', title: 'Plunder Rules', tone: 'warning', icon: Swords, body: ['There is no limit on the number of plunder participants.', 'Zeroing is strictly forbidden. Do not repeatedly attack a city until its troops are nearly wiped out.', 'NAP alliances cannot attack each other.', 'Academy alliances may be attacked, but academy accounts with Farm in the nickname must not be attacked.', 'If a violation is confirmed, the member will be removed without warning.'] },
-    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Zombie Siege and Zombie Tyrant Event', tone: 'info', icon: CalendarDays, body: ['Lir has a high ratio of Korean members.', 'Most events start at 10:00 Apocalypse Time.'] },
+    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Zombie Siege and Zombie Tyrant Event', tone: 'info', icon: CalendarDays, body: ['NoVa has a high ratio of Korean members.', 'Most events start at 10:00 Apocalypse Time.'] },
     { file: '[협곡 쟁탈전].txt', title: 'Canyon Clash', tone: 'info', icon: Users, body: ['Canyon Clash Team 1: 23:00 Apocalypse Time.', 'Canyon Clash Team 2: 09:00 Apocalypse Time.', 'Participants are randomly selected from applicants based on Alliance Duel personal score and combat power.'] },
   ],
   es: [
     { file: '[토요일 킬데이 규칙].txt', title: 'Reglas del Día de bajas del sábado', tone: 'danger', icon: Shield, body: ['Nuestra alianza suele ser objetivo de rivales fuertes, por eso el escudo es obligatorio.', 'Después del reinicio, saquea rápidamente el servidor enemigo, activa el escudo y vuelve.', 'Quienes no saqueen deben activar el escudo inmediatamente después del reinicio.', 'Si no tienes escudo después del reinicio del sábado, puedes ser expulsado sin aviso previo. Es posible volver más adelante.', 'Si el mismo problema se repite tres veces, la expulsión será permanente.'] },
     { file: '[약탈 규칙].txt', title: 'Reglas de saqueo', tone: 'warning', icon: Swords, body: ['No hay límite de participantes para el saqueo.', 'El zeroing está estrictamente prohibido. No ataques repetidamente una ciudad hasta dejar sus tropas casi en cero.', 'Las alianzas NAP no pueden atacarse entre sí.', 'Las alianzas academia pueden ser atacadas, pero las cuentas de academia con Farm en el nombre no deben ser atacadas.', 'Si se confirma una infracción, el miembro será expulsado sin advertencia.'] },
-    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['Lir tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
+    { file: '[좀비 공성 및 좀비 폭군 이벤트].txt', title: 'Asedio zombi y Tirano zombi', tone: 'info', icon: CalendarDays, body: ['NoVa tiene una alta proporción de miembros coreanos.', 'La mayoría de los eventos empieza a las 10:00, hora de Apocalipsis.'] },
     { file: '[협곡 쟁탈전].txt', title: 'Disputa del Cañón', tone: 'info', icon: Users, body: ['Disputa del Cañón, equipo 1: 23:00, hora de Apocalipsis.', 'Disputa del Cañón, equipo 2: 09:00, hora de Apocalipsis.', 'Los participantes se eligen al azar entre quienes desean participar, considerando puntuación personal del Duelo de alianza y poder de combate.'] },
   ],
   hi: hindi.notices.map((item, index) => ({ ...item, file: ['[토요일 킬데이 규칙].txt', '[약탈 규칙].txt', '[좀비 공성 및 좀비 폭군 이벤트].txt', '[협곡 쟁탈전].txt'][index], icon: [Shield, Swords, CalendarDays, Users][index], tone: ['danger', 'warning', 'info', 'info'][index] })),
@@ -1164,7 +1164,7 @@ export default function App() {
             <ArrowLeft size={18} />
             <span>{copy.home}</span>
           </button>
-          <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
+          <div className="brand"><img src="brand/logo-nova.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
           <div className="lang-switch" aria-label="Language">
             <Languages size={16} />
             {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
@@ -1191,7 +1191,7 @@ export default function App() {
   return (
     <main className="home-page" lang={lang} style={{ '--page-bg': 'url("brand/background.png")' }}>
       <nav className="topbar">
-        <div className="brand"><img src="brand/logo-transparent.png" alt="Lir" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
+        <div className="brand"><img src="brand/logo-nova.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
         <div className="lang-switch" aria-label="Language">
           <Languages size={16} />
           {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
@@ -1203,7 +1203,7 @@ export default function App() {
           <div className="lobby-head">
             <div className="lobby-title-mark">
               <p>{copy.eyebrow}</p>
-              <img className="lobby-logo" src="brand/logo-transparent.png" alt={copy.lobbyTitle} />
+              <img className="lobby-logo" src="brand/logo-nova.png" alt={copy.lobbyTitle} />
             </div>
             <div className="lobby-copy">
               <strong>{copy.lobbySubtitle}</strong>
