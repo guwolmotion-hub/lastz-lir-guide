@@ -234,6 +234,22 @@
 .event-sources p { margin: 0 0 12px; }
 .event-sources > div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
 .event-sources a { display: inline-block; color: #91d4bc; margin-left: 10px; text-underline-offset: 3px; }
+.season-guide { max-width: 820px; }
+.season-guide > h3 { margin: 0 0 24px; font-size: 22px; line-height: 1.6; color: #f1f2f3; }
+.season-guide .reading-section { padding: 22px 0; }
+.season-guide .reading-section:first-of-type { padding-top: 0; border-top: 0; }
+.season-guide .reading-section h4 { margin: 0 0 10px; font-size: 17px; line-height: 1.6; }
+.season-guide .text-line { margin: 0; line-height: 1.95; word-break: normal; overflow-wrap: break-word; }
+.season-guide .season-source { margin-top: 18px; padding-top: 18px; border-top: 1px solid #34363b; color: #aeb1b9; font-size: 12px; line-height: 1.8; }
+.detail-page[lang="ko"] .season-guide h4,
+.detail-page[lang="ko"] .season-guide .text-line,
+.detail-page[lang="ko"] .season-guide .season-source { word-break: keep-all; }
+@media (max-width: 760px) {
+  .detail-page .season-content .segmented-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; overflow: visible; }
+  .detail-page .season-content .segmented-tabs button { min-width: 0; min-height: 56px; padding: 12px 0; white-space: normal; text-align: left; line-height: 1.5; }
+  .detail-page .season-content .segmented-tabs button svg { flex-shrink: 0; }
+  .detail-page .season-content .segmented-tabs button span { min-width: 0; overflow-wrap: break-word; }
+}
 @media (max-width: 620px) {
   .detail-page .event-guide th, .detail-page .event-guide td { padding: 12px 10px; font-size: 13px; }
   .detail-page .event-guide th:first-child { width: 35%; }

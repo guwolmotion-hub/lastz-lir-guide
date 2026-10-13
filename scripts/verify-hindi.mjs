@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch({ ...(process.env.GUIDE_BROWSER_EXECUTABLE ? { executablePath: process.env.GUIDE_BROWSER_EXECUTABLE } : { channel: 'msedge' }), headless: true });
 const allowed = new Set(['Lir', 'Last', 'LAST', 'Z', 'NAP', 'Farm', 'VIP', 'S', 'A', 'K', 'M', 'G', 'KO', 'EN', 'ES', 'HI']);
 let checks = 0;
 try {
@@ -17,7 +17,7 @@ try {
       checks++;
     }
     await audit();
-    for (let index = 0; index < 8; index++) {
+    for (let index = 0; index < 9; index++) {
       await page.locator('.feature-card').nth(index).click();
       await audit();
       const tabs = page.locator('.segmented-tabs button, .day-tabs button');
@@ -25,7 +25,7 @@ try {
         await tabs.nth(tab).click();
         await audit();
       }
-      if ([0, 7].includes(index)) await page.screenshot({ path: `qa/hindi-${width}-${index}.png`, fullPage: true });
+      if ([0, 8].includes(index)) await page.screenshot({ path: `qa/hindi-${width}-${index}.png`, fullPage: true });
       await page.locator('.home-button').click();
     }
     await page.close();

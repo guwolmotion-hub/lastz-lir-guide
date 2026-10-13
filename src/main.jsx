@@ -5,6 +5,7 @@ import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronL
 import workbook from './workbook-data.json';
 import { hindi, hindiDays } from './hindi.js';
 import { popularEvents, eventUi } from './popular-events.js';
+import { season2 } from './season2.js';
 
 const hqUpgradeRows = [
   ['16 -> 17', '18.2M', '18.2M', '3.5M', '-', '16', 'labWall'],
@@ -627,6 +628,7 @@ const sectionLabels = {
 };
 
 const featuredSections = [
+  { id: 'season2', icon: Shield, image: 'cards/season2.png' },
   { id: 'duel', icon: Table2, image: 'cards/1.png' },
   { id: 'daily', icon: ClipboardCheck, image: 'cards/5.png' },
   { id: 'hq', icon: Building2, image: 'cards/7.png' },
@@ -638,6 +640,7 @@ const featuredSections = [
 ];
 
 function getSectionMeta(lang, id) {
+  if (id === 'season2') return season2[lang];
   if (id === 'hq') return { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc };
   if (id === 'powerOrder') {
     const guide = extraGuides[lang][id];
@@ -894,13 +897,13 @@ function CaravanView({ lang }) {
 }
 
 function ExtraGuideView({ lang, id }) {
-  const guide = extraGuides[lang][id];
+  const guide = id === 'season2' ? season2[lang] : extraGuides[lang][id];
   const [activeIndex, setActiveIndex] = useState(0);
   const sections = id === 'popular' ? [...popularEvents[lang], ...guide.sections.slice(1)] : guide.sections;
   const active = sections[activeIndex] || sections[0];
   const labels = eventUi[lang];
   return (
-    <section className="content-block">
+    <section className={id === 'season2' ? 'content-block season-content' : 'content-block'}>
       <div className="section-head">
         <div>
           <p className="section-kicker">{guide.file}</p>
@@ -909,7 +912,14 @@ function ExtraGuideView({ lang, id }) {
       </div>
       <SummaryStrip items={guide.summary} />
       <SegmentedTabs label={guide.title} value={activeIndex} onChange={setActiveIndex} items={sections.map((section, index) => ({ id: index, label: section.title, icon: ListChecks }))} />
-      {active.budget ? <article className="event-guide">
+      {active.parts ? <article className="season-guide">
+        <h3>{active.title}</h3>
+        {active.parts.map((part) => <section className="reading-section" key={part.title}>
+          <h4>{part.title}</h4>
+          <p className="text-line">{part.text}</p>
+        </section>)}
+        <footer className="season-source">{guide.sourceNote}</footer>
+      </article> : active.budget ? <article className="event-guide">
         <h3>{active.title}</h3>
         <p className="text-line">{active.intro}</p>
         <section className="reading-section">
@@ -1129,7 +1139,7 @@ export default function App() {
     if (section === 'duel') return <WorkbookView lang={lang} />;
     if (section === 'hq') return <HqUpgradeView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
-    if (section === 'daily' || section === 'popular' || section === 'powerOrder') return <ExtraGuideView lang={lang} id={section} />;
+    if (section === 'season2' || section === 'daily' || section === 'popular' || section === 'powerOrder') return <ExtraGuideView lang={lang} id={section} />;
     if (section === 'rules') {
       return (
         <>

@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch({ ...(process.env.GUIDE_BROWSER_EXECUTABLE ? { executablePath: process.env.GUIDE_BROWSER_EXECUTABLE } : { channel: 'msedge' }), headless: true });
 let checked = 0;
 try {
   for (const width of [360, 390, 768, 1440]) {
@@ -10,7 +10,7 @@ try {
     await page.locator('.feature-card').first().click();
     for (const lang of ['KO', 'EN', 'ES', 'HI']) {
       await page.getByRole('button', { name: lang, exact: true }).click();
-      for (let index = 0; index < 8; index++) {
+      for (let index = 0; index < 9; index++) {
         await page.locator('.home-button').click();
         await page.locator('.feature-card').nth(index).click();
         assert.equal(await page.locator('.guide-navigation').count(), 0);
@@ -31,7 +31,7 @@ try {
         if (lang === 'KO' && [390, 1440].includes(width) && [0, 4, 6].includes(index)) {
           await page.screenshot({ path: `qa/reading-${width}-${index}.png`, fullPage: true });
         }
-        if (index === 0) {
+        if (index === 1) {
           for (let day = 0; day < await page.locator('.day-tabs button').count(); day++) {
             await page.locator('.day-tabs button').nth(day).click();
             assert.ok((await page.locator('.day-copy').innerText()).trim().length > 0);

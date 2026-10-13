@@ -5,7 +5,7 @@ try {
   for (const width of [360, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 900 } });
     await page.goto('http://127.0.0.1:5177/');
-    await page.locator('.feature-card').nth(6).click();
+    await page.locator('.feature-card').nth(7).click();
     assert.equal(await page.locator('.segmented-tabs button').count(), 8);
     for (const lang of ['KO', 'EN', 'ES', 'HI']) {
       await page.getByRole('button', { name: lang, exact: true }).click();
