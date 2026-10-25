@@ -84,7 +84,7 @@ try {
     assert.equal(await page.locator('.hero-record').count(), 1);
     await page.locator('.hero-record').click();
     await page.locator('dialog[open]').waitFor();
-    assert.ok(await page.locator('dialog img').evaluate(img => img.complete && img.naturalWidth > 0));
+    await page.waitForFunction(() => { const image = document.querySelector('dialog img'); return image?.complete && image.naturalWidth > 0; });
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('dialog').count(), 0);
     await page.locator('.hero-record').click();
