@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { normalizeLevels,readResearchMap,prerequisitePath,changeResearchLevel,researchLayout } from '../src/research-state.js';
+const d=JSON.parse(await readFile('src/advanced-reference.json','utf8'));
+for(const tree of d.research){const layout=researchLayout(tree);assert.equal(Object.keys(layout.positions).length,tree.nodes.length);for(const n of tree.nodes){const p=layout.positions[n.id];assert.ok(p.x>=0&&p.y>=0);for(const r of n.requires)assert.ok(layout.positions[r.id].y<p.y);const result=prerequisitePath(tree,{},n.id,n.max);assert.equal(result[n.id],n.max);for(const node of tree.nodes)if(result[node.id])for(const r of node.requires)assert.ok(result[r.id]>=r.requiredLevel);const valid=changeResearchLevel(tree,result,n.id,0);assert.equal(valid[n.id],0);for(const node of tree.nodes)if(valid[node.id])for(const r of node.requires)assert.ok(valid[r.id]>=r.requiredLevel);}}
+const t=d.research.find(t=>t.id==='alliance_recognition');const goal=prerequisitePath(t,{},'one-more',1);assert.equal(goal['collect-wood'],10);assert.equal(goal['zent-gatherer'],10);assert.equal(goal['one-more'],1);const reset=changeResearchLevel(t,goal,'collect-wood',0);assert.equal(reset['one-more'],0);assert.deepEqual(readResearchMap('null'),{});assert.deepEqual(readResearchMap('[1]'),{});assert.equal(normalizeLevels(t,{'collect-wood':999})['collect-wood'],10);
+console.log('21 DAG layouts, prerequisite paths, descendant resets, level bounds and corrupt storage checks passed.');

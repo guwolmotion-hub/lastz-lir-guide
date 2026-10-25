@@ -1147,6 +1147,7 @@ export default function App() {
   }, [page, lang]);
   const renderContent = () => {
     if (section === 'calculators' || section === 'database') return <ToolsView lang={lang} mode={section} onNavigate={handleSectionChange} hqRows={hqUpgradeRows} prerequisites={prerequisiteRowsForLang(lang)} buildings={buildingNames[lang]} />;
+    if (section === 'research') return <ResearchPlanner lang={lang} showGuide />;
     if (section === 'duel') return <WorkbookView lang={lang} />;
     if (section === 'hq') return <HqUpgradeView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
@@ -1169,7 +1170,7 @@ export default function App() {
 
   if (page === 'detail' && section) {
     return (
-      <main className="detail-page" lang={lang}>
+      <main className="detail-page" lang={lang} data-section={section}>
         <nav className="topbar detail-topbar">
           <button className="home-button" onClick={goHome}>
             <ArrowLeft size={18} />

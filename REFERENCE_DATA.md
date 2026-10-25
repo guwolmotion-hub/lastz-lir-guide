@@ -3,10 +3,11 @@
 The calculator card contains nine categories: research, buildings, heroes, tank,
 equipment, caravan, area exploration, hero EXP and Lucky Discounter. Existing
 speedup/resource-pack utilities are grouped under the same card. The research
-guide is a separate educational card.
-Its unlock table opens all 21 trees locally, and a sixth guide tab provides the
-same on-site node, prerequisite and cost planner. Guide pages contain no outbound
-research links. This planner shares saved progress with the Calculator card.
+guide opens an illustrated catalog of all 21 trees. Each tree has a connected
+node canvas, prerequisite paths, current and target levels, a level-cost dialog,
+used/remaining resources, speed and savings settings, zoom/pan and layout modes.
+It also supports tree comparison and an optional beginner guide. Research pages
+contain no outbound links and share progress with the Calculator card.
 
 Game numbers and short item names were checked against the public
 [Wild Hoggs](https://wild-hoggs.com/) reference on 2026-10-26. Each tool links
@@ -17,6 +18,8 @@ not depend on an iframe, third-party login or a live source request.
   growth profiles, tank/equipment costs, 906 exploration stages, 23 bounties,
   and the Lucky Discounter offer probabilities and milestones.
 - `research-reference.json`: laboratory, prerequisite and season requirements.
+- `research-visuals.json` and `public/research/`: locally served game research art
+  and node icons, refreshed with `scripts/import-research-visuals.mjs`.
 - `game-reference.json`: hero identities and EXP costs.
 - The original alliance workbook remains authoritative for alliance-specific
   Caravan recommendations and guide schedules.

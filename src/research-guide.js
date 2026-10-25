@@ -18,7 +18,7 @@ export const researchGuide = {
         { title: '이번에 올릴 경로 하나 정하기', text: '다음 핵심 노드와 그 선행 노드에 필요한 비용을 함께 확인하세요. 여러 트리에 배지를 조금씩 나누기보다, 현재 목표에 도달할 만큼 먼저 확보하고 사용합니다.' },
         { title: '배지가 없는 기초 연구도 활용', text: '공개 기본표에서 새로운 집·대피소 건설·정예 부대 등은 배지 합계가 0입니다. 배지가 부족할 때는 아직 필요한 기초 연구를 검토하되, 다른 자원과 연구 시간은 별도로 필요합니다.' },
         { title: '연구 속도와 자원 절감은 다른 효과', text: '연구 속도는 소요 시간에, 자원 절감은 요구 자원에 영향을 주는 항목입니다. 각각의 실제 효과와 적용 대상을 게임에서 확인하고, 같은 수치라고 생각해 계산하지 마세요.' },
-        { title: '트리 전체 비용과 다음 연구 비용 구분', text: '해금표의 배지 합계는 트리를 처음부터 끝까지 올릴 때의 기본 총량입니다. 해금표의 상세·계산 버튼이나 연구 상세·계산 탭에서 현재 레벨과 목표를 입력하면, 이 사이트 안에서 다음 연구에 필요한 배지·전력·Z코인과 시간을 확인할 수 있습니다.' },
+        { title: '트리 전체 비용과 다음 연구 비용 구분', text: '목록 카드의 합계는 트리를 처음부터 끝까지 올릴 때의 기본 총량입니다. 연구 카드를 열고 트리의 노드를 누르면 현재·목표 레벨과 레벨별 비용을 확인할 수 있습니다. 목표 버튼은 필요한 선행 경로까지 함께 계획에 추가합니다.' },
       ] },
       { title: '4. 연구일 루틴', parts: [
         { title: '전날: 재료와 선행 조건 준비', text: '연구 가속과 경찰 휘장을 모으고, 다음 연구의 실험실 레벨·선행 노드·자원이 준비됐는지 확인하세요. 연구일에 재료가 부족해 목표 경로가 끊기는 일을 줄이는 준비입니다.' },
@@ -53,7 +53,7 @@ export const researchGuide = {
         { title: 'Choose one route for your current goal', text: 'Check the cost of the next key node together with its prerequisites. Reserve enough to reach your current goal before distributing badges among several unrelated trees.' },
         { title: 'Consider essential badge-free research', text: 'The public baseline table lists zero badge totals for New Home, Shelter Building and Elite Troops. When badges are scarce, review useful unfinished foundational research; other resources and research time are still required.' },
         { title: 'Research speed is different from resource reduction', text: 'Research speed affects time, while resource reduction affects costs. Check the actual effect and eligible resource in the game; do not treat the two percentages as interchangeable.' },
-        { title: 'A full-tree total is not the next upgrade cost', text: 'The unlock table shows the baseline badge total for completing a tree from scratch. Open Details & costs beside a tree or the Research details & costs tab. Enter your current and target levels to calculate badges, electricity, coins and time directly on this site.' },
+        { title: 'A full-tree total is not the next upgrade cost', text: 'Catalog totals cover the full tree from scratch. Open a research card and select a node to edit current and target levels and view per-level costs. The Target button adds the required prerequisite path to your plan.' },
       ] },
       { title: '4. Research-day routine', parts: [
         { title: 'The day before: prepare materials and prerequisites', text: 'Save research speedups and badges, then check the Lab level, prerequisite nodes and resources for your next research. This helps avoid getting stuck midway through your planned route.' },
@@ -88,7 +88,7 @@ export const researchGuide = {
         { title: 'Elige una ruta para el objetivo actual', text: 'Consulta el coste del próximo nodo clave y de sus requisitos previos. Reserva lo necesario para llegar al objetivo antes de repartir insignias entre árboles distintos.' },
         { title: 'Revisa las bases sin coste de insignias', text: 'La tabla pública base muestra cero insignias para Nuevo hogar, Construcción del refugio y Tropas de élite. Si faltan insignias, revisa la investigación básica útil pendiente; los demás recursos y el tiempo siguen siendo necesarios.' },
         { title: 'Velocidad y reducción de recursos son distintas', text: 'La velocidad afecta al tiempo y la reducción de recursos al coste. Comprueba el efecto y los recursos afectados en el juego; los porcentajes no son intercambiables.' },
-        { title: 'El total del árbol no es el próximo coste', text: 'La tabla muestra las insignias base para completar el árbol desde cero. Abre Detalles y costes junto al árbol o la pestaña de detalles de investigación. Introduce niveles actuales y objetivo para calcular insignias, electricidad, monedas y tiempo en este sitio.' },
+        { title: 'El total del árbol no es el próximo coste', text: 'Los totales del catálogo cubren el árbol completo desde cero. Abre una tarjeta y elige un nodo para editar niveles actuales y objetivo y consultar costes por nivel. Objetivo añade la ruta previa necesaria a tu plan.' },
       ] },
       { title: '4. Día de investigación', parts: [
         { title: 'La víspera: prepara materiales y requisitos', text: 'Guarda aceleradores e insignias y comprueba nivel de Laboratorio, nodos previos y recursos. Así evitas quedarte bloqueado a mitad de la ruta prevista.' },
@@ -123,7 +123,7 @@ export const researchGuide = {
         { title: 'वर्तमान लक्ष्य के लिए एक रास्ता चुनें', text: 'अगले मुख्य नोड और उसके जरूरी पिछले नोड की लागत साथ में देखें। अलग-अलग वृक्षों में बैज बांटने से पहले वर्तमान लक्ष्य तक पहुंचने की मात्रा बचाएं।' },
         { title: 'बिना बैज वाले बुनियादी शोध भी देखें', text: 'सार्वजनिक मूल तालिका में नया घर, आश्रय निर्माण और श्रेष्ठ सैनिक के कुल बैज शून्य हैं। बैज कम हों तो जरूरी अधूरे बुनियादी शोध देखें; दूसरे संसाधन और शोध समय फिर भी लगते हैं।' },
         { title: 'शोध गति और संसाधन बचत अलग हैं', text: 'शोध गति समय पर और संसाधन बचत लागत पर असर डालती है। खेल में वास्तविक प्रभाव और लागू संसाधन देखें। दोनों प्रतिशतों को एक समान न मानें।' },
-        { title: 'पूरे वृक्ष का योग अगली लागत नहीं', text: 'तालिका शून्य से पूरा वृक्ष बढ़ाने के मूल बैज बताती है। वृक्ष के विवरण और लागत बटन या शोध विवरण टैब को खोलें। वर्तमान और लक्ष्य स्तर दर्ज करके इसी साइट पर बैज, बिजली, सिक्के और समय की गणना करें।' },
+        { title: 'पूरे वृक्ष का योग अगली लागत नहीं', text: 'सूची का योग पूरे वृक्ष को शून्य से बढ़ाने की लागत है। शोध कार्ड खोलें और बिंदु चुनकर वर्तमान तथा लक्ष्य स्तर और हर स्तर की लागत देखें। लक्ष्य बटन जरूरी पूर्व शोध का मार्ग भी योजना में जोड़ता है।' },
       ] },
       { title: '4. शोध वाले दिन का क्रम', parts: [
         { title: 'एक दिन पहले तैयारी', text: 'शोध समय कटौती और बैज बचाएं। अगले शोध के लिए प्रयोगशाला स्तर, पिछले नोड और संसाधन जांचें ताकि तय रास्ते में बीच में रुकना न पड़े।' },
