@@ -4,6 +4,9 @@ The calculator card contains nine categories: research, buildings, heroes, tank,
 equipment, caravan, area exploration, hero EXP and Lucky Discounter. Existing
 speedup/resource-pack utilities are grouped under the same card. The research
 guide is a separate educational card.
+Its unlock table opens all 21 trees locally, and a sixth guide tab provides the
+same on-site node, prerequisite and cost planner. Guide pages contain no outbound
+research links. This planner shares saved progress with the Calculator card.
 
 Game numbers and short item names were checked against the public
 [Wild Hoggs](https://wild-hoggs.com/) reference on 2026-10-26. Each tool links

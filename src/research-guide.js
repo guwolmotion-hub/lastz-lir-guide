@@ -3,7 +3,6 @@ export const researchGuide = {
     title: '연구 가이드', kicker: '연구', file: '연구 가이드', desc: '초보자 우선순위와 연구 해금·배지 관리',
     summary: [{ label: '초반 배지', value: '연맹 표창 우선' }, { label: '해금 확인', value: '실험실 + 선행 연구 진행률' }, { label: '전투 연구', value: '주력 병종에 집중' }],
     sourceNote: '권장 순서는 연맹 원본 Day 3 지침을 반영했습니다. 해금 조건과 기본 배지 합계는 2026-10-26 확인한 Wild Hoggs 공개 자료 기준이며, 실제 게임과 최신 연맹 공지를 우선하세요.',
-    sourceLabel: '연구 트리·비용 원문',
     sections: [
       { title: '1. 시작 순서', parts: [
         { title: '개인 연구와 연맹 기부부터 구분', text: '이 가이드는 내 실험실에서 진행하는 개인 연구를 다룹니다. 연구 트리 이름에 연맹이 들어가더라도, 연맹원 전체가 기부하는 연맹 테크와는 구분해서 확인하세요.' },
@@ -19,7 +18,7 @@ export const researchGuide = {
         { title: '이번에 올릴 경로 하나 정하기', text: '다음 핵심 노드와 그 선행 노드에 필요한 비용을 함께 확인하세요. 여러 트리에 배지를 조금씩 나누기보다, 현재 목표에 도달할 만큼 먼저 확보하고 사용합니다.' },
         { title: '배지가 없는 기초 연구도 활용', text: '공개 기본표에서 새로운 집·대피소 건설·정예 부대 등은 배지 합계가 0입니다. 배지가 부족할 때는 아직 필요한 기초 연구를 검토하되, 다른 자원과 연구 시간은 별도로 필요합니다.' },
         { title: '연구 속도와 자원 절감은 다른 효과', text: '연구 속도는 소요 시간에, 자원 절감은 요구 자원에 영향을 주는 항목입니다. 각각의 실제 효과와 적용 대상을 게임에서 확인하고, 같은 수치라고 생각해 계산하지 마세요.' },
-        { title: '트리 전체 비용과 다음 연구 비용 구분', text: '해금표의 배지 합계는 트리를 처음부터 끝까지 올릴 때의 기본 총량입니다. 이미 연구한 부분이나 내 비용 절감은 반영하지 않으므로, 실제 다음 연구에 필요한 비용은 게임 화면이나 개별 원문 계산기로 확인하세요.' },
+        { title: '트리 전체 비용과 다음 연구 비용 구분', text: '해금표의 배지 합계는 트리를 처음부터 끝까지 올릴 때의 기본 총량입니다. 해금표의 상세·계산 버튼이나 연구 상세·계산 탭에서 현재 레벨과 목표를 입력하면, 이 사이트 안에서 다음 연구에 필요한 배지·전력·Z코인과 시간을 확인할 수 있습니다.' },
       ] },
       { title: '4. 연구일 루틴', parts: [
         { title: '전날: 재료와 선행 조건 준비', text: '연구 가속과 경찰 휘장을 모으고, 다음 연구의 실험실 레벨·선행 노드·자원이 준비됐는지 확인하세요. 연구일에 재료가 부족해 목표 경로가 끊기는 일을 줄이는 준비입니다.' },
@@ -39,7 +38,6 @@ export const researchGuide = {
     title: 'Research Guide', kicker: 'Research', file: 'Research Guide', desc: 'Beginner priorities, unlock paths and badge planning',
     summary: [{ label: 'Early badges', value: 'Alliance Recognition first' }, { label: 'Unlocks', value: 'Lab + prerequisite tree progress' }, { label: 'Combat research', value: 'Focus on your main troop type' }],
     sourceNote: 'Priorities follow the alliance’s original Day 3 guide. Unlocks and baseline badge totals use public Wild Hoggs data checked on 2026-10-26. Current in-game requirements and alliance notices take priority.',
-    sourceLabel: 'Original research trees and costs',
     sections: [
       { title: '1. Getting started', parts: [
         { title: 'Separate personal research from alliance donations', text: 'This guide covers personal research in your own Lab. A tree with Alliance in its name is still distinct from alliance technology funded by member donations. Check which system you are investing in.' },
@@ -55,7 +53,7 @@ export const researchGuide = {
         { title: 'Choose one route for your current goal', text: 'Check the cost of the next key node together with its prerequisites. Reserve enough to reach your current goal before distributing badges among several unrelated trees.' },
         { title: 'Consider essential badge-free research', text: 'The public baseline table lists zero badge totals for New Home, Shelter Building and Elite Troops. When badges are scarce, review useful unfinished foundational research; other resources and research time are still required.' },
         { title: 'Research speed is different from resource reduction', text: 'Research speed affects time, while resource reduction affects costs. Check the actual effect and eligible resource in the game; do not treat the two percentages as interchangeable.' },
-        { title: 'A full-tree total is not the next upgrade cost', text: 'The unlock table shows the baseline badge total for completing a tree from scratch. It does not subtract your completed research or personal reductions. Use the game or the original tree calculator for the next actual cost.' },
+        { title: 'A full-tree total is not the next upgrade cost', text: 'The unlock table shows the baseline badge total for completing a tree from scratch. Open Details & costs beside a tree or the Research details & costs tab. Enter your current and target levels to calculate badges, electricity, coins and time directly on this site.' },
       ] },
       { title: '4. Research-day routine', parts: [
         { title: 'The day before: prepare materials and prerequisites', text: 'Save research speedups and badges, then check the Lab level, prerequisite nodes and resources for your next research. This helps avoid getting stuck midway through your planned route.' },
@@ -75,7 +73,6 @@ export const researchGuide = {
     title: 'Guía de investigación', kicker: 'Investigación', file: 'Guía de investigación', desc: 'Prioridades iniciales, desbloqueos e insignias',
     summary: [{ label: 'Insignias iniciales', value: 'Reconocimiento de alianza primero' }, { label: 'Desbloqueos', value: 'Laboratorio + progreso previo' }, { label: 'Combate', value: 'Prioriza tu tipo de tropa principal' }],
     sourceNote: 'Las prioridades siguen la guía original del día 3 de la alianza. Requisitos e insignias base proceden de datos públicos de Wild Hoggs comprobados el 2026-10-26. Prevalecen el juego actual y los avisos de la alianza.',
-    sourceLabel: 'Árboles y costes originales',
     sections: [
       { title: '1. Por dónde empezar', parts: [
         { title: 'Separa investigación personal y donaciones', text: 'Esta guía trata la investigación personal de tu Laboratorio. Un árbol con Alianza en el nombre no es lo mismo que la tecnología financiada con donaciones de todos los miembros. Comprueba en qué sistema inviertes.' },
@@ -91,7 +88,7 @@ export const researchGuide = {
         { title: 'Elige una ruta para el objetivo actual', text: 'Consulta el coste del próximo nodo clave y de sus requisitos previos. Reserva lo necesario para llegar al objetivo antes de repartir insignias entre árboles distintos.' },
         { title: 'Revisa las bases sin coste de insignias', text: 'La tabla pública base muestra cero insignias para Nuevo hogar, Construcción del refugio y Tropas de élite. Si faltan insignias, revisa la investigación básica útil pendiente; los demás recursos y el tiempo siguen siendo necesarios.' },
         { title: 'Velocidad y reducción de recursos son distintas', text: 'La velocidad afecta al tiempo y la reducción de recursos al coste. Comprueba el efecto y los recursos afectados en el juego; los porcentajes no son intercambiables.' },
-        { title: 'El total del árbol no es el próximo coste', text: 'La tabla muestra las insignias base para completar el árbol desde cero. No descuenta lo ya investigado ni tus reducciones. Consulta el juego o la calculadora original para el coste real siguiente.' },
+        { title: 'El total del árbol no es el próximo coste', text: 'La tabla muestra las insignias base para completar el árbol desde cero. Abre Detalles y costes junto al árbol o la pestaña de detalles de investigación. Introduce niveles actuales y objetivo para calcular insignias, electricidad, monedas y tiempo en este sitio.' },
       ] },
       { title: '4. Día de investigación', parts: [
         { title: 'La víspera: prepara materiales y requisitos', text: 'Guarda aceleradores e insignias y comprueba nivel de Laboratorio, nodos previos y recursos. Así evitas quedarte bloqueado a mitad de la ruta prevista.' },
@@ -111,7 +108,6 @@ export const researchGuide = {
     title: 'शोध मार्गदर्शिका', kicker: 'शोध', file: 'शोध मार्गदर्शिका', desc: 'शुरुआती प्राथमिकताएं, शोध अनलॉक और बैज की योजना',
     summary: [{ label: 'शुरुआती बैज', value: 'पहले गठबंधन मान्यता' }, { label: 'अनलॉक', value: 'प्रयोगशाला और पिछले वृक्ष की प्रगति' }, { label: 'लड़ाई का शोध', value: 'मुख्य सैनिक प्रकार पर ध्यान' }],
     sourceNote: 'प्राथमिकताएं गठबंधन की मूल तीसरे दिन की मार्गदर्शिका पर आधारित हैं। अनलॉक शर्तें और मूल बैज योग Wild Hoggs के सार्वजनिक आंकड़ों से 2026-10-26 को जांचे गए हैं। वर्तमान खेल और गठबंधन की नई सूचना को प्राथमिकता दें।',
-    sourceLabel: 'मूल शोध वृक्ष और लागत',
     sections: [
       { title: '1. शुरुआत का क्रम', parts: [
         { title: 'व्यक्तिगत शोध और दान अलग हैं', text: 'यह मार्गदर्शिका अपनी प्रयोगशाला में होने वाले व्यक्तिगत शोध के लिए है। नाम में गठबंधन होने वाला वृक्ष सभी सदस्यों के दान से बढ़ने वाली गठबंधन तकनीक से अलग है। पहले समझें कि आप किसमें निवेश कर रहे हैं।' },
@@ -127,7 +123,7 @@ export const researchGuide = {
         { title: 'वर्तमान लक्ष्य के लिए एक रास्ता चुनें', text: 'अगले मुख्य नोड और उसके जरूरी पिछले नोड की लागत साथ में देखें। अलग-अलग वृक्षों में बैज बांटने से पहले वर्तमान लक्ष्य तक पहुंचने की मात्रा बचाएं।' },
         { title: 'बिना बैज वाले बुनियादी शोध भी देखें', text: 'सार्वजनिक मूल तालिका में नया घर, आश्रय निर्माण और श्रेष्ठ सैनिक के कुल बैज शून्य हैं। बैज कम हों तो जरूरी अधूरे बुनियादी शोध देखें; दूसरे संसाधन और शोध समय फिर भी लगते हैं।' },
         { title: 'शोध गति और संसाधन बचत अलग हैं', text: 'शोध गति समय पर और संसाधन बचत लागत पर असर डालती है। खेल में वास्तविक प्रभाव और लागू संसाधन देखें। दोनों प्रतिशतों को एक समान न मानें।' },
-        { title: 'पूरे वृक्ष का योग अगली लागत नहीं', text: 'तालिका शून्य से पूरा वृक्ष बढ़ाने के मूल बैज बताती है। इसमें आपका पूरा हो चुका शोध या निजी छूट नहीं घटती। अगली वास्तविक लागत खेल या मूल वृक्ष गणना में देखें।' },
+        { title: 'पूरे वृक्ष का योग अगली लागत नहीं', text: 'तालिका शून्य से पूरा वृक्ष बढ़ाने के मूल बैज बताती है। वृक्ष के विवरण और लागत बटन या शोध विवरण टैब को खोलें। वर्तमान और लक्ष्य स्तर दर्ज करके इसी साइट पर बैज, बिजली, सिक्के और समय की गणना करें।' },
       ] },
       { title: '4. शोध वाले दिन का क्रम', parts: [
         { title: 'एक दिन पहले तैयारी', text: 'शोध समय कटौती और बैज बचाएं। अगले शोध के लिए प्रयोगशाला स्तर, पिछले नोड और संसाधन जांचें ताकि तय रास्ते में बीच में रुकना न पड़े।' },
@@ -157,6 +153,15 @@ export const hindiResearchNames = {
 };
 
 const koreanNames = { alliance_recognition: '연맹 표창', rider_training: '라이더 훈련', assaulter_training: '돌격 훈련', shooter_training: '슈터 훈련' };
+export const researchLocalCopy = {
+  ko: { open: '상세·계산', back: '연구 해금표로', tab: '6. 연구 상세·계산' },
+  en: { open: 'Details & costs', back: 'Back to unlock table', tab: '6. Research details & costs' },
+  es: { open: 'Detalles y costes', back: 'Volver a desbloqueos', tab: '6. Detalles y costes' },
+  hi: { open: 'विवरण और लागत', back: 'अनलॉक तालिका पर लौटें', tab: '6. शोध विवरण और लागत' },
+};
+for (const lang of Object.keys(researchGuide)) {
+  researchGuide[lang].sections.push({ title: researchLocalCopy[lang].tab, planner: true });
+}
 export function researchName(tree, lang) {
   return lang === 'hi' ? hindiResearchNames[tree.id] : lang === 'ko' ? koreanNames[tree.id] || tree.name.ko : tree.name[lang];
 }

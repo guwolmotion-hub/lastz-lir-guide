@@ -258,6 +258,10 @@
 .lab-missing { color: #d8aeb6; }
 .research-requirement { display: block; }
 .research-table-wrap a { display: inline-flex; align-items: center; gap: 5px; color: #a6d9c6; text-underline-offset: 3px; }
+.research-local-open, .research-local-back { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:42px; padding:9px 13px; border:1px solid #58816f; border-radius:6px; background:#1c3027; color:#c5f0dd; font:inherit; font-size:13px; line-height:1.7; }
+.research-local-open:hover, .research-local-back:hover { border-color:#a8e4c8; background:#294437; }
+.research-local-back { margin:0 0 12px; }
+.research-local-planner { border-top:1px solid #39414a; margin-top:20px; }
 .detail-page[lang="ko"] .season-guide h4,
 .detail-page[lang="ko"] .season-guide .text-line,
 .detail-page[lang="ko"] .season-guide .season-source { word-break: keep-all; }

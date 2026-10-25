@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Database, ExternalLink, FlaskConical, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Database, FlaskConical, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 import { hindi, hindiDays } from './hindi.js';
 import { popularEvents, eventUi } from './popular-events.js';
@@ -10,7 +10,7 @@ import ToolsView from './ToolsView.jsx';
 import { toolCopy, toolMeta } from './tools-copy.js';
 import { researchGuide } from './research-guide.js';
 import ResearchTreeTable from './ResearchTreeTable.jsx';
-import { wildHoggsUrl } from './reference-links.js';
+import ResearchPlanner from './ResearchPlanner.jsx';
 
 const hqUpgradeRows = [
   ['16 -> 17', '18.2M', '18.2M', '3.5M', '-', '16', 'labWall'],
@@ -921,14 +921,14 @@ function ExtraGuideView({ lang, id }) {
       </div>
       <SummaryStrip items={guide.summary} />
       <SegmentedTabs label={guide.title} value={activeIndex} onChange={setActiveIndex} items={sections.map((section, index) => ({ id: index, label: section.title, icon: ListChecks }))} />
-      {active.parts ? <article className="season-guide">
+      {active.planner ? <ResearchPlanner lang={lang} /> : active.parts ? <article className="season-guide">
         <h3>{active.title}</h3>
         {active.parts.map((part) => <section className="reading-section" key={part.title}>
           <h4>{part.title}</h4>
           <p className="text-line">{part.text}</p>
         </section>)}
         {active.catalog && <ResearchTreeTable lang={lang} />}
-        <footer className="season-source">{guide.sourceNote}{guide.sourceLabel && <a href={wildHoggsUrl('/tools/research/', lang)} target="_blank" rel="noopener noreferrer">{guide.sourceLabel}<ExternalLink size={13} /></a>}</footer>
+        <footer className="season-source">{guide.sourceNote}</footer>
       </article> : active.budget ? <article className="event-guide">
         <h3>{active.title}</h3>
         <p className="text-line">{active.intro}</p>
