@@ -11,6 +11,27 @@
 .tool-tabs button[aria-selected="true"] { border-color: #ff8993; color: #ffadb5; }
 .tool-tabs svg { flex-shrink: 0; }
 .tool-panel { min-width: 0; }
+.advanced-subtabs, .advanced-actions { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 25px; }
+.advanced-subtabs button, .advanced-actions button { min-height:42px; padding:10px 15px; border:1px solid #49525f; border-radius:6px; color:#d3dce7; background:#1a2027; font:inherit; font-size:13px; line-height:1.6; }
+.advanced-subtabs button[aria-pressed="true"] { color:#c1f3df; border-color:#89cdb3; background:#21382f; }
+.advanced-actions { margin-top:24px; }
+.advanced-check { display:flex; gap:10px; align-items:center; font-size:14px; line-height:1.7; }
+.advanced-check input { width:19px; height:19px; accent-color:#91dfc1; }
+.advanced-skill-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.advanced-skill-grid h4 { font-size:14px; color:#e9eef5; }
+.advanced-skill-grid .tool-field { margin-bottom:12px; }
+.advanced-skill-grid small { color:#adb7c5; font-size:11px; }
+.advanced-reward-summary { padding:20px; margin:24px 0; border-left:3px solid #91dfc1; background:#1a2426; font-size:13px; line-height:1.9; overflow-wrap:anywhere; }
+.advanced-reward-summary h3 { font-size:15px; margin:0 0 10px; color:#f0f4f7; }
+.advanced-reward-summary p { margin:0; color:#c5d1df; }
+.advanced-bounties { margin-top:25px; }
+.advanced-bounties summary { cursor:pointer; padding:16px 0; color:#b5e5d4; font-size:15px; }
+.tools-workspace table[data-table="research-nodes"] td .tool-field { min-width:95px; }
+.tools-workspace table[data-table="research-nodes"] .tool-field>span { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.tools-workspace table[data-table="research-nodes"] td:first-child { min-width:180px; }
+.tools-workspace table[data-table="exploration-stages"] td:nth-child(n+3) { white-space:normal; min-width:210px; max-width:340px; }
+.tool-primary:disabled { cursor:wait; opacity:.65; }
+@media(max-width:520px) { .advanced-skill-grid { grid-template-columns:1fr; } .advanced-skill-grid>div { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding-bottom:18px; border-bottom:1px solid #383f48; } .advanced-skill-grid h4,.advanced-skill-grid small { grid-column:1/-1; margin:0; } .advanced-subtabs button { flex:1 0 auto; } }
 .tool-section-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 .tool-section-title h2 { margin: 0; font-size: 21px; line-height: 1.5; color: #f2f3f6; }
 .tool-icon-button { width: 36px; height: 36px; flex: 0 0 36px; display: grid; place-items: center; border: 1px solid #3d424b; border-radius: 5px; background: transparent; color: #d4d8e2; }

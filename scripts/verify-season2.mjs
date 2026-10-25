@@ -13,7 +13,7 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(process.env.GUIDE_URL || 'http://127.0.0.1:5177/');
     await page.locator('.feature-card').first().waitFor();
-    assert.equal(await page.locator('.feature-card').count(), 9);
+    assert.equal(await page.locator('.feature-card').count(), 11);
     assert.match(await page.locator('.feature-card').nth(0).innerText(), /시즌2/);
     assert.match(await page.locator('.feature-card').nth(1).innerText(), /연맹/);
     assert.match(await page.locator('.feature-card').nth(2).innerText(), /매일/);
@@ -44,7 +44,7 @@ try {
       }
     }
     await page.locator('.home-button').click();
-    assert.equal(await page.locator('.feature-card').count(), 9);
+    assert.equal(await page.locator('.feature-card').count(), 11);
     assert.equal(await page.locator('.season-guide').count(), 0);
     assert.deepEqual(errors, []);
     await page.close();

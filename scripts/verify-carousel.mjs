@@ -33,18 +33,18 @@ try {
         return { problems, height: cards[0].clientHeight, count: cards.length, overflow: document.body.scrollWidth > innerWidth + 2 };
       });
       assert.deepEqual(layout.problems, [], width + '/' + lang);
-      assert.equal(layout.count, 9);
+      assert.equal(layout.count, 11);
       assert.equal(layout.overflow, false, width + '/' + lang + ': page overflow');
       cardHeight ??= layout.height;
       assert.equal(layout.height, cardHeight, 'Translation resized cards');
-      await page.locator('.feature-card').last().evaluate(card => card.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' }));
+      await page.locator('[data-guide="powerOrder"]').evaluate(card => card.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' }));
       await page.waitForFunction(() => {
-        const card = document.querySelector('.feature-card:last-child').getBoundingClientRect();
+        const card = document.querySelector('[data-guide="powerOrder"]').getBoundingClientRect();
         const track = document.querySelector('.feature-tabs').getBoundingClientRect();
         return Math.min(card.right, track.right) - Math.max(card.left, track.left) > card.width * .9;
       });
       if (lang === 'KO' && [390, 1440].includes(width)) await page.screenshot({ path: 'qa/power-card-' + width + '.png', fullPage: true });
-      await page.locator('.feature-card').last().click();
+      await page.locator('[data-guide="powerOrder"]').click();
       const tabs = page.locator('.segmented-tabs button');
       assert.equal(await tabs.count(), 5);
       for (let tab = 0; tab < await tabs.count(); tab++) {

@@ -22,12 +22,12 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(url);
-    assert.equal(await page.locator('.feature-card').count(), 9);
+    assert.equal(await page.locator('.feature-card').count(), 11);
     await page.locator('.open-calculators').click();
     for (const lang of ['KO', 'EN', 'ES', 'HI']) {
       await page.getByRole('button', { name: lang, exact: true }).click();
       await page.locator('.tools-modes button').first().click();
-      for (const tab of ['hq', 'exp', 'caravan', 'speedups', 'packs', 'discount']) {
+      for (const tab of ['exp', 'caravan', 'other']) {
         await page.locator('#tool-tab-' + tab).click();
         await layout(page, width + '/' + lang + '/' + tab);
         if (lang !== 'KO') assert.ok(!/[가-힣]/u.test(await page.locator('.tools-workspace').innerText()));
@@ -44,13 +44,9 @@ try {
     }
     await page.getByRole('button', { name: 'KO', exact: true }).click();
     await page.locator('.tools-modes button').first().click();
-    await page.locator('#tool-tab-hq').click();
-    await page.locator('.tool-section-title button').click();
-    await page.locator('#hq-target').selectOption('18');
-    await page.locator('#hq-reduction').fill('10');
-    await page.locator('#hq-owned-0').fill('10');
-    assert.equal(await page.locator('[data-result="hq-missing-0"]').innerText(), '35.09M');
-    assert.equal(await page.locator('[data-table="hq-plan"] tbody tr').count(), 3);
+    await page.locator('#tool-tab-buildings').click();
+    await page.locator('#building-target').fill('18');
+    assert.equal(await page.locator('[data-table="building-plan"] tbody tr').count(), 2);
     await page.locator('#tool-tab-exp').click();
     await page.locator('#exp-current').fill('1');
     await page.locator('#exp-target').fill('100');
@@ -67,13 +63,15 @@ try {
     assert.equal(await page.locator('#exp-owned').inputValue(), '100');
     await page.locator('#tool-tab-caravan').click();
     assert.match(await page.locator('[data-result="caravan-effective"]').innerText(), /^11M$/);
-    await page.locator('#tool-tab-speedups').click();
+    await page.locator('#tool-tab-other').click();
+    await page.locator('.advanced-subtabs button').first().click();
     await page.locator('#speed-q1440').fill('1');
     assert.match(await page.locator('[data-result="speed-missing"]').innerText(), /^0/);
-    await page.locator('#tool-tab-packs').click();
+    await page.locator('.advanced-subtabs button').nth(1).click();
     assert.equal(await page.locator('[data-result="packs-needed"]').innerText(), '10');
     assert.equal(await page.locator('[data-result="packs-short"]').innerText(), '5');
-    await page.locator('#tool-tab-discount').click();
+    await page.locator('#tool-tab-lucky').click();
+    await page.locator('.advanced-subtabs button').nth(1).click();
     await page.locator('#discount-discount').fill('90');
     assert.equal(await page.locator('[data-result="discount-total"]').innerText(), '1K');
     if ([390, 1440].includes(width)) await page.screenshot({ path: 'qa/tools-calc-' + width + '.png', fullPage: true });
@@ -107,7 +105,7 @@ try {
     assert.equal(await page.locator('[data-table="exp-database"] tbody tr').count(), 25);
     assert.match(await page.locator('.database-count').innerText(), /16,860,000,000/);
     await page.locator('.home-button').click();
-    assert.equal(await page.locator('.feature-card').count(), 9);
+    assert.equal(await page.locator('.feature-card').count(), 11);
     await layout(page, width + '/home');
     assert.deepEqual(errors, []);
     await page.close();

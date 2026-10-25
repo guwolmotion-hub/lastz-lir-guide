@@ -1,0 +1,309 @@
+{
+  "checkedAt": "2026-10-26",
+  "source": "https://wild-hoggs.com/ko/tools/research/",
+  "trees": [
+    {
+      "id": "new_home",
+      "name": {
+        "ko": "새로운 집",
+        "en": "New Home",
+        "es": "Nuevo Hogar"
+      },
+      "lab": 1,
+      "badges": 0,
+      "prerequisite": null,
+      "season": null
+    },
+    {
+      "id": "shelter_building",
+      "name": {
+        "ko": "대피소 건설",
+        "en": "Shelter Building",
+        "es": "Construcción de refugio"
+      },
+      "lab": 5,
+      "badges": 0,
+      "prerequisite": null,
+      "season": null
+    },
+    {
+      "id": "elite_troops",
+      "name": {
+        "ko": "정예 부대",
+        "en": "Elite Troops",
+        "es": "Tropas de élite"
+      },
+      "lab": 8,
+      "badges": 0,
+      "prerequisite": null,
+      "season": null
+    },
+    {
+      "id": "hero_training",
+      "name": {
+        "ko": "영웅 훈련",
+        "en": "Hero Training",
+        "es": "Entrenamiento de héroes"
+      },
+      "lab": 8,
+      "badges": 40040,
+      "prerequisite": null,
+      "season": null
+    },
+    {
+      "id": "alliance_recognition",
+      "name": {
+        "ko": "동맹 인정",
+        "en": "Alliance Recognition",
+        "es": "Reconocimiento de la alianza"
+      },
+      "lab": 10,
+      "badges": 360350,
+      "prerequisite": {
+        "id": "new_home",
+        "percent": 50
+      },
+      "season": null
+    },
+    {
+      "id": "fully_armed_alliance",
+      "name": {
+        "ko": "완전무장 동맹",
+        "en": "Fully Armed Alliance",
+        "es": "Alianza fuertemente armada"
+      },
+      "lab": 10,
+      "badges": 500240,
+      "prerequisite": {
+        "id": "new_home",
+        "percent": 50
+      },
+      "season": null
+    },
+    {
+      "id": "hq_management",
+      "name": {
+        "ko": "HQ 관리",
+        "en": "HQ Management",
+        "es": "Gestión del HQ"
+      },
+      "lab": 14,
+      "badges": 0,
+      "prerequisite": {
+        "id": "shelter_building",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "military_strategies",
+      "name": {
+        "ko": "군사 전략",
+        "en": "Military Strategies",
+        "es": "Estrategias militares"
+      },
+      "lab": 16,
+      "badges": 80116,
+      "prerequisite": {
+        "id": "elite_troops",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "siege_to_seize",
+      "name": {
+        "ko": "포위 섬멸",
+        "en": "Siege to Seize",
+        "es": "Asedio y captura"
+      },
+      "lab": 18,
+      "badges": 270155,
+      "prerequisite": {
+        "id": "military_strategies",
+        "percent": 15
+      },
+      "season": null
+    },
+    {
+      "id": "peace_shield",
+      "name": {
+        "ko": "평화의 방패",
+        "en": "Peace Shield",
+        "es": "Escudo de paz"
+      },
+      "lab": 18,
+      "badges": 270203,
+      "prerequisite": {
+        "id": "military_strategies",
+        "percent": 45
+      },
+      "season": null
+    },
+    {
+      "id": "rapid_growth",
+      "name": {
+        "ko": "급속 성장",
+        "en": "Rapid Growth",
+        "es": "Crecimiento rápido"
+      },
+      "lab": 22,
+      "badges": 0,
+      "prerequisite": {
+        "id": "hq_management",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "field",
+      "name": {
+        "ko": "야전",
+        "en": "Field",
+        "es": "Campo"
+      },
+      "lab": 22,
+      "badges": 600190,
+      "prerequisite": {
+        "id": "siege_to_seize",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "army_building",
+      "name": {
+        "ko": "군대 건설",
+        "en": "Army Building",
+        "es": "Construcción del ejército"
+      },
+      "lab": 25,
+      "badges": 750250,
+      "prerequisite": {
+        "id": "peace_shield",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "rider_training",
+      "name": {
+        "ko": "기병 훈련",
+        "en": "Rider Training",
+        "es": "Entrenamiento de jinetes"
+      },
+      "lab": 25,
+      "badges": 1440070,
+      "prerequisite": {
+        "id": "field",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "assaulter_training",
+      "name": {
+        "ko": "돌격병 훈련",
+        "en": "Assaulter Training",
+        "es": "Entrenamiento de asaltantes"
+      },
+      "lab": 25,
+      "badges": 1440070,
+      "prerequisite": {
+        "id": "field",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "shooter_training",
+      "name": {
+        "ko": "사수 훈련",
+        "en": "Shooter Training",
+        "es": "Entrenamiento de tiradores"
+      },
+      "lab": 25,
+      "badges": 1440070,
+      "prerequisite": {
+        "id": "field",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "unit_special_training",
+      "name": {
+        "ko": "부대 특수 훈련",
+        "en": "Unit Special Training",
+        "es": "Entrenamiento especial de unidades"
+      },
+      "lab": 30,
+      "badges": 1500300,
+      "prerequisite": null,
+      "season": null
+    },
+    {
+      "id": "age_of_steel",
+      "name": {
+        "ko": "강철 시대",
+        "en": "Age of Steel",
+        "es": "Era de Acero"
+      },
+      "lab": 30,
+      "badges": 1079410,
+      "prerequisite": null,
+      "season": {
+        "number": 1,
+        "day": 49
+      }
+    },
+    {
+      "id": "tactical_master",
+      "name": {
+        "ko": "전술 대가",
+        "en": "Tactical Master",
+        "es": "Maestro Táctico"
+      },
+      "lab": 31,
+      "badges": 6000590,
+      "prerequisite": {
+        "id": "army_building",
+        "percent": 100
+      },
+      "season": null
+    },
+    {
+      "id": "army_expansion",
+      "name": {
+        "ko": "군대 확충",
+        "en": "Army Expansion",
+        "es": "Expansión del ejército"
+      },
+      "lab": 33,
+      "badges": 0,
+      "prerequisite": {
+        "id": "rapid_growth",
+        "percent": 50
+      },
+      "season": {
+        "number": 2,
+        "day": 50
+      }
+    },
+    {
+      "id": "leaders_will",
+      "name": {
+        "ko": "지도자의 의지",
+        "en": "Leader's Will",
+        "es": "Voluntad del líder"
+      },
+      "lab": 35,
+      "badges": 6089170,
+      "prerequisite": {
+        "id": "tactical_master",
+        "percent": 80
+      },
+      "season": null
+    }
+  ]
+}

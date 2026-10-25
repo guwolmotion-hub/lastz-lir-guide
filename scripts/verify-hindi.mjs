@@ -2,12 +2,12 @@ import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
 const browser = await chromium.launch({ ...(process.env.GUIDE_BROWSER_EXECUTABLE ? { executablePath: process.env.GUIDE_BROWSER_EXECUTABLE } : { channel: 'msedge' }), headless: true });
-const allowed = new Set(['NoVa', 'Last', 'LAST', 'Z', 'NAP', 'Farm', 'VIP', 'S', 'A', 'K', 'M', 'G', 'KO', 'EN', 'ES', 'HI']);
+const allowed = new Set(['NoVa', 'NOVA', 'Wild', 'Hoggs', 'Last', 'LAST', 'Z', 'NAP', 'Farm', 'VIP', 'S', 'A', 'K', 'M', 'G', 'KO', 'EN', 'ES', 'HI']);
 let checks = 0;
 try {
   for (const width of [390, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 900 } });
-    await page.goto(process.env.GUIDE_URL || 'http://127.0.0.1:5177/');
+    await page.goto(process.env.GUIDE_URL || 'http://127.0.0.1:5180/');
     await page.getByRole('button', { name: 'HI', exact: true }).click();
     async function audit() {
       const text = await page.locator('main').innerText();
@@ -17,7 +17,7 @@ try {
       checks++;
     }
     await audit();
-    for (let index = 0; index < 9; index++) {
+    for (let index = 0; index < 11; index++) {
       await page.locator('.feature-card').nth(index).click();
       await audit();
       const tabs = page.locator('.segmented-tabs button, .day-tabs button');

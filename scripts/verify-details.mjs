@@ -10,7 +10,7 @@ try {
     await page.locator('.feature-card').first().click();
     for (const lang of ['KO', 'EN', 'ES', 'HI']) {
       await page.getByRole('button', { name: lang, exact: true }).click();
-      for (let index = 0; index < 9; index++) {
+      for (let index = 0; index < 11; index++) {
         await page.locator('.home-button').click();
         await page.locator('.feature-card').nth(index).click();
         assert.equal(await page.locator('.guide-navigation').count(), 0);

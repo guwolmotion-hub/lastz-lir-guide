@@ -1,13 +1,16 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Database, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Database, ExternalLink, FlaskConical, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 import { hindi, hindiDays } from './hindi.js';
 import { popularEvents, eventUi } from './popular-events.js';
 import { season2 } from './season2.js';
 import ToolsView from './ToolsView.jsx';
 import { toolCopy, toolMeta } from './tools-copy.js';
+import { researchGuide } from './research-guide.js';
+import ResearchTreeTable from './ResearchTreeTable.jsx';
+import { wildHoggsUrl } from './reference-links.js';
 
 const hqUpgradeRows = [
   ['16 -> 17', '18.2M', '18.2M', '3.5M', '-', '16', 'labWall'],
@@ -639,11 +642,14 @@ const featuredSections = [
   { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
   { id: 'popular', icon: Sparkles, image: 'cards/6.png' },
   { id: 'powerOrder', icon: TrendingUp, image: 'cards/power.png' },
+  { id: 'calculators', icon: Calculator, image: 'cards/calculators.webp' },
+  { id: 'research', icon: FlaskConical, image: 'cards/research.webp' },
 ];
 
 function getSectionMeta(lang, id) {
   if (id === 'calculators' || id === 'database') return toolMeta(lang, id);
   if (id === 'season2') return season2[lang];
+  if (id === 'research') return researchGuide[lang];
   if (id === 'hq') return { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc };
   if (id === 'powerOrder') {
     const guide = extraGuides[lang][id];
@@ -900,13 +906,13 @@ function CaravanView({ lang }) {
 }
 
 function ExtraGuideView({ lang, id }) {
-  const guide = id === 'season2' ? season2[lang] : extraGuides[lang][id];
+  const guide = id === 'season2' ? season2[lang] : id === 'research' ? researchGuide[lang] : extraGuides[lang][id];
   const [activeIndex, setActiveIndex] = useState(0);
   const sections = id === 'popular' ? [...popularEvents[lang], ...guide.sections.slice(1)] : guide.sections;
   const active = sections[activeIndex] || sections[0];
   const labels = eventUi[lang];
   return (
-    <section className={id === 'season2' ? 'content-block season-content' : 'content-block'}>
+    <section className={id === 'season2' || id === 'research' ? 'content-block season-content' : 'content-block'}>
       <div className="section-head">
         <div>
           <p className="section-kicker">{guide.file}</p>
@@ -921,7 +927,8 @@ function ExtraGuideView({ lang, id }) {
           <h4>{part.title}</h4>
           <p className="text-line">{part.text}</p>
         </section>)}
-        <footer className="season-source">{guide.sourceNote}</footer>
+        {active.catalog && <ResearchTreeTable lang={lang} />}
+        <footer className="season-source">{guide.sourceNote}{guide.sourceLabel && <a href={wildHoggsUrl('/tools/research/', lang)} target="_blank" rel="noopener noreferrer">{guide.sourceLabel}<ExternalLink size={13} /></a>}</footer>
       </article> : active.budget ? <article className="event-guide">
         <h3>{active.title}</h3>
         <p className="text-line">{active.intro}</p>
@@ -1143,7 +1150,7 @@ export default function App() {
     if (section === 'duel') return <WorkbookView lang={lang} />;
     if (section === 'hq') return <HqUpgradeView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
-    if (section === 'season2' || section === 'daily' || section === 'popular' || section === 'powerOrder') return <ExtraGuideView lang={lang} id={section} />;
+    if (section === 'season2' || section === 'daily' || section === 'popular' || section === 'powerOrder' || section === 'research') return <ExtraGuideView lang={lang} id={section} />;
     if (section === 'rules') {
       return (
         <>
@@ -1240,7 +1247,7 @@ export default function App() {
               {featuredSections.map(({ id, icon: Icon, image }, index) => {
                 const item = getSectionMeta(lang, id);
                 return (
-                  <button className={`feature-card ${activeCardIndex === index ? 'active' : ''}`} onClick={() => handleSectionChange(id)} key={id}>
+                  <button className={`feature-card ${activeCardIndex === index ? 'active' : ''}`} data-guide={id} onClick={() => handleSectionChange(id)} key={id}>
                     <img src={image} alt="" />
                     <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
                     <span className="feature-copy">

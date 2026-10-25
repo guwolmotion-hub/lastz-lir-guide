@@ -1,17 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Building2, Calculator, Clock3, Database, ExternalLink, Package, Percent, RotateCcw, Search, Shield, TrendingUp, Users, X } from 'lucide-react';
 import reference from './game-reference.json';
 import workbook from './workbook-data.json';
 import { toolCopy, hindiHeroNames } from './tools-copy.js';
+import { wildHoggsUrl } from './reference-links.js';
+import { advancedCopy } from './advanced-copy.js';
 import { UNITS, caravanPlan, discountPlan, experiencePlan, hqPlan, numberInRange, packPlan, safeStoredPlan, speedupPlan } from './tool-math.js';
 import './tools.css';
 
-const CALCULATORS = [['hq', Building2], ['exp', Users], ['caravan', Shield], ['speedups', Clock3], ['packs', Package], ['discount', Percent]];
+const AdvancedTools = lazy(() => import('./AdvancedTools.jsx'));
+const CALCULATORS = [['research', TrendingUp], ['buildings', Building2], ['heroes', Users], ['tank', Shield], ['equipment', Package], ['caravan', Shield], ['exploration', Search], ['exp', Users], ['lucky', Percent], ['other', Clock3]];
 const DATABASES = [['heroes', Users], ['hq', Building2], ['caravan', Shield], ['exp', TrendingUp]];
 const SPEEDS = [1, 5, 15, 30, 60, 180, 480, 1440];
 const LEVELS = workbook.sheets['캐러밴 표'].levels;
 const range = (min, max) => Number.isInteger(min) && Number.isInteger(max) && max >= min && max - min < 500 ? Array.from({ length: max - min + 1 }, (_, index) => min + index) : [];
-const sourceLang = lang => lang === 'hi' ? 'en' : lang;
 const heroName = (hero, lang) => lang === 'hi' ? hindiHeroNames[hero.id] : hero.name[lang] || hero.name.en;
 const format = (value, lang) => new Intl.NumberFormat(lang, { maximumFractionDigits: 2 }).format(value);
 const compact = (value, lang) => {
@@ -62,7 +64,7 @@ function Invalid({ copy }) { return <p className="tool-validation" role="alert">
 
 function Source({ lang, type = 'original' }) {
   const copy = toolCopy[lang];
-  const url = type === 'heroes' || type === 'heroExp' ? reference.sources[type].replace('/ko/', '/' + sourceLang(lang) + '/') : null;
+  const url = type === 'heroes' || type === 'heroExp' ? wildHoggsUrl(reference.sources[type], lang) : null;
   return <footer className="tool-source"><span>{copy.source}: {url ? <a href={url} target="_blank" rel="noopener noreferrer">Wild Hoggs <ExternalLink size={12} /></a> : copy.original}</span>{url && <span>{copy.checked}: {reference.checkedAt}</span>}</footer>;
 }
 
@@ -141,7 +143,7 @@ function HeroDialog({ hero, lang, onClose, onExperience }) {
     const box = dialog.current.getBoundingClientRect();
     if (event.target === dialog.current && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) onClose();
   };
-  return <dialog className="hero-dialog" ref={dialog} onCancel={onClose} onClick={onBackdrop} aria-labelledby="hero-name"><button className="tool-icon-button dialog-close" onClick={onClose} aria-label={copy.close} title={copy.close}><X size={20} /></button><div className="hero-dialog-heading"><img src={hero.image} alt="" /><div><span className="hero-grade">{hero.rarity}</span><h2 id="hero-name">{heroName(hero, lang)}</h2><p>{copy.factions[hero.faction]}</p></div></div><dl className="hero-facts"><div><dt>{copy.role}</dt><dd>{copy.roles[hero.role]}</dd></div><div><dt>{copy.rarity}</dt><dd>{hero.rarity}</dd></div></dl>{hero.globalPassive && <p className="hero-passive"><Shield size={15} />{copy.passive}</p>}<div className="hero-dialog-actions"><button className="tool-primary" onClick={() => onExperience(hero)}><Calculator size={17} />{copy.expAction}</button><a href={'https://wild-hoggs.com' + hero.sourcePath.replace('{lang}', sourceLang(lang))} target="_blank" rel="noopener noreferrer">{copy.detailSource}<ExternalLink size={15} /></a></div></dialog>;
+  return <dialog className="hero-dialog" ref={dialog} onCancel={onClose} onClick={onBackdrop} aria-labelledby="hero-name"><button className="tool-icon-button dialog-close" onClick={onClose} aria-label={copy.close} title={copy.close}><X size={20} /></button><div className="hero-dialog-heading"><img src={hero.image} alt="" /><div><span className="hero-grade">{hero.rarity}</span><h2 id="hero-name">{heroName(hero, lang)}</h2><p>{copy.factions[hero.faction]}</p></div></div><dl className="hero-facts"><div><dt>{copy.role}</dt><dd>{copy.roles[hero.role]}</dd></div><div><dt>{copy.rarity}</dt><dd>{hero.rarity}</dd></div></dl>{hero.globalPassive && <p className="hero-passive"><Shield size={15} />{copy.passive}</p>}<div className="hero-dialog-actions"><button className="tool-primary" onClick={() => onExperience(hero)}><Calculator size={17} />{copy.expAction}</button><a href={wildHoggsUrl(hero.sourcePath, lang)} target="_blank" rel="noopener noreferrer">{copy.detailSource}<ExternalLink size={15} /></a></div></dialog>;
 }
 
 function HeroDatabase({ lang, onExperience }) {
@@ -187,7 +189,8 @@ function ToolTabs({ tabs, active, onChange, copy, label }) {
 
 export default function ToolsView({ lang, mode, onNavigate, hqRows, prerequisites, buildings }) {
   const copy = toolCopy[lang];
-  const [calcTab, setCalcTab] = useState('hq');
+  const [calcTab, setCalcTab] = useState('research');
+  const [otherTab, setOtherTab] = useState('speedups');
   const [databaseTab, setDatabaseTab] = useState('heroes');
   const [selectedHero, setSelectedHero] = useState(null);
   const calculator = mode === 'calculators';
@@ -195,7 +198,9 @@ export default function ToolsView({ lang, mode, onNavigate, hqRows, prerequisite
   const changeTab = calculator ? setCalcTab : setDatabaseTab;
   const tabs = calculator ? CALCULATORS : DATABASES;
   const onExperience = hero => { setSelectedHero(hero); setCalcTab('exp'); onNavigate('calculators'); };
-  return <section className="tools-workspace"><nav className="tools-modes" aria-label="NoVa"><button onClick={() => onNavigate('calculators')} className={calculator ? 'active' : ''}><Calculator size={18} />{copy.calculators}</button><button onClick={() => onNavigate('database')} className={!calculator ? 'active' : ''}><Database size={18} />{copy.database}</button></nav><ToolTabs tabs={tabs} active={tab} onChange={changeTab} copy={copy} label={copy[mode]} /><div className="tool-panel" role="tabpanel" id="tool-panel" aria-labelledby={'tool-tab-' + tab}>
+  return <section className="tools-workspace"><nav className="tools-modes" aria-label="NoVa"><button onClick={() => onNavigate('calculators')} className={calculator ? 'active' : ''}><Calculator size={18} />{copy.calculators}</button><button onClick={() => onNavigate('database')} className={!calculator ? 'active' : ''}><Database size={18} />{copy.database}</button></nav><ToolTabs tabs={tabs} active={tab} onChange={changeTab} copy={{...copy,...advancedCopy[lang],exp:copy.exp,caravan:copy.caravan}} label={copy[mode]} /><div className="tool-panel" role="tabpanel" id="tool-panel" aria-labelledby={'tool-tab-' + tab}>
+    {calculator && ['research','buildings','heroes','tank','equipment','exploration','lucky'].includes(tab) && <Suspense fallback={<p className="tool-note">…</p>}><AdvancedTools tab={tab} lang={lang} heroDatabase={<HeroDatabase lang={lang} onExperience={onExperience}/>} discountCalculator={<DiscountCalculator lang={lang}/>}/></Suspense>}
+    {calculator && tab === 'other' && <><div className="advanced-subtabs">{['speedups','packs'].map(k=><button key={k} aria-pressed={otherTab===k} onClick={()=>setOtherTab(k)}>{copy[k]}</button>)}</div>{otherTab==='speedups'?<SpeedupCalculator lang={lang}/>:<PackCalculator lang={lang}/>}</>}
     {calculator && tab === 'hq' && <HqCalculator lang={lang} rows={hqRows} />}
     {calculator && tab === 'exp' && <HeroCalculator lang={lang} selected={selectedHero} />}
     {calculator && tab === 'caravan' && <CaravanCalculator lang={lang} />}
@@ -206,5 +211,5 @@ export default function ToolsView({ lang, mode, onNavigate, hqRows, prerequisite
     {!calculator && tab === 'hq' && <BuildingDatabase lang={lang} rows={hqRows} prerequisites={prerequisites} buildings={buildings} />}
     {!calculator && tab === 'caravan' && <><p className="tool-note">{copy.caravanNote}</p><DataTable id="caravan-database" columns={[copy.step, copy.startPower, copy.endPower]} rows={LEVELS.map(row => [row.level, row.start, row.end || '—'])} /><Source lang={lang} /></>}
     {!calculator && tab === 'exp' && <ExperienceDatabase lang={lang} />}
-  </div><a className="tools-reference" href={'https://wild-hoggs.com/' + sourceLang(lang) + '/'} target="_blank" rel="noopener noreferrer"><span>{copy.reference}<small>Wild Hoggs · {copy.external}</small></span><ExternalLink size={18} /></a></section>;
+  </div><a className="tools-reference" href={wildHoggsUrl('/', lang)} target="_blank" rel="noopener noreferrer"><span>{copy.reference}<small>Wild Hoggs · {copy.external}</small></span><ExternalLink size={18} /></a></section>;
 }

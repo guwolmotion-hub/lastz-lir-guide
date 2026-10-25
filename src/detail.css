@@ -241,6 +241,23 @@
 .season-guide .reading-section h4 { margin: 0 0 10px; font-size: 17px; line-height: 1.6; }
 .season-guide .text-line { margin: 0; line-height: 1.95; word-break: normal; overflow-wrap: break-word; }
 .season-guide .season-source { margin-top: 18px; padding-top: 18px; border-top: 1px solid #34363b; color: #aeb1b9; font-size: 12px; line-height: 1.8; }
+.season-source > a { display: flex; align-items: center; gap: 7px; width: fit-content; margin-top: 12px; color: #a6d9c6; text-underline-offset: 3px; }
+.research-catalog { margin-top: 24px; }
+.research-filter { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 18px 24px; }
+.research-filter .tool-field { width: 180px; max-width: 100%; }
+.research-toggle { display: flex; align-items: center; gap: 9px; padding-bottom: 11px; color: #ced5df; font-size: 13px; line-height: 1.6; }
+.research-toggle input { flex: 0 0 17px; width: 17px; height: 17px; accent-color: #ed8291; }
+.research-count { color: #c4ced9; margin: 22px 0 14px; font-size: 13px; }
+.research-table-wrap { max-width: 100%; max-height: 560px; overflow: auto; border: 1px solid #3a424b; border-radius: 5px; scrollbar-width: thin; }
+.research-table-wrap table { min-width: 700px; width: 100%; font-size: 13px; }
+.detail-page .research-table-wrap th, .detail-page .research-table-wrap td { padding: 13px; line-height: 1.75; }
+.research-table-wrap td:first-child { white-space: normal; min-width: 150px; }
+.research-table-wrap td strong { display: block; font-size: 13px; line-height: 1.7; font-weight: 650; }
+.research-table-wrap td small { display: block; margin-top: 3px; font-size: 11px; line-height: 1.6; }
+.lab-met { color: #94d8b8; }
+.lab-missing { color: #d8aeb6; }
+.research-requirement { display: block; }
+.research-table-wrap a { display: inline-flex; align-items: center; gap: 5px; color: #a6d9c6; text-underline-offset: 3px; }
 .detail-page[lang="ko"] .season-guide h4,
 .detail-page[lang="ko"] .season-guide .text-line,
 .detail-page[lang="ko"] .season-guide .season-source { word-break: keep-all; }
