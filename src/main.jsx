@@ -635,6 +635,8 @@ const sectionLabels = {
 const featuredSections = [
   { id: 'season2', icon: Shield, image: 'cards/season2.png' },
   { id: 'duel', icon: Table2, image: 'cards/1.png' },
+  { id: 'calculators', icon: Calculator, image: 'cards/calculators.webp' },
+  { id: 'research', icon: FlaskConical, image: 'cards/research-potion.webp' },
   { id: 'daily', icon: ClipboardCheck, image: 'cards/5.png' },
   { id: 'hq', icon: Building2, image: 'cards/7.png' },
   { id: 'caravan', icon: Calculator, image: 'cards/2.png' },
@@ -642,8 +644,6 @@ const featuredSections = [
   { id: 'events', icon: CalendarDays, image: 'cards/4.png' },
   { id: 'popular', icon: Sparkles, image: 'cards/6.png' },
   { id: 'powerOrder', icon: TrendingUp, image: 'cards/power.png' },
-  { id: 'calculators', icon: Calculator, image: 'cards/calculators.webp' },
-  { id: 'research', icon: FlaskConical, image: 'cards/research.webp' },
 ];
 
 function getSectionMeta(lang, id) {
