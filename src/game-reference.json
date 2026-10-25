@@ -1,0 +1,690 @@
+{
+  "checkedAt": "2026-10-26",
+  "sources": {
+    "heroes": "https://wild-hoggs.com/ko/heroes/",
+    "heroExp": "https://wild-hoggs.com/ko/tools/hero-exp/"
+  },
+  "heroes": [
+    {
+      "id": "amber",
+      "name": {
+        "ko": "앰버",
+        "en": "Amber",
+        "es": "Amber"
+      },
+      "rarity": "S4",
+      "faction": "guard-of-order",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/amber.webp",
+      "sourcePath": "/{lang}/heroes/amber/"
+    },
+    {
+      "id": "alma",
+      "name": {
+        "ko": "알마",
+        "en": "Alma",
+        "es": "Alma"
+      },
+      "rarity": "S2",
+      "faction": "wings-of-dawn",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/alma.webp",
+      "sourcePath": "/{lang}/heroes/alma/"
+    },
+    {
+      "id": "amelia",
+      "name": {
+        "ko": "에밀리아",
+        "en": "Amelia",
+        "es": "Emilia"
+      },
+      "rarity": "S",
+      "faction": "wings-of-dawn",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/amelia.webp",
+      "sourcePath": "/{lang}/heroes/amelia/"
+    },
+    {
+      "id": "angelina",
+      "name": {
+        "ko": "안젤리나",
+        "en": "Angelina",
+        "es": "Angelina"
+      },
+      "rarity": "B",
+      "faction": "wings-of-dawn",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/angelina.webp",
+      "sourcePath": "/{lang}/heroes/angelina/"
+    },
+    {
+      "id": "athena",
+      "name": {
+        "ko": "아테나",
+        "en": "Athena",
+        "es": "Atenea"
+      },
+      "rarity": "B",
+      "faction": "guard-of-order",
+      "role": "attack",
+      "globalPassive": true,
+      "image": "heroes/athena.webp",
+      "sourcePath": "/{lang}/heroes/athena/"
+    },
+    {
+      "id": "audrey",
+      "name": {
+        "ko": "오드리",
+        "en": "Audrey",
+        "es": "Audrey"
+      },
+      "rarity": "B",
+      "faction": "blood-rose",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/audrey.webp",
+      "sourcePath": "/{lang}/heroes/audrey/"
+    },
+    {
+      "id": "ava",
+      "name": {
+        "ko": "에바",
+        "en": "Ava",
+        "es": "Eva"
+      },
+      "rarity": "A",
+      "faction": "blood-rose",
+      "role": "support",
+      "globalPassive": false,
+      "image": "heroes/ava.webp",
+      "sourcePath": "/{lang}/heroes/ava/"
+    },
+    {
+      "id": "bella",
+      "name": {
+        "ko": "벨라",
+        "en": "Bella",
+        "es": "Bella"
+      },
+      "rarity": "S2",
+      "faction": "blood-rose",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/bella.webp",
+      "sourcePath": "/{lang}/heroes/bella/"
+    },
+    {
+      "id": "chicha",
+      "name": {
+        "ko": "치나츠",
+        "en": "Chicha",
+        "es": "Chinatsu"
+      },
+      "rarity": "S",
+      "faction": "guard-of-order",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/chicha.webp",
+      "sourcePath": "/{lang}/heroes/chicha/"
+    },
+    {
+      "id": "christina",
+      "name": {
+        "ko": "크리스티나",
+        "en": "Christina",
+        "es": "Cristina"
+      },
+      "rarity": "A",
+      "faction": "wings-of-dawn",
+      "role": "support",
+      "globalPassive": false,
+      "image": "heroes/christina.webp",
+      "sourcePath": "/{lang}/heroes/christina/"
+    },
+    {
+      "id": "dodomeki",
+      "name": {
+        "ko": "백목귀",
+        "en": "Dodomeki",
+        "es": "Cienojos"
+      },
+      "rarity": "S3",
+      "faction": "guard-of-order",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/dodomeki.webp",
+      "sourcePath": "/{lang}/heroes/dodomeki/"
+    },
+    {
+      "id": "elizabeth",
+      "name": {
+        "ko": "엘리자베스",
+        "en": "Elizabeth",
+        "es": "Elizabeth"
+      },
+      "rarity": "A",
+      "faction": "guard-of-order",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/elizabeth.webp",
+      "sourcePath": "/{lang}/heroes/elizabeth/"
+    },
+    {
+      "id": "evelyn",
+      "name": {
+        "ko": "에블린",
+        "en": "Evelyn",
+        "es": "Evelyn"
+      },
+      "rarity": "S1",
+      "faction": "guard-of-order",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/evelyn.webp",
+      "sourcePath": "/{lang}/heroes/evelyn/"
+    },
+    {
+      "id": "fiona",
+      "name": {
+        "ko": "피오나",
+        "en": "Fiona",
+        "es": "Fiona"
+      },
+      "rarity": "A",
+      "faction": "wings-of-dawn",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/fiona.webp",
+      "sourcePath": "/{lang}/heroes/fiona/"
+    },
+    {
+      "id": "giselle",
+      "name": {
+        "ko": "지젤",
+        "en": "Giselle",
+        "es": "Giselle"
+      },
+      "rarity": "B",
+      "faction": "blood-rose",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/giselle.webp",
+      "sourcePath": "/{lang}/heroes/giselle/"
+    },
+    {
+      "id": "harleyna",
+      "name": {
+        "ko": "할리나",
+        "en": "Harleyna",
+        "es": "Halina"
+      },
+      "rarity": "S2",
+      "faction": "guard-of-order",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/harleyna.webp",
+      "sourcePath": "/{lang}/heroes/harleyna/"
+    },
+    {
+      "id": "isabella",
+      "name": {
+        "ko": "이사벨라",
+        "en": "Isabella",
+        "es": "Isabella"
+      },
+      "rarity": "A",
+      "faction": "wings-of-dawn",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/isabella.webp",
+      "sourcePath": "/{lang}/heroes/isabella/"
+    },
+    {
+      "id": "katrina",
+      "name": {
+        "ko": "카트리나",
+        "en": "Katrina",
+        "es": "Katrina"
+      },
+      "rarity": "S",
+      "faction": "blood-rose",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/katrina.webp",
+      "sourcePath": "/{lang}/heroes/katrina/"
+    },
+    {
+      "id": "laura",
+      "name": {
+        "ko": "로라",
+        "en": "Laura",
+        "es": "Laura"
+      },
+      "rarity": "S",
+      "faction": "wings-of-dawn",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/laura.webp",
+      "sourcePath": "/{lang}/heroes/laura/"
+    },
+    {
+      "id": "leah",
+      "name": {
+        "ko": "레아",
+        "en": "Leah",
+        "es": "Leah"
+      },
+      "rarity": "A",
+      "faction": "guard-of-order",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/leah.webp",
+      "sourcePath": "/{lang}/heroes/leah/"
+    },
+    {
+      "id": "licia",
+      "name": {
+        "ko": "리시아",
+        "en": "Licia",
+        "es": "Lysia"
+      },
+      "rarity": "S3",
+      "faction": "blood-rose",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/licia.webp",
+      "sourcePath": "/{lang}/heroes/licia/"
+    },
+    {
+      "id": "liliana",
+      "name": {
+        "ko": "릴리아나",
+        "en": "Liliana",
+        "es": "Liliana"
+      },
+      "rarity": "S3",
+      "faction": "wings-of-dawn",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/liliana.webp",
+      "sourcePath": "/{lang}/heroes/liliana/"
+    },
+    {
+      "id": "maria",
+      "name": {
+        "ko": "마리아",
+        "en": "Maria",
+        "es": "María"
+      },
+      "rarity": "A",
+      "faction": "guard-of-order",
+      "role": "support",
+      "globalPassive": false,
+      "image": "heroes/maria.webp",
+      "sourcePath": "/{lang}/heroes/maria/"
+    },
+    {
+      "id": "mia",
+      "name": {
+        "ko": "미아",
+        "en": "Mia",
+        "es": "Mia"
+      },
+      "rarity": "S",
+      "faction": "guard-of-order",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/mia.webp",
+      "sourcePath": "/{lang}/heroes/mia/"
+    },
+    {
+      "id": "miranda",
+      "name": {
+        "ko": "미란다",
+        "en": "Miranda",
+        "es": "Miranda"
+      },
+      "rarity": "A",
+      "faction": "blood-rose",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/miranda.webp",
+      "sourcePath": "/{lang}/heroes/miranda/"
+    },
+    {
+      "id": "natalie",
+      "name": {
+        "ko": "나탈리",
+        "en": "Natalie",
+        "es": "Natalia"
+      },
+      "rarity": "B",
+      "faction": "wings-of-dawn",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/natalie.webp",
+      "sourcePath": "/{lang}/heroes/natalie/"
+    },
+    {
+      "id": "nyx",
+      "name": {
+        "ko": "니콜스",
+        "en": "Nyx",
+        "es": "Nyx"
+      },
+      "rarity": "S1",
+      "faction": "wings-of-dawn",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/nyx.webp",
+      "sourcePath": "/{lang}/heroes/nyx/"
+    },
+    {
+      "id": "oliveira",
+      "name": {
+        "ko": "올리베이라",
+        "en": "Oliveira",
+        "es": "Oliveira"
+      },
+      "rarity": "S1",
+      "faction": "blood-rose",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/oliveira.webp",
+      "sourcePath": "/{lang}/heroes/oliveira/"
+    },
+    {
+      "id": "queenie",
+      "name": {
+        "ko": "퀴니",
+        "en": "Queenie",
+        "es": "Queenie"
+      },
+      "rarity": "S4",
+      "faction": "wings-of-dawn",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/queenie.webp",
+      "sourcePath": "/{lang}/heroes/queenie/"
+    },
+    {
+      "id": "sakura",
+      "name": {
+        "ko": "사쿠라",
+        "en": "Sakura",
+        "es": "Sakura"
+      },
+      "rarity": "S1",
+      "faction": "guard-of-order",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/sakura.webp",
+      "sourcePath": "/{lang}/heroes/sakura/"
+    },
+    {
+      "id": "scarlett",
+      "name": {
+        "ko": "스칼렛",
+        "en": "Scarlett",
+        "es": "Scarlett"
+      },
+      "rarity": "S1",
+      "faction": "wings-of-dawn",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/scarlett.webp",
+      "sourcePath": "/{lang}/heroes/scarlett/"
+    },
+    {
+      "id": "selena",
+      "name": {
+        "ko": "셀레나",
+        "en": "Selena",
+        "es": "Selena"
+      },
+      "rarity": "S1",
+      "faction": "blood-rose",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/selena.webp",
+      "sourcePath": "/{lang}/heroes/selena/"
+    },
+    {
+      "id": "sophia",
+      "name": {
+        "ko": "소피아",
+        "en": "Sophia",
+        "es": "Sofía"
+      },
+      "rarity": "S",
+      "faction": "blood-rose",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/sophia.webp",
+      "sourcePath": "/{lang}/heroes/sophia/"
+    },
+    {
+      "id": "vivian",
+      "name": {
+        "ko": "비비안",
+        "en": "Vivian",
+        "es": "Vivian"
+      },
+      "rarity": "A",
+      "faction": "blood-rose",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/vivian.webp",
+      "sourcePath": "/{lang}/heroes/vivian/"
+    },
+    {
+      "id": "william",
+      "name": {
+        "ko": "윌리엄",
+        "en": "William",
+        "es": "William"
+      },
+      "rarity": "B",
+      "faction": "guard-of-order",
+      "role": "defense",
+      "globalPassive": false,
+      "image": "heroes/william.webp",
+      "sourcePath": "/{lang}/heroes/william/"
+    },
+    {
+      "id": "yu_chan",
+      "name": {
+        "ko": "옥선",
+        "en": "Yu Chan",
+        "es": "Yu Chan"
+      },
+      "rarity": "S4",
+      "faction": "blood-rose",
+      "role": "attack",
+      "globalPassive": false,
+      "image": "heroes/yu_chan.webp",
+      "sourcePath": "/{lang}/heroes/yu_chan/"
+    }
+  ],
+  "heroExp": [
+    0,
+    50,
+    100,
+    150,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    900,
+    1100,
+    1300,
+    1500,
+    1700,
+    1900,
+    2100,
+    2300,
+    2500,
+    2700,
+    3000,
+    3300,
+    3600,
+    3900,
+    4200,
+    4500,
+    4800,
+    5100,
+    5400,
+    5700,
+    6000,
+    7000,
+    9000,
+    12000,
+    16000,
+    21000,
+    27000,
+    34000,
+    42000,
+    51000,
+    61000,
+    74000,
+    90000,
+    110000,
+    130000,
+    160000,
+    180000,
+    220000,
+    250000,
+    290000,
+    330000,
+    390000,
+    470000,
+    570000,
+    690000,
+    840000,
+    1000000,
+    1200000,
+    1500000,
+    1700000,
+    2000000,
+    2300000,
+    2600000,
+    2900000,
+    3200000,
+    3500000,
+    3800000,
+    4100000,
+    4400000,
+    4700000,
+    5200000,
+    5700000,
+    6200000,
+    6700000,
+    7200000,
+    7700000,
+    8200000,
+    8700000,
+    9200000,
+    9700000,
+    10500000,
+    11200000,
+    12000000,
+    12700000,
+    13500000,
+    14200000,
+    15000000,
+    15700000,
+    16500000,
+    17200000,
+    18200000,
+    19200000,
+    20000000,
+    21000000,
+    22000000,
+    23000000,
+    24000000,
+    25000000,
+    26000000,
+    27000000,
+    29000000,
+    31000000,
+    33000000,
+    35000000,
+    37000000,
+    39000000,
+    41000000,
+    43000000,
+    45000000,
+    47000000,
+    49000000,
+    51000000,
+    53000000,
+    55000000,
+    57000000,
+    59000000,
+    61000000,
+    63000000,
+    65000000,
+    67000000,
+    70000000,
+    73000000,
+    76000000,
+    79000000,
+    82000000,
+    85000000,
+    88000000,
+    91000000,
+    94000000,
+    97000000,
+    100000000,
+    103000000,
+    106000000,
+    109000000,
+    112000000,
+    115000000,
+    118000000,
+    121000000,
+    124000000,
+    127000000,
+    132000000,
+    137000000,
+    142000000,
+    147000000,
+    152000000,
+    157000000,
+    162000000,
+    167000000,
+    172000000,
+    177000000,
+    210000000,
+    240000000,
+    270000000,
+    300000000,
+    330000000,
+    360000000,
+    400000000,
+    430000000,
+    470000000,
+    500000000,
+    540000000,
+    580000000,
+    620000000,
+    660000000,
+    700000000,
+    750000000,
+    800000000,
+    850000000,
+    900000000,
+    950000000,
+    1000000000,
+    1100000000,
+    1200000000,
+    1300000000,
+    1400000000
+  ]
+}

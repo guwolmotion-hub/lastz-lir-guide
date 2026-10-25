@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, Database, Home, Languages, ListChecks, Shield, Sparkles, Swords, Table2, TrendingUp, Users } from 'lucide-react';
 import workbook from './workbook-data.json';
 import { hindi, hindiDays } from './hindi.js';
 import { popularEvents, eventUi } from './popular-events.js';
 import { season2 } from './season2.js';
+import ToolsView from './ToolsView.jsx';
+import { toolCopy, toolMeta } from './tools-copy.js';
 
 const hqUpgradeRows = [
   ['16 -> 17', '18.2M', '18.2M', '3.5M', '-', '16', 'labWall'],
@@ -640,6 +642,7 @@ const featuredSections = [
 ];
 
 function getSectionMeta(lang, id) {
+  if (id === 'calculators' || id === 'database') return toolMeta(lang, id);
   if (id === 'season2') return season2[lang];
   if (id === 'hq') return { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc };
   if (id === 'powerOrder') {
@@ -1136,6 +1139,7 @@ export default function App() {
     return () => window.removeEventListener('resize', updateActiveCard);
   }, [page, lang]);
   const renderContent = () => {
+    if (section === 'calculators' || section === 'database') return <ToolsView lang={lang} mode={section} onNavigate={handleSectionChange} hqRows={hqUpgradeRows} prerequisites={prerequisiteRowsForLang(lang)} buildings={buildingNames[lang]} />;
     if (section === 'duel') return <WorkbookView lang={lang} />;
     if (section === 'hq') return <HqUpgradeView lang={lang} />;
     if (section === 'caravan') return <CaravanView lang={lang} />;
@@ -1190,8 +1194,12 @@ export default function App() {
 
   return (
     <main className="home-page" lang={lang} style={{ '--page-bg': 'url("brand/background-v2.png")' }}>
-      <nav className="topbar">
+      <nav className="topbar home-topbar">
         <div className="brand"><img src="brand/logo-gold.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
+        <div className="tool-shortcuts">
+          <button className="open-calculators" onClick={() => handleSectionChange('calculators')}><Calculator size={17} />{toolCopy[lang].calculators}</button>
+          <button className="open-database" onClick={() => handleSectionChange('database')}><Database size={17} />{toolCopy[lang].database}</button>
+        </div>
         <div className="lang-switch" aria-label="Language">
           <Languages size={16} />
           {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
