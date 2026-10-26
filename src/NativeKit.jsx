@@ -1,0 +1,11 @@
+import React,{useEffect,useRef}from'react';import{X}from'lucide-react';
+import art from './tool-art.json';import{nativeCopy}from'./native-copy.js';import{fmt}from'./advanced-ui.jsx';
+import './native-tools.css';
+export const picture=path=>art.art[path];
+export function GameImage({path,...props}){const src=picture(path);return src?<img src={src} alt="" {...props}/>:null;}
+export function NativeModal({lang,title,children,onClose}){const ref=useRef(null);useEffect(()=>{const e=ref.current;e.showModal();return()=>e.close();},[]);return <dialog ref={ref} className="nt-modal" onCancel={onClose} onClick={e=>{if(e.target===ref.current){const r=ref.current.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)onClose();}}}><button className="nt-close" aria-label={nativeCopy[lang].close} onClick={onClose}><X size={18}/></button><h3>{title}</h3>{children}</dialog>;}
+export function Stepper({id,value,onChange,max=350,min=0,label}){return <label className="nt-stepper"><span>{label}</span><div>{[-10,-1].map(n=><button key={n} type="button" onClick={()=>onChange(Math.max(min,Number(value)+n))}>{n}</button>)}<input id={id} type="number" min={min} max={max} value={value} onChange={e=>onChange(Math.max(min,Math.min(max,Number(e.target.value)||0)))}/>{[1,10].map(n=><button key={n} type="button" onClick={()=>onChange(Math.min(max,Number(value)+n))}>+{n}</button>)}</div></label>;}
+export function ResourceSummary({values,lang}){return <div className="nt-resource-summary">{Object.entries(values).map(([k,v])=><div key={k}><span>{k}</span><strong>{fmt(v,lang)}</strong></div>)}</div>;}
+export function NativeTabs({items,active,onChange}){return <div className="nt-tabs">{items.map(([id,name])=><button key={id} aria-pressed={active===id} onClick={()=>onChange(id)}>{name}</button>)}</div>;}
+export function Factions({lang,value,onChange,labels}){return <div className="nt-factions">{['blood-rose','wings-of-dawn','guard-of-order'].map((id,i)=><button key={id} className={'faction-'+i} aria-pressed={value===id} onClick={()=>onChange(id)}><GameImage path={'/images/heroes/symbols/'+id+'.webp'}/><span>{labels[id]}</span></button>)}</div>;}
+export const safeMap=value=>{try{const p=JSON.parse(value);return p&&typeof p==='object'&&!Array.isArray(p)?p:{};}catch{return{};}};

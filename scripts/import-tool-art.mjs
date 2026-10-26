@@ -1,0 +1,14 @@
+import{readFile,writeFile,mkdir}from'node:fs/promises';import{createHash}from'node:crypto';
+const snapshots=JSON.parse(await readFile('qa/tool-reference/snapshots.json','utf8')),raw=JSON.parse(await readFile('qa/reference-literals.json','utf8'));
+const urls=new Set(Object.values(snapshots).flatMap(s=>s.images.map(i=>i.src)).filter(u=>u&&!/logo|\/nav\//.test(u)));
+for(const file of ['extra-images.json','equip-images.json'])for(const i of JSON.parse(await readFile('qa/tool-reference/'+file,'utf8')))if(i.src&&!/nav|logo/.test(i.src))urls.add(i.src);
+const buildings=Object.values(raw.buildings).find(v=>Array.isArray(v)&&v.length===32&&v[0]?.costs);buildings.forEach(b=>urls.add(b.image));
+for(const m of Object.values(raw.tank.C0))for(const color of ['grey','blue','purple','orange','red'])urls.add('/images/garage/modules/'+m.bild+'-'+color+'.webp');
+for(const a of Object.values(Object.values(raw.heroAccount).find(v=>v.attr&&v.kosten&&v.resonanz).attr))urls.add('/images/garage/plugins/'+a.bild+'.webp');
+for(const id of ['cheetah','hercules','destroyer','destroyer-ex','conqueror'])urls.add('/images/garage/vehicles/'+id+'.webp');
+const equipment=Object.values(raw.equipment).find(v=>v.teile&&v.verstaerken);for(const item of Object.values(equipment.teile))if(item.bild)urls.add('/images/equipment/'+item.bild+'.webp');
+for(const item of equipment.teile)urls.add('/images/equipment/'+item.icon+'.webp');
+await mkdir('public/game-tools',{recursive:true});const art={},failed=[],entries=[...urls];let cursor=0;
+await Promise.all(Array.from({length:8},async()=>{while(cursor<entries.length){const u=entries[cursor++];if(!u.startsWith('/'))continue;try{const r=await fetch('https://wild-hoggs.com'+u);if(!r.ok){failed.push(u);continue;}const file='game-tools/'+createHash('sha1').update(u).digest('hex').slice(0,14)+'.webp';await writeFile('public/'+file,Buffer.from(await r.arrayBuffer()));art[u]=file;}catch{failed.push(u);}}}));
+const game={art,buildingImages:Object.fromEntries(buildings.map(b=>[b.id,art[b.image]])),minor:raw.tank.Ce,moduleImages:Object.fromEntries(Object.entries(raw.tank.C0).map(([id,m])=>[id,Object.fromEntries(['grey','blue','purple','orange','red'].map(c=>[c,art['/images/garage/modules/'+m.bild+'-'+c+'.webp']]))])),forms:raw.tank.We};
+await writeFile('src/tool-art.json',JSON.stringify(game));console.log('Local game artwork:',Object.keys(art).length,'unavailable:',failed.length);await writeFile('qa/tool-reference/unavailable.json',JSON.stringify(failed));

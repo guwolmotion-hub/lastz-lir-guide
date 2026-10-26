@@ -8,9 +8,13 @@ import { advancedCopy } from './advanced-copy.js';
 import { UNITS, caravanPlan, discountPlan, experiencePlan, hqPlan, numberInRange, packPlan, safeStoredPlan, speedupPlan } from './tool-math.js';
 import './tools.css';
 
+const NativeHeroes = lazy(() => import('./NativeCollections.jsx').then(m => ({default:m.HeroCatalog})));
+const NativeExperience = lazy(() => import('./NativeSimpleTools.jsx').then(m => ({default:m.ExperienceStudio})));
+const NativeCaravan = lazy(() => import('./NativeSimpleTools.jsx').then(m => ({default:m.CaravanStudio})));
+function LocalHeroCatalog(props) { return <Suspense fallback={<p>?</p>}><NativeHeroes {...props}/></Suspense>; }
 const AdvancedTools = lazy(() => import('./AdvancedTools.jsx'));
-const CALCULATORS = [['research', TrendingUp], ['buildings', Building2], ['heroes', Users], ['tank', Shield], ['equipment', Package], ['caravan', Shield], ['exploration', Search], ['exp', Users], ['lucky', Percent], ['other', Clock3]];
-const DATABASES = [['heroes', Users], ['hq', Building2], ['caravan', Shield], ['exp', TrendingUp]];
+const CALCULATORS = [['heroes', Users], ['tank', Shield], ['equipment', Package], ['exploration', Search], ['exp', Users], ['lucky', Percent], ['other', Clock3]];
+const DATABASES = [['heroes', Users], ['exp', TrendingUp]];
 const SPEEDS = [1, 5, 15, 30, 60, 180, 480, 1440];
 const LEVELS = workbook.sheets['캐러밴 표'].levels;
 const range = (min, max) => Number.isInteger(min) && Number.isInteger(max) && max >= min && max - min < 500 ? Array.from({ length: max - min + 1 }, (_, index) => min + index) : [];
@@ -65,7 +69,7 @@ function Invalid({ copy }) { return <p className="tool-validation" role="alert">
 function Source({ lang, type = 'original' }) {
   const copy = toolCopy[lang];
   const url = type === 'heroes' || type === 'heroExp' ? wildHoggsUrl(reference.sources[type], lang) : null;
-  return <footer className="tool-source"><span>{copy.source}: {url ? <a href={url} target="_blank" rel="noopener noreferrer">Wild Hoggs <ExternalLink size={12} /></a> : copy.original}</span>{url && <span>{copy.checked}: {reference.checkedAt}</span>}</footer>;
+  return <footer className="tool-source"><span>{copy.source}: {type === "original" ? copy.original : "Wild Hoggs"}</span><span>{copy.checked}: {reference.checkedAt}</span></footer>;
 }
 
 function DataTable({ columns, rows, id }) {
@@ -88,24 +92,8 @@ function HqCalculator({ lang, rows }) {
   </div>{valid && <><h3 className="tool-subheading">{copy.breakdown}</h3><DataTable id="hq-plan" columns={[copy.level, ...copy.resources]} rows={[...result.rows.map((row, index) => [row[0].replace(' -> ', ' → '), ...result.costs[index].map(value => format(value, lang))]), [copy.total, ...result.totals.map(value => format(value, lang))]]} /></>}<Source lang={lang} /></>;
 }
 
-function HeroCalculator({ lang, selected }) {
-  const copy = toolCopy[lang];
-  const [plan, set, reset] = usePlan('exp', { current: '1', target: '100', count: '1', owned: '0', unit: 'M' });
-  const result = experiencePlan(reference.heroExp, numberInRange(plan.current, 1, 175, true) ?? NaN, numberInRange(plan.target, 1, 175, true) ?? NaN, numberInRange(plan.count, 1, 100, true) ?? NaN, scaled(plan.owned, plan.unit));
-  return <><ToolHeader title={copy.exp} onReset={reset} copy={copy} />{selected && <p className="selected-hero"><img src={selected.image} alt="" />{copy.selectedHero}: <strong>{heroName(selected, lang)}</strong></p>}<div className="calculator-layout"><section className="tool-inputs"><div className="tool-form-grid">
-    <NumberField id="exp-current" label={copy.current} value={plan.current} onChange={value => set('current', value)} min={1} max={175} />
-    <NumberField id="exp-target" label={copy.target} value={plan.target} onChange={value => set('target', value)} min={1} max={175} />
-    <NumberField id="exp-count" label={copy.count} value={plan.count} onChange={value => set('count', value)} min={1} max={100} />
-    <AmountField id="exp-owned" label={copy.owned} value={plan.owned} unit={plan.unit} onChange={value => set('owned', value)} onUnit={value => set('unit', value)} copy={copy} />
-  </div><p className="tool-note">{copy.expNote}</p></section>{result ? <Results title={copy.exp}><Metric label={copy.perHero} value={result.perHero} lang={lang} id="exp-per-hero" /><Metric label={copy.total} value={result.total} lang={lang} id="exp-total" /><Metric label={copy.missing} value={result.missing} lang={lang} accent id="exp-missing" /></Results> : <Invalid copy={copy} />}</div><Source lang={lang} type="heroExp" /></>;
-}
-
-function CaravanCalculator({ lang }) {
-  const copy = toolCopy[lang];
-  const [plan, set, reset] = usePlan('caravan', { power: '10', unit: 'M', bonus: '10' });
-  const result = caravanPlan(LEVELS, scaled(plan.power, plan.unit), numberInRange(plan.bonus, 0, 100) ?? NaN);
-  return <><ToolHeader title={copy.caravan} onReset={reset} copy={copy} /><div className="calculator-layout"><section className="tool-inputs"><div className="tool-form-grid"><AmountField id="caravan-power" label={copy.power} value={plan.power} unit={plan.unit} onChange={value => set('power', value)} onUnit={value => set('unit', value)} copy={copy} /><NumberField id="caravan-bonus" label={copy.bonus + ' (%)'} value={plan.bonus} onChange={value => set('bonus', value)} max={100} step={0.1} /></div><p className="tool-note">{copy.caravanNote}</p></section>{result ? <Results title={copy.recommended}><Metric label={copy.recommended} value={result.best ? copy.step + ' ' + result.best.level : copy.belowFirst} text accent id="caravan-level" /><Metric label={copy.effective} value={result.effective} lang={lang} id="caravan-effective" /><Metric label={copy.next} value={result.next ? copy.step + ' ' + result.next.level : copy.aboveLast} text /><Metric label={copy.needMore} value={result.needed} lang={lang} /></Results> : <Invalid copy={copy} />}</div><Source lang={lang} /></>;
-}
+function HeroCalculator({lang,selected}) { return <Suspense fallback={<p>?</p>}><NativeExperience lang={lang} selected={selected}/></Suspense>; }
+export function CaravanCalculator({lang}) { return <Suspense fallback={<p>?</p>}><NativeCaravan lang={lang}/></Suspense>; }
 
 function duration(value, copy, lang) {
   return [[Math.floor(value / 1440), copy.days], [Math.floor(value % 1440 / 60), copy.hours], [value % 60, copy.minutes]].filter(([number], index) => number || index === 2).map(([number, unit]) => format(number, lang) + ' ' + unit).join(' · ');
@@ -143,7 +131,7 @@ function HeroDialog({ hero, lang, onClose, onExperience }) {
     const box = dialog.current.getBoundingClientRect();
     if (event.target === dialog.current && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) onClose();
   };
-  return <dialog className="hero-dialog" ref={dialog} onCancel={onClose} onClick={onBackdrop} aria-labelledby="hero-name"><button className="tool-icon-button dialog-close" onClick={onClose} aria-label={copy.close} title={copy.close}><X size={20} /></button><div className="hero-dialog-heading"><img src={hero.image} alt="" /><div><span className="hero-grade">{hero.rarity}</span><h2 id="hero-name">{heroName(hero, lang)}</h2><p>{copy.factions[hero.faction]}</p></div></div><dl className="hero-facts"><div><dt>{copy.role}</dt><dd>{copy.roles[hero.role]}</dd></div><div><dt>{copy.rarity}</dt><dd>{hero.rarity}</dd></div></dl>{hero.globalPassive && <p className="hero-passive"><Shield size={15} />{copy.passive}</p>}<div className="hero-dialog-actions"><button className="tool-primary" onClick={() => onExperience(hero)}><Calculator size={17} />{copy.expAction}</button><a href={wildHoggsUrl(hero.sourcePath, lang)} target="_blank" rel="noopener noreferrer">{copy.detailSource}<ExternalLink size={15} /></a></div></dialog>;
+  return <dialog className="hero-dialog" ref={dialog} onCancel={onClose} onClick={onBackdrop} aria-labelledby="hero-name"><button className="tool-icon-button dialog-close" onClick={onClose} aria-label={copy.close} title={copy.close}><X size={20} /></button><div className="hero-dialog-heading"><img src={hero.image} alt="" /><div><span className="hero-grade">{hero.rarity}</span><h2 id="hero-name">{heroName(hero, lang)}</h2><p>{copy.factions[hero.faction]}</p></div></div><dl className="hero-facts"><div><dt>{copy.role}</dt><dd>{copy.roles[hero.role]}</dd></div><div><dt>{copy.rarity}</dt><dd>{hero.rarity}</dd></div></dl>{hero.globalPassive && <p className="hero-passive"><Shield size={15} />{copy.passive}</p>}<div className="hero-dialog-actions"><button className="tool-primary" onClick={() => onExperience(hero)}><Calculator size={17} />{copy.expAction}</button></div></dialog>;
 }
 
 function HeroDatabase({ lang, onExperience }) {
@@ -158,7 +146,7 @@ function HeroDatabase({ lang, onExperience }) {
   return <><div className="hero-filters"><label className="tool-field hero-search" htmlFor="hero-query"><span>{copy.search}</span><div className="search-control"><Search size={17} /><input id="hero-query" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={copy.searchPlaceholder} /></div></label><SelectField id="hero-faction" label={copy.faction} value={faction} onChange={setFaction} options={[allOption, ...Object.entries(copy.factions).map(([value, label]) => ({ value, label }))]} /><SelectField id="hero-role" label={copy.role} value={role} onChange={setRole} options={[allOption, ...Object.entries(copy.roles).map(([value, label]) => ({ value, label }))]} /><SelectField id="hero-rarity" label={copy.rarity} value={rarity} onChange={setRarity} options={[allOption, ...['B', 'A', 'S', 'S1', 'S2', 'S3', 'S4']]} /></div><div className="database-count"><span>{copy.results}: {filtered.length} / {reference.heroes.length}</span><button className="tool-icon-button" aria-label={copy.reset} title={copy.reset} onClick={() => { setQuery(''); setFaction('all'); setRole('all'); setRarity('all'); }}><RotateCcw size={16} /></button></div>{filtered.length ? <div className="hero-grid">{filtered.map(hero => <button className="hero-record" key={hero.id} onClick={() => setSelected(hero)} aria-label={heroName(hero, lang) + ' · ' + copy.openHero}><img src={hero.image} alt="" loading="lazy" /><span className="hero-record-copy"><span className="hero-grade">{hero.rarity}</span><strong>{heroName(hero, lang)}</strong><span>{copy.roles[hero.role]}</span><small>{copy.factions[hero.faction]}</small></span></button>)}</div> : <p className="tool-empty" role="status">{copy.empty}</p>}<p className="tool-note">{copy.heroNote}</p><Source lang={lang} type="heroes" />{selected && <HeroDialog hero={selected} lang={lang} onClose={() => setSelected(null)} onExperience={hero => { setSelected(null); onExperience(hero); }} />}</>;
 }
 
-function BuildingDatabase({ lang, rows, prerequisites, buildings }) {
+export function BuildingDatabase({ lang, rows, prerequisites, buildings }) {
   const copy = toolCopy[lang];
   const [type, setType] = useState('hq');
   const [from, setFrom] = useState('16');
@@ -189,7 +177,7 @@ function ToolTabs({ tabs, active, onChange, copy, label }) {
 
 export default function ToolsView({ lang, mode, onNavigate, hqRows, prerequisites, buildings }) {
   const copy = toolCopy[lang];
-  const [calcTab, setCalcTab] = useState('research');
+  const [calcTab, setCalcTab] = useState('heroes');
   const [otherTab, setOtherTab] = useState('speedups');
   const [databaseTab, setDatabaseTab] = useState('heroes');
   const [selectedHero, setSelectedHero] = useState(null);
@@ -199,17 +187,13 @@ export default function ToolsView({ lang, mode, onNavigate, hqRows, prerequisite
   const tabs = calculator ? CALCULATORS : DATABASES;
   const onExperience = hero => { setSelectedHero(hero); setCalcTab('exp'); onNavigate('calculators'); };
   return <section className="tools-workspace"><nav className="tools-modes" aria-label="NoVa"><button onClick={() => onNavigate('calculators')} className={calculator ? 'active' : ''}><Calculator size={18} />{copy.calculators}</button><button onClick={() => onNavigate('database')} className={!calculator ? 'active' : ''}><Database size={18} />{copy.database}</button></nav><ToolTabs tabs={tabs} active={tab} onChange={changeTab} copy={{...copy,...advancedCopy[lang],exp:copy.exp,caravan:copy.caravan}} label={copy[mode]} /><div className="tool-panel" role="tabpanel" id="tool-panel" aria-labelledby={'tool-tab-' + tab}>
-    {calculator && ['research','buildings','heroes','tank','equipment','exploration','lucky'].includes(tab) && <Suspense fallback={<p className="tool-note">…</p>}><AdvancedTools tab={tab} lang={lang} heroDatabase={<HeroDatabase lang={lang} onExperience={onExperience}/>} discountCalculator={<DiscountCalculator lang={lang}/>}/></Suspense>}
+    {calculator && ['heroes','tank','equipment','exploration','lucky'].includes(tab) && <Suspense fallback={<p className="tool-note">…</p>}><AdvancedTools tab={tab} lang={lang} heroDatabase={<LocalHeroCatalog lang={lang} onExperience={onExperience}/>} discountCalculator={<DiscountCalculator lang={lang}/>}/></Suspense>}
     {calculator && tab === 'other' && <><div className="advanced-subtabs">{['speedups','packs'].map(k=><button key={k} aria-pressed={otherTab===k} onClick={()=>setOtherTab(k)}>{copy[k]}</button>)}</div>{otherTab==='speedups'?<SpeedupCalculator lang={lang}/>:<PackCalculator lang={lang}/>}</>}
-    {calculator && tab === 'hq' && <HqCalculator lang={lang} rows={hqRows} />}
     {calculator && tab === 'exp' && <HeroCalculator lang={lang} selected={selectedHero} />}
-    {calculator && tab === 'caravan' && <CaravanCalculator lang={lang} />}
     {calculator && tab === 'speedups' && <SpeedupCalculator lang={lang} />}
     {calculator && tab === 'packs' && <PackCalculator lang={lang} />}
     {calculator && tab === 'discount' && <DiscountCalculator lang={lang} />}
-    {!calculator && tab === 'heroes' && <HeroDatabase lang={lang} onExperience={onExperience} />}
-    {!calculator && tab === 'hq' && <BuildingDatabase lang={lang} rows={hqRows} prerequisites={prerequisites} buildings={buildings} />}
-    {!calculator && tab === 'caravan' && <><p className="tool-note">{copy.caravanNote}</p><DataTable id="caravan-database" columns={[copy.step, copy.startPower, copy.endPower]} rows={LEVELS.map(row => [row.level, row.start, row.end || '—'])} /><Source lang={lang} /></>}
+    {!calculator && tab === 'heroes' && <LocalHeroCatalog lang={lang} onExperience={onExperience} />}
     {!calculator && tab === 'exp' && <ExperienceDatabase lang={lang} />}
-  </div><a className="tools-reference" href={wildHoggsUrl('/', lang)} target="_blank" rel="noopener noreferrer"><span>{copy.reference}<small>Wild Hoggs · {copy.external}</small></span><ExternalLink size={18} /></a></section>;
+  </div></section>;
 }

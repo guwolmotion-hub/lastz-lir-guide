@@ -6,7 +6,9 @@ import workbook from './workbook-data.json';
 import { hindi, hindiDays } from './hindi.js';
 import { popularEvents, eventUi } from './popular-events.js';
 import { season2 } from './season2.js';
-import ToolsView from './ToolsView.jsx';
+import ToolsView, { CaravanCalculator, BuildingDatabase } from './ToolsView.jsx';
+import CardBuildingTools from './CardBuildingTools.jsx';
+import { cardToolCopy } from './card-tool-copy.js';
 import { toolCopy, toolMeta } from './tools-copy.js';
 import { researchGuide } from './research-guide.js';
 import ResearchTreeTable from './ResearchTreeTable.jsx';
@@ -742,7 +744,10 @@ function HqUpgradeView({ lang }) {
   const [tab, setTab] = useState('hq');
   return (
     <section className="content-block">
-      <SegmentedTabs label={copy.title} value={tab} onChange={setTab} items={[{ id: 'hq', label: copy.hqTitle, icon: Building2 }, { id: 'prerequisite', label: copy.prereqTitle, icon: ListChecks }]} />
+      <SegmentedTabs label={copy.title} value={tab} onChange={setTab} items={[{ id: 'hq', label: copy.hqTitle, icon: Building2 }, { id: 'prerequisite', label: copy.prereqTitle, icon: ListChecks }, { id: 'calculator', label: cardToolCopy[lang].buildingCalculator, icon: Calculator }, { id: 'lookup', label: cardToolCopy[lang].buildingData, icon: Table2 }]} />
+      {tab === 'calculator' && <CardBuildingTools lang={lang} />}
+      {tab === 'lookup' && <section className="tools-workspace" data-card-tool="building-data"><BuildingDatabase lang={lang} rows={hqUpgradeRows} prerequisites={prerequisiteRowsForLang(lang)} buildings={buildingNames[lang]} /></section>}
+      <div hidden={tab === 'calculator' || tab === 'lookup'}>
       <div className="section-head">
         <div>
           <p className="section-kicker">{copy.file}</p>
@@ -777,6 +782,7 @@ function HqUpgradeView({ lang }) {
           </div>
           <GuideTable columns={copy.prereqColumns} rows={prerequisiteRowsForLang(lang)} />
         </section>
+      </div>
       </div>
     </section>
   );
@@ -821,15 +827,16 @@ function Caravan({ lang }) {
   const [tab, setTab] = useState('steps');
   return (
     <div className="caravan-layout">
-      <SegmentedTabs label={copy.title} value={tab} onChange={setTab} items={[{ id: 'steps', label: copy.stepsTitle, icon: ListChecks }, { id: 'table', label: copy.tableTitle, icon: Table2 }]} />
-      <section className="formula-panel">
+      <SegmentedTabs label={copy.title} value={tab} onChange={setTab} items={[{ id: 'steps', label: copy.stepsTitle, icon: ListChecks }, { id: 'table', label: copy.tableTitle, icon: Table2 }, { id: 'calculator', label: cardToolCopy[lang].caravanCalculator, icon: Calculator }]} />
+      {tab === 'calculator' && <section className="tools-workspace" data-card-tool="caravan"><CaravanCalculator lang={lang} /></section>}
+      {tab !== 'calculator' && <section className="formula-panel">
         <div className="formula-icon"><Calculator size={24} /></div>
         <div>
           <p>{copy.formulaLabel}</p>
           <strong>{copy.formula}</strong>
           <span>{copy.formulaHint}</span>
         </div>
-      </section>
+      </section>}
       <section className="step-panel" hidden={tab !== 'steps'}>
         <div className="panel-title">
           <ListChecks size={19} />
@@ -946,7 +953,7 @@ function ExtraGuideView({ lang, id }) {
         </section>
         <footer className="event-sources">
           <p>{labels.note}</p>
-          <div><span>{labels.checked}</span><span>{labels.sources}: {active.sources.map((url, index) => <a href={url} key={url} target="_blank" rel="noopener noreferrer">{labels.source} {index + 1}</a>)}</span></div>
+          <div><span>{labels.checked}</span><span>{labels.sources}: {active.sources.length}</span></div>
         </footer>
       </article> :
       <div className="guide-section-grid">
@@ -1204,10 +1211,6 @@ export default function App() {
     <main className="home-page" lang={lang} style={{ '--page-bg': 'url("brand/background-v2.png")' }}>
       <nav className="topbar home-topbar">
         <div className="brand"><img src="brand/logo-gold.png" alt="NoVa" /><small>{lang === 'hi' ? 'मार्गदर्शिका' : 'Guide Hub'}</small></div>
-        <div className="tool-shortcuts">
-          <button className="open-calculators" onClick={() => handleSectionChange('calculators')}><Calculator size={17} />{toolCopy[lang].calculators}</button>
-          <button className="open-database" onClick={() => handleSectionChange('database')}><Database size={17} />{toolCopy[lang].database}</button>
-        </div>
         <div className="lang-switch" aria-label="Language">
           <Languages size={16} />
           {['ko', 'en', 'es', 'hi'].map((code) => <button className={lang === code ? 'active' : ''} onClick={() => setLang(code)} key={code}>{code.toUpperCase()}</button>)}
