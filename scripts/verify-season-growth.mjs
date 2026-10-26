@@ -7,6 +7,10 @@ import { powerGrowth } from '../src/power-growth.js';
 const imageFiles = new Set();
 for (const lang of ['ko','en','es','hi']) {
   assert.equal(season2[lang].sections.length,15);
+  assert.equal(season2[lang].sections.reduce((n,ch)=>n+ch.parts.length,0),36);
+  assert.doesNotMatch(JSON.stringify(season2[lang]),/PDF|원문|출처|작성자|저자|기존 자료|the source|the author|a separate article|la fuente|el autor|otro artículo|मूल विवरण|मूल लेख|लेखक/i,lang+': reader-facing document references');
+  assert.equal(season2[lang].sourceNote,undefined);
+  assert.ok(season2[lang].sections.every(ch=>ch.sourcePages===undefined));
   assert.equal(powerGrowth[lang].sections.length,5);
   for (const guide of [season2[lang],powerGrowth[lang]]) {
     for (const ch of guide.sections) {

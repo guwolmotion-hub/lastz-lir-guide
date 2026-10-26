@@ -8,8 +8,9 @@
 - 81 PDF pages: article through page 69, comments from page 70 onward.
 - The article permits translation; the author also approves sharing in the comments.
 - `src/season2-expanded.js` independently summarizes the article and relevant
-  author answers in Korean, English, Spanish and Hindi. Each chapter identifies
-  its PDF pages. Reader comments are not treated as authoritative mechanics.
+  author answers in Korean, English, Spanish and Hindi. PDF page ranges are kept
+  only in internal chapter metadata. Reader comments are not treated as
+  authoritative mechanics.
 - 38 original game screenshots are extracted from PDF image objects to local
   `public/season2/*.webp`, preserving their complete aspect ratios and content.
   They are encoded in WebP for web delivery, without redesign, translation or
@@ -42,6 +43,12 @@
   percentages, invented drop rates or specific mandatory paid purchases.
 
 ## Validation
+
+- Season 2 now uses direct reader instructions in all 36 entries and all four
+  languages. It does not discuss an original document, article, author or PDF
+  in published prose, captions or exported guide metadata. The Ice Cave and
+  Glory battle entries give participation checks without inventing missing
+  scoring/reward mechanics. The 15 tabs and 38 game screenshots are retained.
 
 - `scripts/verify-season-growth.mjs`: 320 chapter views across four languages
   and 360/390/768/1440px, 38 local screenshots, image decoding, enlargement,
