@@ -5,7 +5,9 @@ import { AlertTriangle, ArrowLeft, Building2, Calculator, CalendarDays, ChevronL
 import workbook from './workbook-data.json';
 import { hindi, hindiDays } from './hindi.js';
 import { popularEvents, eventUi } from './popular-events.js';
-import { season2 } from './season2.js';
+import { season2 } from './season2-expanded.js';
+import SeasonGallery from './SeasonGallery.jsx';
+import { powerGrowth } from './power-growth.js';
 import ToolsView, { CaravanCalculator, BuildingDatabase } from './ToolsView.jsx';
 import CardBuildingTools from './CardBuildingTools.jsx';
 import { cardToolCopy } from './card-tool-copy.js';
@@ -654,7 +656,7 @@ function getSectionMeta(lang, id) {
   if (id === 'research') return researchGuide[lang];
   if (id === 'hq') return { kicker: hqUpgradeCopy[lang].kicker, title: hqUpgradeCopy[lang].title, desc: hqUpgradeCopy[lang].desc };
   if (id === 'powerOrder') {
-    const guide = extraGuides[lang][id];
+    const guide = powerGrowth[lang];
     return { kicker: guide.kicker, title: guide.title, desc: guide.desc };
   }
   return sectionLabels[lang][id];
@@ -913,13 +915,13 @@ function CaravanView({ lang }) {
 }
 
 function ExtraGuideView({ lang, id }) {
-  const guide = id === 'season2' ? season2[lang] : id === 'research' ? researchGuide[lang] : extraGuides[lang][id];
+  const guide = id === 'season2' ? season2[lang] : id === 'powerOrder' ? powerGrowth[lang] : id === 'research' ? researchGuide[lang] : extraGuides[lang][id];
   const [activeIndex, setActiveIndex] = useState(0);
   const sections = id === 'popular' ? [...popularEvents[lang], ...guide.sections.slice(1)] : guide.sections;
   const active = sections[activeIndex] || sections[0];
   const labels = eventUi[lang];
   return (
-    <section className={id === 'season2' || id === 'research' ? 'content-block season-content' : 'content-block'}>
+    <section className={id === 'season2' || id === 'research' || id === 'powerOrder' ? 'content-block season-content' : 'content-block'}>
       <div className="section-head">
         <div>
           <p className="section-kicker">{guide.file}</p>
@@ -930,12 +932,14 @@ function ExtraGuideView({ lang, id }) {
       <SegmentedTabs label={guide.title} value={activeIndex} onChange={setActiveIndex} items={sections.map((section, index) => ({ id: index, label: section.title, icon: ListChecks }))} />
       {active.planner ? <ResearchPlanner lang={lang} /> : active.parts ? <article className="season-guide">
         <h3>{active.title}</h3>
+        {active.intro && <p className="season-intro">{active.intro}</p>}
         {active.parts.map((part) => <section className="reading-section" key={part.title}>
           <h4>{part.title}</h4>
           <p className="text-line">{part.text}</p>
         </section>)}
         {active.catalog && <ResearchTreeTable lang={lang} />}
-        <footer className="season-source">{guide.sourceNote}</footer>
+        <SeasonGallery key={active.title} images={active.images} lang={lang} />
+        <footer className="season-source">{active.sourcePages && <p>{active.sourcePages}</p>}{guide.sourceNote}</footer>
       </article> : active.budget ? <article className="event-guide">
         <h3>{active.title}</h3>
         <p className="text-line">{active.intro}</p>

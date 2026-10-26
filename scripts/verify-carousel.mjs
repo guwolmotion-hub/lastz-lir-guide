@@ -49,8 +49,8 @@ try {
       assert.equal(await tabs.count(), 5);
       for (let tab = 0; tab < await tabs.count(); tab++) {
         await tabs.nth(tab).click();
-        assert.ok((await page.locator('.guide-section-card').innerText()).trim().length > 100);
-        assert.equal(await page.evaluate(() => [...document.querySelectorAll('.detail-document h1,.guide-section-card h3,.guide-section-card li')].some(el => el.scrollWidth > el.clientWidth + 2)), false, width + '/' + lang + ': clipped guide');
+        assert.ok((await page.locator('.season-guide').innerText()).trim().length > 100);
+        assert.equal(await page.evaluate(() => [...document.querySelectorAll('.detail-document h1,.season-guide h3,.season-guide .text-line')].some(el => el.scrollWidth > el.clientWidth + 2)), false, width + '/' + lang + ': clipped guide');
       }
       await page.locator('.home-button').click();
       checked += layout.count;

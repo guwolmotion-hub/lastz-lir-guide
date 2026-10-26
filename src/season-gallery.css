@@ -1,0 +1,28 @@
+.season-gallery { margin-top:32px; padding-top:24px; border-top:1px solid var(--onyx-border); }
+.season-gallery > h4 { margin:0 0 8px; font-size:17px; color:var(--onyx-gold-soft); }
+.season-gallery > p { color:var(--onyx-muted); font-size:13px; line-height:1.8; margin:0 0 20px; }
+.season-photos { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px 16px; }
+.season-photos figure { margin:0; min-width:0; }
+.season-photos button { display:block; position:relative; width:100%; padding:8px; background:var(--onyx-inset); border:1px solid var(--onyx-border); border-radius:12px; cursor:zoom-in; }
+.season-photos button:hover,.season-photos button:focus-visible { border-color:var(--onyx-gold); }
+.season-photos img { display:block; width:100%; height:250px; object-fit:contain; }
+.season-photos button > span { position:absolute; right:8px; bottom:8px; background:var(--onyx-bg); color:var(--onyx-gold); border-radius:6px; padding:3px 8px; }
+.season-photos figcaption { padding:10px 2px 0; color:var(--onyx-muted); font-size:12px; line-height:1.7; overflow-wrap:anywhere; }
+.season-photo-dialog { width:min(1100px,96vw); max-width:96vw; max-height:92dvh; padding:0; background:var(--onyx-bg); border:1px solid var(--onyx-border-strong); border-radius:14px; color:var(--onyx-text); overflow:auto; }
+.season-photo-dialog::backdrop { background:rgb(0 0 0 / .88); }
+.season-photo-toolbar { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 16px; background:var(--onyx-surface); border-bottom:1px solid var(--onyx-border); }
+.season-photo-toolbar p { margin:0; font-size:13px; line-height:1.6; }
+.season-photo-toolbar button { flex-shrink:0; padding:9px 13px; border:1px solid var(--onyx-edge); border-radius:8px; color:var(--onyx-gold-soft); background:var(--onyx-inset); cursor:pointer; }
+.season-photo-dialog > img { display:block; width:auto; max-width:100%; height:auto; margin:auto; }
+.season-guide > .season-intro { margin:0 0 24px; padding:16px 18px; border-left:3px solid var(--onyx-gold); background:var(--onyx-surface); color:var(--onyx-muted); line-height:1.9; font-size:14px; }
+.detail-page[lang="ko"] .season-intro { word-break:keep-all; overflow-wrap:break-word; }
+.detail-page[data-section="season2"] .segmented-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0 20px; overflow:visible; }
+.detail-page[data-section="season2"] .segmented-tabs button { min-width:0; white-space:normal; text-align:left; line-height:1.6; }
+.detail-page[data-section="season2"] .segmented-tabs button svg { flex-shrink:0; }
+.detail-page[data-section="season2"] .segmented-tabs button span { overflow-wrap:anywhere; }
+@media(max-width:700px) {
+  .season-photos { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 12px; }
+  .season-photos img { height:220px; }
+  .detail-page[data-section="season2"] .segmented-tabs { grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 14px; }
+}
+@media(max-width:400px) { .season-photos img { height:180px; } }
