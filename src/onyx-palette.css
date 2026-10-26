@@ -1,0 +1,17 @@
+:root {
+  --onyx-bg: #090b0e;
+  --onyx-inset: #0e1116;
+  --onyx-surface: #15191f;
+  --onyx-raised: #1e232b;
+  --onyx-border: #353c46;
+  --onyx-border-strong: #4a515c;
+  --onyx-edge: #78684e;
+  --onyx-gold: #d5ba85;
+  --onyx-gold-soft: #f1dec0;
+  --onyx-gold-tint: #302a20;
+  --onyx-text: #f0eee8;
+  --onyx-muted: #bec0c5;
+  --onyx-dim: #9298a3;
+  --onyx-gold-rgb: 213 186 133;
+  --onyx-bg-rgb: 9 11 14;
+}
