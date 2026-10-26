@@ -1,0 +1,49 @@
+.rs-badges { margin:0 0 24px; padding:24px; background:var(--onyx-surface); border:1px solid var(--onyx-edge); border-radius:12px; min-width:0; }
+.rs-badges > header { display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--onyx-gold-soft); font-size:14px; line-height:1.6; }
+.rs-badges > header strong { font-size:22px; }
+.rs-badge-metrics { display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:22px; margin:20px 0; }
+.rs-badge-metrics > div { min-width:0; }
+.rs-badge-metrics dt { color:var(--onyx-muted); font-size:12px; line-height:1.7; margin-bottom:6px; }
+.rs-badge-metrics dd { margin:0; font-size:clamp(19px,2.3vw,30px); font-weight:700; line-height:1.4; color:var(--onyx-text); font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.rs-badge-metrics .rs-badge-remaining dd { color:var(--onyx-gold-soft); font-size:clamp(24px,3vw,38px); }
+.rs-badge-progress > span { display:flex; justify-content:space-between; gap:14px; margin:0 0 8px; color:var(--onyx-muted); font-size:12px; line-height:1.6; }
+.rs-badge-progress b { color:var(--onyx-gold); }
+.rs-badge-progress [role=progressbar] { height:7px; overflow:hidden; background:var(--onyx-raised); border-radius:4px; }
+.rs-badge-progress i { display:block; height:100%; background:var(--onyx-gold); }
+.rs-badge-inventory { display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:end; margin-top:20px; padding-top:18px; border-top:1px solid var(--onyx-border); }
+.rs-badge-inventory label,.rs-badge-inventory > div { min-width:0; }
+.rs-badge-inventory span { display:block; color:var(--onyx-muted); font-size:12px; line-height:1.7; margin-bottom:7px; }
+.rs-badge-inventory input { width:100%; max-width:240px; min-height:44px; padding:10px 12px; border:1px solid var(--onyx-border-strong); border-radius:7px; background:var(--onyx-inset); color:var(--onyx-text); font:inherit; font-size:16px; box-sizing:border-box; }
+.rs-badge-inventory strong { display:block; color:var(--onyx-gold-soft); font-size:24px; line-height:1.7; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.rs-badge-explanation { margin-top:16px; color:var(--onyx-muted); font-size:11px; line-height:1.8; }
+.rs-badge-explanation summary { cursor:pointer; }
+.rs-badge-explanation p { margin:8px 0 0; }
+.rs-badge-free { color:var(--onyx-muted); font-size:12px; line-height:1.7; }
+.rs-badges.compact { padding:14px; margin:18px 0; background:var(--onyx-inset); }
+.rs-badges.compact > header { font-size:12px; }
+.rs-badges.compact .rs-badge-metrics { grid-template-columns:1fr 1fr; gap:14px 12px; margin:14px 0; }
+.rs-badges.compact .rs-badge-remaining { grid-column:1/-1; }
+.rs-badges.compact .rs-badge-metrics dd { font-size:16px; }
+.rs-badges.compact .rs-badge-remaining dd { font-size:28px; }
+.rs-badges.compact .rs-badge-inventory { grid-template-columns:1fr; gap:14px; }
+.rs-badges.compact .rs-badge-inventory strong { font-size:23px; }
+.rs-category-badges { padding:14px 0; margin:8px 0; border-bottom:1px solid var(--onyx-border); }
+.rs-category-badges > span { display:block; color:var(--onyx-muted); font-size:12px; line-height:1.7; }
+.rs-category-badges > strong { display:block; color:var(--onyx-gold-soft); font-size:24px; line-height:1.6; font-variant-numeric:tabular-nums; }
+.rs-category-badges dl { margin:8px 0 0; display:flex; flex-direction:column; gap:5px; }
+.rs-category-badges dl > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 12px; font-size:11px; line-height:1.6; }
+.rs-category-badges dt { color:var(--onyx-muted); }
+.rs-category-badges dd { margin:0; color:var(--onyx-text); }
+@media(max-width:800px) { .rs-badges.compact .rs-badge-inventory { grid-template-columns:1fr 1fr; } }
+@media(max-width:550px) {
+ .rs-badges { padding:18px; }
+ .rs-badge-metrics { grid-template-columns:1fr 1fr; gap:18px 12px; }
+ .rs-badge-remaining { grid-column:1/-1; }
+ .rs-badge-metrics dd { font-size:21px; }
+ .rs-badge-metrics .rs-badge-remaining dd { font-size:34px; }
+ .rs-badge-inventory { gap:12px; }
+ .rs-badge-inventory strong { font-size:21px; }
+ .rs-category-badges > strong { font-size:20px; }
+ .rs-category-badges dl > div { display:block; }
+ .rs-category-badges dd { margin-top:2px; }
+}
