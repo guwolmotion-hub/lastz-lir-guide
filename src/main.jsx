@@ -8,6 +8,8 @@ import { popularEvents, eventUi } from './popular-events.js';
 import { season2 } from './season2-expanded.js';
 import SeasonGallery from './SeasonGallery.jsx';
 import { powerGrowth } from './power-growth.js';
+import { caravanLevels } from './caravan-math.js';
+import { caravanUi, caravanAmount } from './caravan-copy.js';
 import ToolsView, { CaravanCalculator, BuildingDatabase } from './ToolsView.jsx';
 import CardBuildingTools from './CardBuildingTools.jsx';
 import { cardToolCopy } from './card-tool-copy.js';
@@ -824,8 +826,9 @@ function DuelGuide({ lang }) {
 }
 
 function Caravan({ lang }) {
-  const data = workbook.sheets['캐러밴 표'];
-  const copy = caravanCopy[lang];
+  const baseCopy = caravanCopy[lang];
+  const updated = caravanUi[lang];
+  const copy = { ...baseCopy, formula: updated.formula, formulaHint: updated.formulaHint, tableHint: updated.tableHint, steps: baseCopy.steps.map((step,index) => index===2 ? {...step,text:updated.step} : step) };
   const [tab, setTab] = useState('steps');
   return (
     <div className="caravan-layout">
@@ -871,13 +874,13 @@ function Caravan({ lang }) {
             <p className="section-kicker">{copy.tableHint}</p>
             <h3>{copy.tableTitle}</h3>
           </div>
-          <span>{data.levels.length} {lang === 'hi' ? 'चरण' : 'Levels'}</span>
+          <span>{caravanLevels.length} {lang === 'ko' ? '단계' : lang === 'es' ? 'etapas' : lang === 'hi' ? 'चरण' : 'levels'}</span>
         </div>
         <div className="table-wrap compact">
         <table>
           <thead><tr>{copy.columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
           <tbody>
-            {data.levels.map((row) => <tr key={row.level}><td>{row.level}</td><td>{row.start}</td><td>{row.end || '-'}</td></tr>)}
+            {caravanLevels.map((row) => <tr key={row.level}><td>{row.level}</td><td>{caravanAmount(row.start)}</td><td>{caravanAmount(row.end)}</td></tr>)}
           </tbody>
         </table>
         </div>
@@ -939,7 +942,6 @@ function ExtraGuideView({ lang, id }) {
         </section>)}
         {active.catalog && <ResearchTreeTable lang={lang} />}
         <SeasonGallery key={active.title} images={active.images} lang={lang} />
-        <footer className="season-source">{active.sourcePages && <p>{active.sourcePages}</p>}{guide.sourceNote}</footer>
       </article> : active.budget ? <article className="event-guide">
         <h3>{active.title}</h3>
         <p className="text-line">{active.intro}</p>
@@ -955,10 +957,6 @@ function ExtraGuideView({ lang, id }) {
           <h4>{labels.strategy}</h4>
           {active.strategy.map(line => <p className="bullet-line" key={line}>{line}</p>)}
         </section>
-        <footer className="event-sources">
-          <p>{labels.note}</p>
-          <div><span>{labels.checked}</span><span>{labels.sources}: {active.sources.length}</span></div>
-        </footer>
       </article> :
       <div className="guide-section-grid">
         {[active].map((section) => (
@@ -982,7 +980,6 @@ function FileNotice({ lang, file }) {
     <section className="content-block">
       <div className="section-head">
         <div>
-          <p className="section-kicker">{ui[lang].source}</p>
           <h2>{item.title}</h2>
         </div>
       </div>

@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react';
 import './season-gallery.css';
 
 const copy = {
-  ko: ['원문 게임 화면', '사진을 누르면 크게 볼 수 있습니다. 사진 속 문구는 한국어 원문이며, 설명은 선택한 언어로 제공됩니다.', '닫기', '이미지 확대'],
-  en: ['Original game screenshots', 'Select a screenshot to enlarge it. Images retain the Korean original; the guide text is translated.', 'Close', 'Enlarge image'],
-  es: ['Capturas originales del juego', 'Pulsa una imagen para ampliarla. Las capturas conservan el coreano original; la guía está traducida.', 'Cerrar', 'Ampliar imagen'],
-  hi: ['मूल गेम के स्क्रीनशॉट', 'बड़ा देखने के लिए चित्र दबाएँ। चित्रों में मूल कोरियाई पाठ है; समझाने वाला पाठ चुनी हुई भाषा में है।', 'बंद करें', 'चित्र बड़ा करें'],
+  ko: ['게임 화면', '사진을 누르면 크게 볼 수 있습니다. 사진 속 문구는 한국어이며, 설명은 선택한 언어로 제공됩니다.', '닫기', '이미지 확대'],
+  en: ['Game screenshots', 'Select a screenshot to enlarge it. Images contain Korean text; the guide text is translated.', 'Close', 'Enlarge image'],
+  es: ['Capturas del juego', 'Pulsa una imagen para ampliarla. Las capturas contienen texto coreano; la guía está traducida.', 'Cerrar', 'Ampliar imagen'],
+  hi: ['गेम के स्क्रीनशॉट', 'बड़ा देखने के लिए चित्र दबाएँ। चित्रों में कोरियाई पाठ है; समझाने वाला पाठ चुनी हुई भाषा में है।', 'बंद करें', 'चित्र बड़ा करें'],
 };
 
 export default function SeasonGallery({ images, lang }) {

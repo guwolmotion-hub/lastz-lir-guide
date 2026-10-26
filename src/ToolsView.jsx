@@ -67,9 +67,7 @@ function ToolHeader({ title, onReset, copy }) {
 function Invalid({ copy }) { return <p className="tool-validation" role="alert">{copy.invalid}</p>; }
 
 function Source({ lang, type = 'original' }) {
-  const copy = toolCopy[lang];
-  const url = type === 'heroes' || type === 'heroExp' ? wildHoggsUrl(reference.sources[type], lang) : null;
-  return <footer className="tool-source"><span>{copy.source}: {type === "original" ? copy.original : "Wild Hoggs"}</span><span>{copy.checked}: {reference.checkedAt}</span></footer>;
+  return null;
 }
 
 function DataTable({ columns, rows, id }) {
