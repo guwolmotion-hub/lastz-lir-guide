@@ -17,7 +17,7 @@
     {
       "id": "shelter_building",
       "name": {
-        "ko": "대피소 건설",
+        "ko": "피난소 건설",
         "en": "Shelter Building",
         "es": "Construcción de refugio"
       },
@@ -29,7 +29,7 @@
     {
       "id": "elite_troops",
       "name": {
-        "ko": "정예 부대",
+        "ko": "엘리트 부대",
         "en": "Elite Troops",
         "es": "Tropas de élite"
       },
@@ -53,7 +53,7 @@
     {
       "id": "alliance_recognition",
       "name": {
-        "ko": "동맹 인정",
+        "ko": "연맹 표창",
         "en": "Alliance Recognition",
         "es": "Reconocimiento de la alianza"
       },
@@ -68,7 +68,7 @@
     {
       "id": "fully_armed_alliance",
       "name": {
-        "ko": "완전무장 동맹",
+        "ko": "연맹 무장",
         "en": "Fully Armed Alliance",
         "es": "Alianza fuertemente armada"
       },
@@ -83,7 +83,7 @@
     {
       "id": "hq_management",
       "name": {
-        "ko": "HQ 관리",
+        "ko": "본부 관리",
         "en": "HQ Management",
         "es": "Gestión del HQ"
       },
@@ -98,7 +98,7 @@
     {
       "id": "military_strategies",
       "name": {
-        "ko": "군사 전략",
+        "ko": "군사 이론",
         "en": "Military Strategies",
         "es": "Estrategias militares"
       },
@@ -113,7 +113,7 @@
     {
       "id": "siege_to_seize",
       "name": {
-        "ko": "포위 섬멸",
+        "ko": "도시 함락",
         "en": "Siege to Seize",
         "es": "Asedio y captura"
       },
@@ -128,7 +128,7 @@
     {
       "id": "peace_shield",
       "name": {
-        "ko": "평화의 방패",
+        "ko": "전쟁 수호",
         "en": "Peace Shield",
         "es": "Escudo de paz"
       },
@@ -143,7 +143,7 @@
     {
       "id": "rapid_growth",
       "name": {
-        "ko": "급속 성장",
+        "ko": "초고속 건설",
         "en": "Rapid Growth",
         "es": "Crecimiento rápido"
       },
@@ -173,7 +173,7 @@
     {
       "id": "army_building",
       "name": {
-        "ko": "군대 건설",
+        "ko": "군사 발전",
         "en": "Army Building",
         "es": "Construcción del ejército"
       },
@@ -188,7 +188,7 @@
     {
       "id": "rider_training",
       "name": {
-        "ko": "기병 훈련",
+        "ko": "라이더 특훈",
         "en": "Rider Training",
         "es": "Entrenamiento de jinetes"
       },
@@ -203,7 +203,7 @@
     {
       "id": "assaulter_training",
       "name": {
-        "ko": "돌격병 훈련",
+        "ko": "돌격 특훈",
         "en": "Assaulter Training",
         "es": "Entrenamiento de asaltantes"
       },
@@ -218,7 +218,7 @@
     {
       "id": "shooter_training",
       "name": {
-        "ko": "사수 훈련",
+        "ko": "슈터 특훈",
         "en": "Shooter Training",
         "es": "Entrenamiento de tiradores"
       },
@@ -233,7 +233,7 @@
     {
       "id": "unit_special_training",
       "name": {
-        "ko": "부대 특수 훈련",
+        "ko": "유닛 특훈",
         "en": "Unit Special Training",
         "es": "Entrenamiento especial de unidades"
       },
@@ -260,7 +260,7 @@
     {
       "id": "tactical_master",
       "name": {
-        "ko": "전술 대가",
+        "ko": "전술 마스터",
         "en": "Tactical Master",
         "es": "Maestro Táctico"
       },

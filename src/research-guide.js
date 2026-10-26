@@ -6,9 +6,9 @@ export const researchGuide = {
     sections: [
       { title: '1. 시작 순서', parts: [
         { title: '개인 연구와 연맹 기부부터 구분', text: '이 가이드는 내 실험실에서 진행하는 개인 연구를 다룹니다. 연구 트리 이름에 연맹이 들어가더라도, 연맹원 전체가 기부하는 연맹 테크와는 구분해서 확인하세요.' },
-        { title: '먼저 연맹 표창을 여는 길 확보', text: '연맹 표창은 참고 사이트의 동맹 인정, 영문 Alliance Recognition과 같은 연구입니다. 공개 해금표 기준으로 실험실 10레벨과 새로운 집 트리 50%가 필요합니다. 잠겨 있다면 이 두 조건부터 확인하세요.' },
+        { title: '먼저 연맹 표창을 여는 길 확보', text: '연맹 표창을 열려면 실험실 10레벨과 새로운 집 트리 50%가 필요합니다. 잠겨 있다면 이 두 조건부터 확인하세요.' },
         { title: '배지와 연구 가속은 연맹 표창 중심', text: '연맹 원본은 장기 성장을 위해 경찰 휘장과 테크 가속을 연맹 표창 연구에 집중하도록 권장합니다. 당장 표시되는 전투력만 보지 말고, 이벤트·보상 관련 핵심 노드까지 이어지는 경로를 먼저 정하세요.' },
-        { title: '전투 연구는 주력 한 부대부터', text: '기초 해금과 성장 기반을 마련한 뒤, 실제 주력 병종에 맞는 공격·방어·생명력 연구를 선택하세요. 슈터·라이더·돌격 연구를 동시에 넓게 올리기보다 주력 부대가 바로 쓰는 효과를 우선하는 편이 효율적입니다.' },
+        { title: '전투 연구는 주력 한 부대부터', text: '기초 해금과 성장 기반을 마련한 뒤, 실제 주력 병종에 맞는 공격·방어·생명력 연구를 선택하세요. 슈터 특훈·라이더 특훈·돌격 특훈을 동시에 넓게 올리기보다 주력 부대가 바로 쓰는 효과를 우선하는 편이 효율적입니다.' },
       ] },
       { title: '2. 연구 해금표', catalog: true, parts: [
         { title: '실험실 레벨만으로 열리지 않는 연구', text: '트리에 따라 실험실 레벨 외에 앞선 트리의 진행률과 시즌 개방 조건이 필요합니다. 실험실 조건이 충족되었다는 표시가 있어도 나머지 조건을 모두 확인해야 합니다.' },
@@ -16,7 +16,7 @@ export const researchGuide = {
       ] },
       { title: '3. 배지·자원 관리', parts: [
         { title: '이번에 올릴 경로 하나 정하기', text: '다음 핵심 노드와 그 선행 노드에 필요한 비용을 함께 확인하세요. 여러 트리에 배지를 조금씩 나누기보다, 현재 목표에 도달할 만큼 먼저 확보하고 사용합니다.' },
-        { title: '배지가 없는 기초 연구도 활용', text: '공개 기본표에서 새로운 집·대피소 건설·정예 부대 등은 배지 합계가 0입니다. 배지가 부족할 때는 아직 필요한 기초 연구를 검토하되, 다른 자원과 연구 시간은 별도로 필요합니다.' },
+        { title: '배지가 없는 기초 연구도 활용', text: '새로운 집·피난소 건설·엘리트 부대 등은 배지 합계가 0입니다. 배지가 부족할 때는 아직 필요한 기초 연구를 검토하되, 다른 자원과 연구 시간은 별도로 필요합니다.' },
         { title: '연구 속도와 자원 절감은 다른 효과', text: '연구 속도는 소요 시간에, 자원 절감은 요구 자원에 영향을 주는 항목입니다. 각각의 실제 효과와 적용 대상을 게임에서 확인하고, 같은 수치라고 생각해 계산하지 마세요.' },
         { title: '트리 전체 비용과 다음 연구 비용 구분', text: '목록 카드의 합계는 트리를 처음부터 끝까지 올릴 때의 기본 총량입니다. 연구 카드를 열고 트리의 노드를 누르면 현재·목표 레벨과 레벨별 비용을 확인할 수 있습니다. 목표 버튼은 필요한 선행 경로까지 함께 계획에 추가합니다.' },
       ] },
@@ -30,7 +30,7 @@ export const researchGuide = {
         { title: '본부를 올렸는데도 잠겨 있다면', text: '본부와 실험실 레벨은 별개입니다. 실험실 레벨, 선행 트리 진행률, 시즌 개방 조건을 차례로 확인하세요. 조건표에 없는 추가 요구 사항은 실제 게임의 잠금 안내를 기준으로 판단합니다.' },
         { title: '가속을 쓸 수 없다면', text: '진행 중인 연구가 있는지, 보유한 가속이 연구용 또는 적용 가능한 범용인지 확인하세요. 건설·훈련 전용 가속을 연구에 사용할 수 있다고 계산하면 준비 시간이 어긋납니다.' },
         { title: '전투력이 크게 오르지 않는다면', text: '생산·개발·속도 관련 연구와 전투 능력치 연구는 목적이 다릅니다. 이번 목표가 성장 효율인지 주력 부대 전투인지 먼저 정하고, 실제 적용 효과를 비교하세요.' },
-        { title: '연구 이름이 자료마다 다르다면', text: '연맹 표창은 동맹 인정·연합 표창으로도 적혀 있습니다. 라이더 훈련은 기병 훈련, 슈터 훈련은 사수 훈련으로 표시될 수 있으니 아이콘·효과와 원문 이름을 함께 확인하세요.' },
+        { title: '게임 화면과 같은 연구 이름으로 확인', text: '연맹 표창·연맹 무장·군사 이론·도시 함락·전쟁 수호·유닛 특훈 등 게임의 한국어 명칭으로 확인하세요. 병종별 연구는 라이더 특훈·돌격 특훈·슈터 특훈이며, 아이콘과 선행 조건도 함께 비교하면 목표 경로를 찾기 쉽습니다.' },
       ] },
     ],
   },
@@ -152,7 +152,6 @@ export const hindiResearchNames = {
   new_home: 'नया घर', shelter_building: 'आश्रय निर्माण', elite_troops: 'श्रेष्ठ सैनिक', hero_training: 'नायक प्रशिक्षण', alliance_recognition: 'गठबंधन मान्यता', fully_armed_alliance: 'पूर्ण सशस्त्र गठबंधन', hq_management: 'मुख्यालय प्रबंधन', military_strategies: 'सैन्य रणनीति', siege_to_seize: 'घेराबंदी विजय', peace_shield: 'शांति कवच', rapid_growth: 'तीव्र विकास', field: 'मैदानी युद्ध', army_building: 'सेना निर्माण', rider_training: 'सवार प्रशिक्षण', assaulter_training: 'आक्रमणकारी प्रशिक्षण', shooter_training: 'निशानेबाज प्रशिक्षण', unit_special_training: 'विशेष इकाई प्रशिक्षण', age_of_steel: 'इस्पात युग', tactical_master: 'रणनीति विशेषज्ञ', army_expansion: 'सेना विस्तार', leaders_will: 'नेता की इच्छा',
 };
 
-const koreanNames = { alliance_recognition: '연맹 표창', rider_training: '라이더 훈련', assaulter_training: '돌격 훈련', shooter_training: '슈터 훈련' };
 export const researchLocalCopy = {
   ko: { open: '상세·계산', back: '연구 해금표로', tab: '6. 연구 상세·계산' },
   en: { open: 'Details & costs', back: 'Back to unlock table', tab: '6. Research details & costs' },
@@ -163,5 +162,5 @@ for (const lang of Object.keys(researchGuide)) {
   researchGuide[lang].sections.push({ title: researchLocalCopy[lang].tab, planner: true });
 }
 export function researchName(tree, lang) {
-  return lang === 'hi' ? hindiResearchNames[tree.id] : lang === 'ko' ? koreanNames[tree.id] || tree.name.ko : tree.name[lang];
+  return lang === 'hi' ? hindiResearchNames[tree.id] : tree.name[lang];
 }
